@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>抽奖系统</title>
+		<style type="text/css">
+			.wrap {
+				width: 300px;
+				margin: 20px auto;
+				text-align: center;
+			}
+			
+			.box {
+				padding: 10px;
+				color: red;
+				font: bold 24px "微软雅黑";
+				border: 1px solid #FF7F50;
+				color: red;
+				margin: 20px auto;
+			}
+			
+			input[type="button"] {
+				border: 1px solid #DC143C;
+				background-color: #FF6600;
+				padding: 5px 12px;
+				font: bold 16px "微软雅黑";
+				color: white;
+				cursor: pointer;
+			}
+			
+			.box,
+			input[type="button"] {
+				-webkit-border-radius: 11px;
+				-moz-border-radius: 11px;
+				border-radius: 11px;
+			}
+			
+			input[type="button"].play {
+				background-color: brown;
+				border: 1px solid darkred;
+			}
+		</style>
+		<script src="DOM2级事件-跨浏览器处理—封装库.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div id="box" class="box">开始抽奖了！</div>
+			<input type="button" value="开始" id="play" />
+			<input type="button" value="结束" id="stop" />
+		</div>
+		<script type="text/javascript">
+			window.onload = function() {
+				var title = document.getElementById('box'),
+					play = document.getElementById('play'),
+					stop = document.getElementById('stop'),
+					arr = ['谢谢参与!', '一等奖', '谢谢参与!', '二等奖', '谢谢参与!', '三等奖', '特等奖', '谢谢参与!', '优秀奖', '参与奖', '谢谢参与!', '荣誉奖', '谢谢参与!', '辛苦奖', '谢谢参与!', '魅力奖', '谢谢参与!'], //思路出错的地方2，抽奖就是抽随机数，而不是一个i从0-7的加加加，最后只会是7的结果。
+					trap = 0, //方便二次按回车时结束抽奖【一键多用！】
+					timer = null; //思路出错的地方1，定时器要定义为全局变量
+
+				//开始抽奖
+				//				play.onclick = playCj; //因为需要多次引用，所以封装起来函数。
+				//				play.addEventListener('click',funciton(){
+				//					trap=1;
+				//				},false);
+				eventUill.addHander(play,'click', playCj);//利用dom二级添加事件。写错了的地方：原先写成play.eventUill.addHander()了。注意使用这种封装库得方法，括号内传的是参数，第一个是受众标签名称，二是事件，三是执行的函数或函数名称不带括号的调用。
+//				eventUill.addHander(play,'click', function() {
+//					trap = 1;});
+					//写这个点击后更改trap的数值的原因，就是怕用户先用了回车，然后又去用鼠标点击结束，这样当再次换回回车时，就会出现错误，所以在点击这里，也应该有trap数值的改编，但是好像怎么变都解决不了问题啊
+				
+				//结束抽奖
+				stop.onclick = stopCj;//利用dom0级添加事件
+
+				//封装开始抽奖函数
+				function playCj() {
+					clearInterval(timer);
+					//设置定时器
+					timer = setInterval(function() {
+						var i = Math.floor(Math.random() * arr.length);
+						//random生成的是0-1之间的随机数，拿这个例子举例来说，他需要生成的是0-7范围的随机数才能正确取出arr数组内的文字。因为数组长度是8，而生成的是0-1之间的小数点，再乘以8的话，最大也就是7.999999999，然后利用Math.floor()向下取整，去掉小数点之后的数，就可以得到自己的索引目标。
+						title.innerHTML = arr[i];
+					}, 30);
+					play.className = 'play'; //更改样式直接用了一个class名字，这样js里省点代码。
+				}
+				//封装结束函数
+				function stopCj() {
+					play.className = '';
+					clearInterval(timer);
+					title.innerHTML = '谢谢参与!';
+				}
+				//键盘事件
+				document.onkeyup = function(event) { //忘记先传一个event事件
+					event = event || window.event;
+					//				console.log(event.keyCode);
+					if(event.keyCode === 13) { //这里两个等于号或三个等于号都可以
+						alert(trap)
+						if(trap == 0) { //这里判断要用两个等于号，用三个等于号就是错误的了。因为是判断是不是等于，而一个等于号是赋值！！！注意了
+							playCj();
+							trap = 1;
+						} else {
+							stopCj();
+							trap = 0;
+						}
+					}
+				}
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>slideDown下拉动画</title>
+		<style>
+    .left div,
+    .right div {
+        width: 100%;
+        height: 50px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+        display: none;
+    }
+    .left div {
+        background: #bbffaa;
+    }
+    
+    .right div {
+        background: yellow;
+    }
+    </style>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+	</head>
+	<body>
+		<h3>下拉动画——slideDown</h3>
+		对于隐藏的元素，在将其显示出来的过程中，可以对其进行一些变化的动画效果。之前学过了show方法，show方法在显示的过程中也可以有动画，但是.show()方法将为匹配元素的<span style="color: red;">宽度，高度，以及不透明度，同时进行动画操作》</span>。这里将要学习一个新的显示方法slideDown方法
+<p></p>
+.slideDown()：用滑动动画显示一个匹配元素<p></p>
+
+.slideDown()方法将给匹配元素的高度的动画，这会导致页面的下面部分滑下去，弥补了显示的方式<p></p>
+
+常见的操作，提供一个动画是时间，然后传递一个回调，用于知道动画是什么时候结束<p></p>
+
+.slideDown( [duration ] [, complete ] )<p></p>
+持续时间（duration）是以毫秒为单位的，数值越大，动画越慢，不是越快。字符串 'fast' 和 'slow' 分别代表200和600毫秒的延时。如果提供任何其他字符串，或者这个duration参数被省略，那么默认使用400 毫秒的延时。<p></p>
+
+具体使用：<p></p>
+
+$("ele").slideDown(1000, function() {<p></p>
+    //等待动画执行1秒后,执行别的动作....<p></p>
+});<p></p>
+注意事项：<p></p>
+<li>
+下拉动画是从无到有，所以一开始元素是需要先隐藏起来的，可以设置display:none</li><li>
+如 果提供回调函数参数，callback会在动画完成的时候调用。将不同的动画串联在一起按顺序排列执行是非常有用的。这个回调函数不设置任何参数，但是 this会设成将要执行动画的那个DOM元素，如果多个元素一起做动画效果，那么要非常注意，回调函数会在每一个元素执行完动画后都执行一次，而不是这组 动画整体才执行一次</li>
+<hr />
+<pre>
+	只提供动画时间
+	 //点击buttom
+        //执行3秒隐藏
+        //执行3秒显示
+        $("button:first").click(function() {
+            $("#a1").slideDown(3000)
+        });
+</pre>
+<hr />
+<pre>
+	同时提供动画完成后的回调函数
+        //点击buttom
+        //执行3秒隐藏
+        //执行3秒显示
+        $("button:last").click(function() {
+            $("#a2").slideDown(3000,function(){
+                alert('动画执行结束')
+            })
+        });
+</pre>
+<hr />
+  <h2>slideDown</h2>
+    <div class="left">
+        <h4>测试一</h4>
+        <div id="a1">hide-show</div>
+        <button>点击slideDown显示动画</button>
+        <script type="text/javascript">
+        //点击buttom
+        //执行3秒隐藏
+        //执行3秒显示
+        $("button:first").click(function() {
+            $("#a1").slideDown(3000)
+        });
+        </script>
+
+        <h4>测试二</h4>
+        <div id="a2">hide-show</div>
+        <button>点击slideDown执行回调</button>
+        <script type="text/javascript">
+        //点击buttom
+        //执行3秒隐藏
+        //执行3秒显示
+        $("button:last").click(function() {
+            $("#a2").slideDown(3000,function(){
+                alert('动画执行结束')
+            })
+        });
+        </script>
+	</body>
+</html>

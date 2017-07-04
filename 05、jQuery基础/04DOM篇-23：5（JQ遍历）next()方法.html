@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>next()方法</title>
+		    <link rel="stylesheet" href="../css/imooc.css" type="text/css">
+    <style>
+    .left {
+        width: auto;
+        height: 120px;
+    }
+    
+    .left div {
+        width: 150px;
+        height: 70px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        background: #bbffaa;
+        border: 1px solid #ccc;
+    }
+    
+    a {
+        display: block;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>找弟弟妹妹——next()方法</h3>
+jQuery是一个合集对象，如果想快速查找指定元素集合中每一个元素紧邻的后面同辈元素的元素集合，此时可以用next()方法
+<br />
+理解节点查找关系：
+<br />
+如下class="item-1"元素就是红色部分，那蓝色的class="tem-2"就是它的兄弟元素
+<br />
+《ul class="level-3"><br />
+    <p style="color: red;">《li class="item-1">1《/li></p>
+    <p style="color: blue;">《li class="item-2">2《/li></p>
+    《li class="item-3">3《/li><br />
+《/ul><br />
+<h4>
+next()无参数
+</h4>
+允许我们找遍元素集合中紧跟着这些元素的直接兄弟元素，并根据匹配的元素创建一个新的 jQuery 对象。<br />
+<br />
+<h4>注意：jQuery是一个合集对象，所以通过next是匹配合集中每一个元素的下一个兄弟元素</h4>
+next()方法选择性地接受同一类型选择器表达式<br />
+
+同样的也是因为jQuery是合集对象，可能需要对这个合集对象进行一定的筛选，找出目标元素，所以允许传一个选择器的表达式<br />
+具体的操作，请参考下边的代码
+<pre>
+	//1 无参数
+	 $("button:first").click(function() {
+        $('li.item-2').next().css('border','1px solid red');
+    })
+</pre>
+<pre>
+	//2 有参数
+	$("button:last").click(function() {
+        //找到所有class=item-3的li
+        //然后给每个li,然后筛选出第一个，加上蓝色的边
+       $('.item-2').next(':first').css('border', '1px solid blue')
+    })
+</pre>
+<h2>实验：next方法()</h2>
+    <div class="left first-div">
+        <div class="div">
+            <ul class="level-1">
+                <li class="item-1">1</li>
+                <li class="item-2">2</li>
+                <li class="item-3">3</li>
+            </ul>
+        </div>
+        <div class="div">
+            <ul class="level-2">
+                <li class="item-1">1</li>
+                <li class="item-2">2</li>
+                <li class="item-3">3</li>
+            </ul>
+        </div>
+        <div class="div">
+            <ul class="level-3">
+                <li class="item-1">1</li>
+                <li class="item-2">2</li>
+                <li class="item-3">3</li>
+            </ul>
+        </div>
+    </div>
+    <button>点击：next无参数</button>
+    <button>点击：next传递表达式</button>
+    <script type="text/javascript">
+    $("button:first").click(function() {
+        $('li.item-2').next().css('border','1px solid red');
+    })
+    </script>
+
+    <script type="text/javascript">
+    $("button:last").click(function() {
+        //找到所有class=item-3的li
+        //然后给每个li,然后筛选出第一个，加上蓝色的边
+       $('.item-2').next(':first').css('border', '1px solid blue')
+    })
+    </script>
+	</body>
+</html>

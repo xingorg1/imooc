@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<ul id="con">
+<li id="lesson1">javascript
+  <ul> 
+      <li id="tcon"> 基础语法</li>
+      <li>流程控制语句</li>
+      <li>函数</li>
+      <li>事件</li>
+      <li>DOM</li>
+  </ul>
+</li>
+<li id="lesson2">das</li>
+<li id="lesson3">dadf</li>
+<li id="lesson4">HTML/CSS 
+  <ul>
+    <li>文字</li>
+    <li>段落</li>
+    <li>表单</li>
+    <li>表格</li>  
+  </ul> 
+</li></ul>  
+<script  type="text/javascript">    
+   var mylist = document.getElementById("tcon"); 
+   document.write("<br/>1");
+    // document.write(mylist.parentNode.parentNode.nodeValue);
+document.write(mylist.parentNode.parentNode.parentNode.lastChild.childNodes[0].nodeValue);
+//根据parentChild向上推导，导出ul下的最后一个li,求出li中的子节点childNodes的第一个子节点【这里别忘了，空格也算一个，而里里边的html/css内容因为没有换行，就是第一个子节点，】然后这个子节点就是一个文本，文本的nodeValue就被写出来就是文本的内容本身。
+document.write("<br/>"+mylist.parentNode.parentNode.parentNode.lastChild.innerHTML);//【这里获取了最后一个li的innerHTML。不知道怎么只单独选择html/css而排除下边子li标签的内容呢？
+</script> 
+
+</body>
+</html>

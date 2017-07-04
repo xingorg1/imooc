@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>显示与隐藏切换toggle方法</title>
+		 <style>
+    div {
+        width: 100%;
+        height: 50px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+    
+    .left {
+        background: #bbffaa;
+    }
+    
+    .right {
+        background: yellow;
+        display: none;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>自动判断，显示与隐藏切换——toggle方法</h3>
+		show与hide是一对互斥的方法。需要对元素进行显示隐藏的互斥切换，通常情况是需要先判断元素的display状态，然后调用其对应的处理方法。比如显示的元素，那么就要调用hide，反之亦然。 对于这样的操作行为，jQuery提供了一个便捷方法toggle用于切换显示或隐藏匹配元素<p></p>
+
+基本的操作：toggle();<p></p>
+
+这是最基本的操作，处理元素显示或者隐藏，因为不带参数，所以没有动画。通过改变CSS的display属性，匹配的元素将被立即显示或隐藏，没有动画。<p></p>
+
+如果元素是最初显示，它会被隐藏<p></p>
+如果隐藏的，它会显示出来<p></p>
+display属性将被储存并且需要的时候可以恢复。如果一个元素的display值为inline，然后是隐藏和显示，这个元素将再次显示inline<p></p>
+
+提供参数：.toggle( [duration ] [, complete ] )<p></p>
+
+同样的提供了时间、还有动画结束的回调。在参数对应的时间内，元素会发生显示/隐藏的改变，在改变的过程中会把元素的高、宽、不透明度进行一系列动画。这个元素其实就是show与hide的方法<p></p>
+
+直接定位：.toggle(display)<p></p>
+
+直接提供一个参数，指定要改变的元素的最终效果<p></p>
+
+其实就是确定是使用show还是hide方法<p></p>
+
+if ( display === true ) {<br />
+  $( "elem" ).show();<br />
+} else if ( display === false ) {<br />
+  $( "elem" ).hide();<br />
+}<br />
+
+toggle方法就是show与hide的相互切换的一个快捷方法，具体使用可以参考案例：
+<hr />
+<pre>
+	//厉害之处就是自己会判断div的display，然后进行变化切换
+	 $("button:first").click(function() {
+        $(".left").toggle(3000)
+    });
+</pre>
+<hr />
+ <pre>   $("button:last").click(function() {
+        $(".right").toggle(3000)
+    });
+</pre>
+<hr />
+ <h2>通过toggle切换显示与隐藏</h2>
+    <div class="left">显示到隐藏</div>
+    <div class="right">隐藏到显示</div>
+    <p>这里有一个黄的，被隐藏。如果点击第二个按钮他就会出来</p>
+    <button>直接show-hide动画</button>
+    <button>直接hide-show动画</button>
+    <script type="text/javascript">
+    $("button:first").click(function() {
+        $(".left").toggle(3000)
+    });
+    </script>
+
+    <script type="text/javascript">
+    $("button:last").click(function() {
+        $(".right").toggle(3000)
+    });
+    </script>
+	</body>
+</html>

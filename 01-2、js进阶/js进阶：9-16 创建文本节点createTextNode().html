@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>createTextNode()</title>
+		<style type="text/css">
+			.message {
+				width: 200px;
+				height: 100px;
+				background-color: #CCC;
+				text-align: center;
+				line-height: 100px;
+				font: 14px "微软雅黑";
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>关于innerHTML和createTextNode的两种同功能不同方法的区别说明</h1>
+		<h3>innerHTML和createTextNode都可以把一段内容添加到一个节点中，区别是如果这段内容中有html标签（如例子中的<pre>《strong>《/strong》</pre>）时表现就不同了，在createTextNode中会当作文本处理，不会被浏览器解析，但用innerHTML就会被当作HTML代码处理（如你的例子中Hello会被加粗显示）。
+
+总的来说，如果你确定要插入的内容中没有html标签，可以用innerHTML，这样更简洁，但如果不能确定（比如要插入用户输入的内容）建议用createTextNode的方式。</h3>
+<h1>实验</h1>
+		<script type="text/javascript">
+			//  var p = document.createElement('p');
+			//  var innertext = document.createTextNode("I Love Javascript");
+			//  p.className = "message";
+			//  p.appendChild(innertext);
+			//  document.body.appendChild(p);
+	//seo--简便
+			var p = document.createElement('p');
+			p.className = "message";
+			//方法2 
+			//p.setAttribute("class","message");
+			p.appendChild(document.createTextNode("I Love Javascript"));
+			document.body.appendChild(p);
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>blur与foucus事件</title>
+		<style>
+    .left div,
+    .right div {
+        width: 100%;
+        height: 50px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+    
+    .left div {
+        background: #bbffaa;
+    }
+    
+    .right div {
+        background: yellow;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+			<h2>焦点事件——blur和focus：不冒泡</h2>
+		<p>在之前2.8与2.9节我们学过了表单处理事件focusin事件与focusout事件，同样用于处理表单焦点的事件还有blur与focus事件</p>
+		<h1>它们之间的本质区别:</h1>
+		<h1 style="color: red;">是否支持冒泡处理！</h1>
+		举个简单的例子<br />
+《div><br />
+  《input type="text" /><br />
+《/div><br />
+其中input元素可以触发focus()事件<br />
+
+div是input的父元素，当它包含的元素input触发了focus事件时，它就产生了focusin()事件。<br />
+
+focus()在元素本身产生，focusin()在元素包含的元素中产生<br />
+blur与focusout也亦是如此<br />
+<p>当子元素出发了blur事件，父元素就会被动触发focuout事件blur在元素本身产生。focuout在元素的包含元素中产生</p>
+具体参考下案例，给出来的区别<br />
+<hr />
+<pre>
+	//   focus   和   focusin
+	$(".aaron").focus(function() {
+        $(this).css('border', '2px solid red')
+    })
+    $(".aaron1").focusin(function() {
+        $(this).find('input').val('冒泡捕获了focusin事件')//find找儿子，孙子，曾孙子
+    })
+</pre>
+<hr />
+<pre>
+	//   blur    和    focusout
+	  $(".aaron3").blur(function() {
+        $(this).css('border', '2px solid red')
+    })
+    $(".aaron4").focusout(function() {
+        $(this).find('input').val('冒泡捕获了focusout事件')
+    })
+</pre>
+<h4>.focusin与blur</h4>
+    <div class="left">
+        <div class="aaron">
+            点击触发焦点(无反应)：
+            <input type="text" />
+        </div>
+        <div class="aaron1">
+            点击触发焦点并冒泡：
+            <input type="text" />
+        </div>
+    </div>
+    <script type="text/javascript">
+    $(".aaron").focus(function() {
+        $(this).css('border', '2px solid red')
+    })
+    $(".aaron1").focusin(function() {
+        $(this).find('input').val('冒泡捕获了focusin事件')
+    })
+    </script>
+
+<p></p>
+    <h4>.focusout与blur</h4>
+    <div class="right">
+        <div class="aaron3">
+            点击触发失去焦点(无反应)：
+            <input type="text" />
+        </div>
+        <div class="aaron4">
+            点击触发失去焦点并冒泡：
+            <input type="text" />
+        </div>
+    </div>
+    <script type="text/javascript">
+    $(".aaron3").blur(function() {
+        $(this).css('border', '2px solid red')
+    })
+    $(".aaron4").focusout(function() {
+        $(this).find('input').val('冒泡捕获了focusout事件')
+    })
+
+    </script>
+	</body>
+</html>

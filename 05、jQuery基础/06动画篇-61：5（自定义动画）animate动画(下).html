@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>动画animate(下)</title>
+		 <style>
+    p {
+        color: red;
+    }
+    
+    div {
+        width: 200px;
+        height: 100px;
+        background-color: yellow;
+        color: red;
+    }
+    a{
+        display: block
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>动画——animate（下）</h3>
+		animate在执行动画中，如果需要观察动画的一些执行情况，或者在动画进行中的某一时刻进行一些其他处理，我们可以通过animate的提供第二种设置语法，传递一个对象参数，可以拿到动画执行状态一些通知
+<p></p>
+.animate( properties, options )<p></p>
+options参数<p></p>
+<li>
+duration - 设置动画执行的时间</li><li>
+easing - 规定要使用的 easing 函数，过渡使用哪种缓动函数</li><li>
+step：规定每个动画的每一步完成之后要执行的函数</li><li>
+progress：每一次动画调用的时候会执行这个回调，就是一个进度的概念</li><li>
+complete：动画完成回调</li>
+其中最关键的一点就是：<p></p>
+
+<p style="font: bold 24px '微软雅黑'; color: red;">如果多个元素执行动画，回调将在每个匹配的元素上执行一次，不是作为整个动画执行一次</p>
+列出常用的方式：<p></p>
+
+$('#elem').animate({<br />
+    width: 'toggle',  <br />
+    height: 'toggle'<br />
+  }, {<br />
+    duration: 5000,<br />
+    specialEasing: {<br />
+      width: 'linear',<br />
+      height: 'easeOutBounce'<br />
+    },<br />
+    complete: function() {<br />
+      $(this).after('《div>Animation complete.《/div>');<br />
+    }<br />
+  });<br />
+  <hr />
+  <pre>
+  	//示例代码
+  	 $("#exec").click(function() {
+        var v = $("#animation").val();
+        var $aaron = $("#aaron");
+        if (v == "1") {
+            //观察每一次动画的改变
+            $aaron.animate({
+                height: '50'
+            }, {
+                duration :2000,
+                //每一个动画都会调用
+                step: function(now, fx) {
+                   $aaron.text('高度的改变值:'+now)
+                }
+            })
+        } else if (v == "2") {
+            //观察每一次进度的变化
+            $aaron.animate({
+                height: '50'
+            }, {
+                duration :2000,
+                //每一步动画完成后调用的一个函数，
+                //无论动画属性有多少，每个动画元素都执行单独的函数
+                progress: function(now, fx) {
+                   $aaron.text('进度:'+arguments[1])
+                    // var data = fx.elem.id + ' ' + fx.prop + ': ' + now;
+                    // alert(data)
+                }
+            })
+        } 
+    });
+  </pre>
+  <hr />
+  
+   <h2>animate(下)</h2>
+    <p>慕课网,专注分享</p>
+    <div id="aaron">内部动画</div>
+    点击观察动画效果：
+    <select id="animation">
+        <option value="1">动画step动画</option>
+        <option value="2">动画progress回调</option>
+    </select>
+    <a></a>
+    <input id="exec" type="button" value="执行动画">
+    <script type="text/javascript">
+    $("#exec").click(function() {
+        var v = $("#animation").val();
+        var $aaron = $("#aaron");
+        if (v == "1") {
+            //观察每一次动画的改变
+            $aaron.animate({
+                height: '50'
+            }, {
+                duration :2000,
+                //每一个动画都会调用
+                step: function(now, fx) {
+                   $aaron.text('高度的改变值:'+now)
+                }
+            })
+        } else if (v == "2") {
+            //观察每一次进度的变化
+            $aaron.animate({
+                height: '50'
+            }, {
+                duration :2000,
+                //每一步动画完成后调用的一个函数，
+                //无论动画属性有多少，每个动画元素都执行单独的函数
+                progress: function(now, fx) {
+                   $aaron.text('进度:'+arguments[1])
+                    // var data = fx.elem.id + ' ' + fx.prop + ': ' + now;
+                    // alert(data)
+                }
+            })
+        } 
+    });
+    </script>
+	</body>
+</html>

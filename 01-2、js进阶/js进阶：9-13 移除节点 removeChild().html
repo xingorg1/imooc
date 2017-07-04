@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>removeChild()</title>
+	</head>
+
+	<body>
+		<h1>removedChild(node)——node：
+	是指定要删除的节点—是节点，不是别的nodeName、innerHTML之类的———注意空格占位置，你可能获取不到正确的子节点的位置和内容，是undefined/null说明是空节点，
+	</h1>
+		<h3>所以，大胆猜测这可能就是要循环遍历子节点的原因，如果子节点的返回值是1，则删除。否则放行</h3>
+		<div id="content">
+			<h1>html</h1>
+			<h1>php</h1>
+			<h1>javascript</h1>
+			<h1>jquery</h1>
+			<h1>java</h1>
+		</div>
+
+		<script type="text/javascript">
+			function clearText() {
+				var content = document.getElementById("content");
+				// 在此完成该函数
+				var childs = content.childNodes;
+				//alert(typeof childs);
+				//alert(childs.length);//这里一直调试不成功，主要是空格作祟，删了空格就成功了
+
+				for(var i = 0; i < childs.length; i++) {
+					//不备注的都是测试时候用的，
+					//alert(childs[i].innerHTML);
+//					if(childs[i].nodeType == 3) {
+//						alert('childs.nodeType=3')
+//					}
+					if(childs[i].nodeType == 1) {
+						//content.removeChild(childs[i].nodeName);错误案例
+						//content.removeChild(content.childNodes[i]);//、、成功的第一种写法。直接把子节点删除
+						content.removeChild(childs[i]); //第二种写法。
+//						alert('childs.nodeType=1')
+					}
+
+					//alert(childs[i].nodeType);//返回是3，就是空格，空文本。返回是1，就是<h1>元素，标签。
+				}
+
+			}
+			//添加功能，不成功
+			//function appText(){
+			//	var content = document.getElmentById('content');
+			//	var childs = content.childNodes;
+			//	for(var j=0;j<childs.length;j++){
+			//		if(childs[j].nodeType == 1){
+			//			content.append(childs[j]);
+			//		}
+			//	}
+			//}
+		</script>
+
+		<button onclick="clearText()">清除节点内容</button>
+		<!--<button oncilck="appText()">添加节点内容</button>-->
+
+	</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset=utf-8 />
+	<title>动画菜单</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+			font-size: 14px;
+		}
+		
+		a {
+			color: #333;
+			text-decoration: none
+		}
+		
+		ul {
+			list-style: none;
+		}
+		
+		.nav {
+			height: 30px;
+			border-bottom: 5px solid #F60;
+			margin-left: 50px;
+			width: 600px;
+		}
+		
+		.nav li {
+			float: left;
+			position: relative;
+			height: 30px;
+			width: 120px
+		}
+		
+		.nav li a {
+			display: block;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			width: 120px;
+			background: #efefef;
+			margin-left: 1px;
+		}
+		
+		.subNav {
+			position: absolute;
+			top: 30px;
+			left: 0;
+			width: 120px;
+			/*height:120px;*/
+			height: 0;
+			overflow: hidden;
+			border: 1px solid #4169E1;/*先找准height的值*/
+		}
+		
+		.subNav li a {
+			background: #ddd
+		}
+		
+		.subNav li a:hover {
+			background: #efefef
+		}
+	</style>
+	<script>
+		window.onload = function() {
+			var aLi = document.getElementsByClassName('li');
+//			var aLi = document.getElementsByTagName('li');
+			//也可以这么用，不过获得的是13个li。
+			//其实用到getElementsByTagName时，括号后边就要加上[0]，二者是成对出现的；不然后边用的话，就得像这样subNav[0],这样才能获取到你想要的tagName。
+//			alert(aLi.length);
+			for(var i = 0; i < aLi.length; i++) {
+				aLi[i].onmouseover = function() {
+						//鼠标经过一级菜单，二级菜单动画下拉显示出来
+						var sub = this.getElementsByClassName('subNav')[0];
+						//第二种获取的方法，也可以
+						//var sub = this.getElementsByTagName('ul')[0];
+						if(sub) {//如果这个li当前是有sub的，即sub==true，执行如下代码：
+//							var This = sub;
+							clearInterval(sub.timer);
+							sub.timer = setInterval(function() {
+								//alert('+20');//弹出+20，以判断在这里执行了，几次+20.经判断，他是执行了6次，即加到了120，在120的时候，因为if判断，执行了clear
+								sub.style.height = sub.offsetHeight + 20 + "px";
+								if(sub.offsetHeight > 120) {
+									sub.style.height = 120+'px';
+									clearInterval(sub.timer)
+									//alert('跳出来了');//clear执行后，跳出本次循环
+								}
+							}, 30)
+							//alert(sub);//本来以为放在这里弹窗。会在加完120后再执行，没想到他先执行的这个，并且弹出ullistElement，即说明他找到了subNav的ul，
+							//问题来了，当加载完成后，请你尝试把鼠标再放到二级菜单上移动一下，你没选择一个二级菜单，他就是把这三个alert再执行一遍，然后你就会看到ul的长度又加了20，当你不停的上下晃动鼠标，二级菜单就会不停的添加。最后加的老长。为了明显，我加了border，效果一目了然。
+							//原因：这里，通过这个代码：alert(aLi.length);原因就明显了，因为开头的aLi，获得的是body中所有的li，包括二级菜单的。就是说你在二级菜单的每一个li上晃一下，他都会认为你是在重新执行了aLi.onmouseover这个代码，流程就再走了一遍。但是因为在高度加20那里，他高度先增加了20，然后一判断，发现高度大于120了，就赶紧跳出了。所以就会每次你晃一下，只增加了20。
+							//解决1，从源头，只找对应的li，试过以后，我还没发现真谛。难道是要给ul一个id，然后通过id获得ul下的li集合，再判断谁有二级菜单进行显示
+							//解决2：高度处，在判断那里，如果高度大于120了，我们就直接让高度等于120，不就得了，以后他再长，也会被这一条限制住。sub.style.height = 120+'px';
+//							解决3：判断处，再增加前我先判断是不是大于120行不行，是的话你就停止，不是就继续。问题也就可以解决了。if(){}else{}
+//最后mouseout那里，就不用管了，毕竟ul的长度不会出格了，就不需要加强防备了、
+						}
+					}
+					//鼠标离开菜单，二级菜单动画收缩起来。		
+				aLi[i].onmouseout = function() {
+					var sub = this.getElementsByTagName('ul')[0];
+					if(sub) {
+//						var This = sub;//不用This替换也可以
+						clearInterval(sub.timer);
+						sub.timer = setInterval(function() {
+							sub.style.height = sub.offsetHeight - 20 + "px";
+							if(sub.offsetHeight <= 0) {
+								clearInterval(sub.timer)
+							}
+						}, 30)
+					}
+				}
+			}
+		}
+		//后来我也发现了收缩不干净，总是多出外面几像素，但是我把border删掉他就收缩干净了，我不知道在js处是不是还存在问题导致的收缩不干净。
+		//幕友是这么回答的：收缩不干净是因为宽高不会小于零，比如你在某一刻高度为3，但是要减去4，这个时候高度的值不会等于-1，也不会等于0，而是选择不执行。也就是说，高度会一直为3，所以if里面的将高度设置为零的语句根本就没有执行，同时定时器也没有清除。然后没收缩干净的就是很小的高度为3的部分。关键是定时器还一直在占用系统的资源。希望对认真做练习和思考的小伙伴们有帮助。
+	</script>
+</head>
+
+<body>
+	<ul class="nav">
+		<li class="li">
+			<a href="#">一级菜单</a>
+			<ul class="subNav">
+				<li>
+					<a href="#">二级菜单</a>
+				</li>
+				<li>
+					<a href="#">二级菜单</a>
+				</li>
+				<li>
+					<a href="#">二级菜单</a>
+				</li>
+				<li>
+					<a href="#">二级菜单</a>
+				</li>
+			</ul>
+		</li>
+		<li class="li">
+			<a href="#">一级菜单</a>
+			<ul class="subNav">
+				<li>
+					<a href="#">二级菜单</a>
+				</li>
+				<li>
+					<a href="#">二级菜单</a>
+				</li>
+				<li>
+					<a href="#">二级菜单</a>
+				</li>
+				<li>
+					<a href="#">二级菜单</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="#">一级菜单</a>
+		</li>
+		<li>
+			<a href="#">一级菜单</a>
+		</li>
+		<li>
+			<a href="#">一级菜单</a>
+		</li>
+	</ul>
+</body>
+
+</html>

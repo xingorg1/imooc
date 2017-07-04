@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>firstChild和lastChild</title>
+</head>
+<body>
+	<h1>因为标签之间的空白元素也是 默认为是一个标签的</h1>
+<div id="con">
+  <p>javascript</p>
+  <div>jQuery</div>
+  <h5>PHP</h5>
+</div>
+<script type="text/javascript">
+  var x=document.getElementById("con");
+ document.write(x.firstChild+'<br/>');
+ document.write(x.lastChild);
+ document.write("<br/>也许效果和你想象的不一样，试着调整一下代码，输出正确的代码");
+ document.write("<br/>没有删除空白部分的时候p元素是第二个子节点，删了就是显示p，没删的话第一个子节点是文本节点，所以输出nodeName的时候是#text。")
+ document.write('<br/>因为标签之间的空白元素也是 默认为是一个标签的')
+</script>
+</body>
+</html>

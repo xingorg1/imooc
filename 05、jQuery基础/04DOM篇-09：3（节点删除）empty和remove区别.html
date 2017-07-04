@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>empty和remove区别</title>
+	<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <style>
+    .left,
+    .right {
+        width: 300px;
+    }
+    
+    .left div,
+    .right div {
+        width: 100px;
+        height: 90px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+    
+    .left div {
+        background: #bbffaa;
+    }
+    
+    .right div {
+        background: yellow;
+    }
+    </style>
+	</head>
+	<body>
+		<div>要用到移除指定元素的时候，jQuery提供了empty()与remove([expr])二个方法，两个都是删除元素，但是两者还是有区别</div>
+		<ul>
+			<b>empty方法</b>
+<li>
+严格地讲，empty()方法并不是删除节点，而是清空节点，它能清空元素中的所有后代节点</li><li>
+empty不能删除自己本身这个节点</li>
+<b>remove方法</b>
+<li>
+该节点与该节点所包含的所有后代节点将同时被删除</li><li>
+提供传递一个筛选的表达式，用来指定删除选中合集中的元素</li>
+<p></p>
+以上就是二者的区别，我们具体通过右边代码部分加深理解
+		</ul>
+		 <h2>实验对比：通过empty与remove移除元素</h2>
+    <div class="left">
+        <button id="bt1">点击通过jQuery的empty移除内部P元素</button>
+        <button id="bt2">点击通过jQuery的remove移除整个节点</button>
+    </div>
+    <div class="right">
+        <div id="test1">
+            <p>p元素1</p>
+            <p>p元素2</p>
+        </div>
+        <div id="test2">
+            <p>p元素3</p>
+            <p>p元素4</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $("#bt1").on('click', function() {
+        //删除了2个p元素，但是本着没有删除 
+        $("#test1").empty()
+    })
+
+    $("#bt2").on('click', function() {
+        //删除整个节点
+        $("#test2").remove()
+    })
+    </script>
+	</body>
+</html>

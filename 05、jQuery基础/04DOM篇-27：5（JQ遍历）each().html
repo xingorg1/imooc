@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>each()</title>
+		    <style>
+    .left {
+        width: auto;
+        height: 150px;
+    }
+    
+    .left div {
+        width: 150px;
+        height: 120px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        background: #bbffaa;
+        border: 1px solid #ccc;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<a href="06动画篇-63：6（jQuery核心）each方法的应用.html">each详解</a><br />
+		jQuery是一个合集对象，通过$()方法找到指定的元素合集后可以进行一系列的操作。比如我们操作$("li").css('') 给所有的li设置style值，因为jQuery是一个合集对象，所以css方法内部就必须封装一个遍历的方法，被称为隐式迭代的过程。要一个一个给合集中每一个li设置颜色，这里方法就是each
+<br />
+.each() 方法就是一个for循环的迭代器，它会迭代jQuery对象合集中的每一个DOM元素。每次回调函数执行时，会传递当前循环次数作为参数(从0开始计数
+<br />
+所以大体上了解3个重点：
+<br />
+each是一个for循环的包装迭代器<br />
+each通过回调的方式处理，并且会有2个固定的实参，索引与元素<br />
+each回调方法中的this指向当前迭代的dom元素<br />
+看一个简单的案例<br />
+
+《ul><br />
+    《li>慕课网《/li><br />
+    《li>Aaron《/li><br />
+《/ul><br />
+开始迭代li，循环2次<br />
+
+$("li").each(function(index, element) {<br />
+     index 索引 0,1<br />
+     element是对应的li节点 li,li<br />
+     this 指向的是li<br />
+})<br />
+这样可以在循环体会做一些逻辑操作了，如果需要提前退出，可以以通过返回 false以便在回调函数内中止循<br />
+
+具体的操作，请参考下边的代码<br />
+<pre>
+	//1 遍历所有，不添加终止条件
+	 $("button:first").click(function() {
+        //遍历所有的li
+        //修改每个li内的字体颜色
+        $("li").each(function(index, element) {
+            $(this).css('color','red')
+        })
+
+    })
+   
+</pre>
+<pre>
+	//2 遍历，但是添加终止条件if(){}<span style="color: red;">我觉得这里有用，第一种有点多此一举，不加each也会遍历的。但是如果想遍历的有条件，就通过each来添加条件。比如说奇偶行换色等。</span>
+	 $("button:last").click(function() {
+        //遍历所有的li
+        //修改偶数li内的字体颜色
+        $("li").each(function(index, element) {
+            if (index % 2) {
+                $(this).css('color','blue')
+            }
+        })
+    })
+</pre>
+   <h2>实验：each方法</h2>
+    <div class="left first-div">
+        <div class="div">
+            <ul>
+                <li>list item 1</li>
+                <li>list item 2</li>
+                <li>list item 3</li>
+            </ul>
+        </div>
+        <div class="div">
+            <ul>
+                <li>list item 4</li>
+                <li>list item 5</li>
+                <li>list item 6</li>
+            </ul>
+        </div>
+    </div>
+
+    <br/>
+    <button>点击：each方法遍历元素</button>
+    <button>点击：each方法回调判断</button>
+    <script type="text/javascript">
+    $("button:first").click(function() {
+        //遍历所有的li
+        //修改每个li内的字体颜色
+        $("li").each(function(index, element) {
+            $(this).css('color','red')
+        })
+
+    })
+    </script>
+    <script type="text/javascript">
+    $("button:last").click(function() {
+        //遍历所有的li
+        //修改偶数li内的字体颜色
+        $("li").each(function(index, element) {
+            if (index % 2) {
+                $(this).css('color','blue')
+            }
+        })
+    })
+    </script>
+	</body>
+</html>

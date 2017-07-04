@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>浏览器窗口可视区域大小</title>
+	</head>
+	<body>
+		<h1>浏览器窗口可视区域大小</h1>
+获得浏览器窗口的尺寸（浏览器的视口，不包括工具栏和滚动条）的方法:
+
+<h3>一、对于IE9+、Chrome、Firefox、Opera 以及 Safari：</h3>
+
+•  window.innerHeight - 浏览器窗口的内部高度
+
+•  window.innerWidth - 浏览器窗口的内部宽度
+
+<h3>二、对于 Internet Explorer 8、7、6、5：</h3>
+
+•  document.documentElement.clientHeight表示HTML文档所在窗口的当前高度。<br />
+
+•  document.documentElement.clientWidth表示HTML文档所在窗口的当前宽度。<br />
+
+或者<br />
+
+Document对象的body属性对应HTML文档的<body>标签<br />
+
+•  document.body.clientHeight<br />
+
+•  document.body.clientWidth<br />
+
+<h3>在不同浏览器都实用的 JavaScript 方案：</h3><br />
+
+var w= document.documentElement.clientWidth
+      || document.body.clientWidth;<br />
+var h= document.documentElement.clientHeight
+      || document.body.clientHeight;<br />
+      <h3>两种方案是有所区别的，幕友们记住body与浏览器之间有个默认的margin！</h3>
+<h5>任务</h5>
+在script标签内，补充右边编辑器代码，获取浏览器当前窗口大小。
+	</body>
+	<script type="text/javascript">
+var vW = document.documentElement.cilentWidth || document.body.clientWidth;
+var vH = document.documentElement.clientHeight || document.body.clientHeight;
+document.write(vW+"px<br/>"+vH+"px<pr/>");
+
+</script>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>detach()和remove()区别</title>
+		 <style type="text/css">
+    p{
+        border: 1px solid red;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<div>
+			JQuery是一个很强大的工具库，在工作中开发中，可是有些方法还是因为不常用到，或是没有注意到而被我们而忽略。	</div>	<div>
+
+remove()和detach()可能就是其中的一个，可能remove()我们用得比较多，而detach()就可能会很少了	</div>	<div>
+<br />
+ 通过一张对比表来解释2个方法之间的不同
+		</div>
+		<table border="1">
+			<tbody bgcolor="#B0C4DE">
+			<tr>
+				<td>方法名</td>
+				<td>参数</td>
+				<td>事件及数据是否也被移除</td>
+				<td>元素自身是否被移除</td>
+			</tr></tbody>
+			<tr>
+				<td>remove</td>
+				<td>支持选择器表达</td>
+				<td>是</td>
+				<td>是（无参数时），有参数的时候根据参数所涉及的范围。参数就是决定你要选择谁被删除掉</td>
+			</tr>
+			<tr>
+				<td>detach</td>
+				<td>参数同remove</td>
+				<td></td>
+				<td>情况同remove</td>
+			</tr>
+		</table>
+		<b>empty：移除节点</b>
+		<li style="color: blueviolet;">魂没了，躯壳（节点标签自身）还在</li>
+		<li>移除节点内部的所有节点，保留节点上事件与数据，自身不被移除。魂没了，躯壳（节点标签自身）还在</li>
+		<b>remove：移除节点</b>
+		<li style="color: blueviolet;">魂没了，躯壳也没了</li>
+		<li>无参数，移除自身整个节点以及该节点的内部的所有节点，包括节点上事件与数据</li>
+		<li>有参数，移除筛选出的节点以及该节点的内部的所有节点，包括节点上事件与数据</li>
+		<b>
+			detach：移除节点
+		</b>
+		<li style="color: blueviolet;">躯壳没了，魂还在</li>
+		<li>移除的处理与remove一致</li>
+		<li>与remove()不同的是，所有绑定的事件、附加的数据等都会保留下来</li>
+		<li>例如：$("p").detach()这一句会移除对象，仅仅是显示效果没有了。但是内存中还是存在的。当你append之后，又重新回到了文档流中。就又显示出来了。</li>
+		<br />
+		具体可以参考xia边的代码区域的对比
+		<pre>
+			    //给页面上2个p元素都绑定事件
+    $('p').click(function(e) {
+        alert(e.target.innerHTML)
+    })
+
+    $("button:first").click(function() {
+        var p = $("p:first").remove();
+        p.css('color','red').text('p1通过remove处理后,点击该元素,事件已经丢失')
+        $("body").append(p);
+    });
+
+    $("button:last").click(function() {
+        var p = $("p:first").detach();
+        p.css('color','blue').text('p2通过detach处理后,点击该元素，事件还存在')
+        $("body").append(p);
+    });
+		</pre>
+		<h3>实验：</h3>
+		
+		<h3>给页面2个p元素节点绑定点击事件,点击后弹出自己本身的节点内容</h3>
+    <p>元素p1，同时绑定点击事件</p>
+    <p>元素p2，同时绑定点击事件</p>
+    <h3>通过点击2个按钮后观察方法处理的区别</h3>
+   
+    <button>点击通过remove处理元素p1</button>
+    <button>点击通过detach处理元素p2</button>
+     <span>最终目的就是让你区分，谁的魂没了，重新加载过来之前删的东西后，remove方法的，点击事件消失了。detach的事件还在</span>
+    <script type="text/javascript">
+    //给页面上2个p元素都绑定时间
+    $('p').click(function(e) {
+        alert(e.target.innerHTML)
+    })
+
+    $("button:first").click(function() {
+        var p = $("p:first").remove();
+        p.css('color','red').text('p1通过remove处理后,点击该元素,事件已经丢失')
+        $("body").append(p);
+    });
+
+    $("button:last").click(function() {
+        var p = $("p:first").detach();
+        p.css('color','blue').text('p2通过detach处理后,点击该元素，事件仍然存在')
+        $("body").append(p);
+    });
+</script>
+	</body>
+</html>

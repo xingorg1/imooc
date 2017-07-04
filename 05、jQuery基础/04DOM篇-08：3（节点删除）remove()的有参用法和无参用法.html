@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>remove()的有参用法和无参用法</title>
+		    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <style>
+    .test1 {
+        background: #bbffaa;
+    }
+    
+    .test2 {
+        background: yellow;
+    }
+    </style>
+	</head>
+	<body>
+		<div>remove与empty一样，都是移除元素的方法，但是remove会将元素自身移除，同时也会移除元素内部的一切，包括绑定的事件及与该元素相关的jQuery数据。</div>
+		<div>
+			例如一段节点，绑定点击事件
+<br/>
+《div class="hello">《p>慕课网《/p>《/div><br/>
+$('.hello').on("click",fn)<br/>
+如果不通过remove方法删除这个节点其实也很简单，但是同时需要把事件给销毁掉，这里是为了防止<span style="color: red;background-color: yellow;">"内存泄漏"</span>，所以前端开发者一定要注意，绑了多少事件，不用的时候一定要记得销毁<br/>
+
+通过remove方法移除div及其内部所有元素，remove内部会自动操作事件销毁方法，所以使用使用起来非常简单<br/>
+<h5>
+//通过remove处理<br/>
+$('.hello').remove()<br/>
+//结果：《div class="hello">《p>慕课网《/p>《/div> 全部被移除<br/>
+//节点不存在了,同时事件也会被销毁<br/>
+</h5>
+<h5>remove表达式参数：</h5>
+
+remove比empty好用的地方就是可以传递一个选择器表达式用来过滤将被移除的匹配元素集合，可以选择性的删除指定的节点<br/>
+
+我们可以通过$()选择一组相同的元素，然后通过remove（）传递筛选的规则，从而这样处理<br/>
+<pre>
+	  $("button:first").on('click', function() {
+	        //删除整个 class=test1的div节点
+	        $(".test1").remove()
+	    })
+	
+	    $("button:last").on('click', function() {
+	    //找到所有p元素中，包含了3的元素
+	    //这个也是一个过滤器的处理
+	    $("p").remove(":contains('3')");//提供传递一个筛选的表达式，用来指定删除选中合集中的元素
+    		})
+</pre>
+对比上边的代码区域，我们可以通过类似于这样处理<br/>
+
+$("p").filter(":contains('3')").remove()
+		</div>
+		    <h2>实验：通过jQuery remove方法移除元素</h2>
+    <div class="test1">
+        <p>p元素1</p>
+        <p>p元素2</p>
+    </div>
+    <div class="test2">
+        <p>p元素3</p>
+        <p>p元素4</p>
+    </div>
+    <button>点击通过jQuery的empty移除元素</button>
+    <button>点击通过jQuery的empty移除指定元素</button>
+    <script type="text/javascript">
+    $("button:first").on('click', function() {
+        //删除整个 class=test1的div节点
+        $(".test1").remove()
+    })
+
+    $("button:last").on('click', function() {
+        //找到所有p元素中，包含了3的元素
+        //这个也是一个过滤器的处理
+        $("p").remove(":contains('3')");//提供传递一个筛选的表达式，用来指定删除选中合集中的元素
+    })
+    </script>
+	</body>
+</html>

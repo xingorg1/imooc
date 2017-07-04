@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.head {
+				font-size: 12px;
+				padding: 6px 0 0 10px;
+			}
+			
+			#login_box {
+				width: 300px;
+				height: 150px;
+				background: #eee;
+				border: 1px solid #ccc;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -150px;
+				margin-top: -75px;
+				display: none;
+			}
+			
+			#login_box p {
+				height: 20px;
+				border-bottom: 1px solid #ccc;
+				font-size: 12px;
+				padding: 6px 0 0 5px;
+				font-weight: bold;
+			}
+			
+			#close {
+				width: 14px;
+				height: 14px;
+				background-color: red;
+				position: absolute;
+				right: 4px;
+				top: 6px;
+			}
+		</style>
+		<script>
+			window.onload = function() {
+				var login_btn = document.getElementById('login'),
+					login_box = document.getElementById('login_box'),
+					close = document.getElementById('close');
+				// 封装添加事件监听程序，封装到一个函数addEvent中，接受三个参数：要执行的对象（就是获取的id变量名）、事件类型（click。mouseover等）、执行的函数（这里表示调用显示函数/隐藏函数）
+				function addEvent(ele, type, hander) {
+					if(ele.addEventListener) {//如果浏览器支持addEventListener方法，（适配于除ie8及以下浏览器之外的浏览器）
+						ele.addEventListener(type, hander, false);//就使用这个方法，true表示事件捕获，false表示事件冒泡
+					} else if(ele.attachEvent) {//如果是ie8及以下的浏览器，
+						ele.attachEvent('on' + type, hander);//就用这个方法，因为传进来的type事件都不必要添加‘on’，但是ie少不了on，就在type前加上‘on’，不用加false或ture，因为ie只支持冒泡，默认是false也只有false
+					} else {
+						ele['on' + type] = hander;//不支持dom2级操作的话，就调用dom0级的样式，就比如obj.onclick = function(){}一样，ele=obj，onclick='on'+type，hander=function(){}；值得注意的是，1：需要加'on'，因为传过来type时不用加on但是dom0级调用事件是要有on的。2：[]的处理方式，而不是'.'，因为变量不能调用字符串的方法，其实ele.onclick === ele['onclick'],这两个写法完全相等。所以不能使用'.'的情况下，用['']的方法。
+					}
+				}
+				// 显示登录层函数
+				function showLogin() {//普通的通过js操作css样式的代码，只不过定义成了一个函数封装起来一会方便调用。
+					// 执行代码
+					login_box.style.display = "block";
+				}
+				// 隐藏登录层函数
+				function hideLogin() {
+					// 执行代码
+					login_box.style.display = "none";
+				}
+				//点击登录按钮显示登录层 
+				// 执行代码
+				addEvent(login_btn,'click', showLogin);//调用函数，传三个参数，分别是要承载、执行事件的按钮id变量名，事件名称-不加on，触发这个事件后会调用或执行的函数（名）
+				//点击关闭按钮隐藏登录层
+				// 执行代码
+				addEvent(close,'click', hideLogin);//同上，添加了一个单机时隐藏的事件。
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="head">亲，您好！<input type="button" value="登 录" id="login"></div>
+		<div id="login_box">
+			<p>用户登录</p><span id="close"></span>
+		</div>
+	</body>
+
+</html>

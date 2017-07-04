@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function f() {
+				var num = 1;
+				return function e(){
+					num++;
+					console.log(num);
+				};
+			}
+			var c=f();
+			c();
+			c();
+			c();
+			var d = f();
+			d();
+			d();
+			console.log(typeof c);
+			console.log(typeof d);
+			console.log(c==d);
+		</script>
+	</head>
+
+	<body>
+看控制台
+<h1>这里请思考，c为什么不等于d？</h1>
+	</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>on()多事件绑定</title>
+		<style>
+			.left div,
+			.right div {
+				width: 100%;
+				height: 50px;
+				padding: 5px;
+				margin: 5px;
+				float: left;
+				border: 1px solid #ccc;
+			}
+			
+			.left div {
+				background: #bbffaa;
+			}
+			
+			.right div {
+				background: yellow;
+			}
+		</style>
+		<script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+
+	<body>
+		<h3>on()的多事件绑定</h3> 之前学的鼠标事件，表单事件与键盘事件都有个特点，就是直接给元素绑定一个处理函数，所有这类事件都是属于快捷处理。翻开源码其实可以看到，所有的快捷事件在底层的处理都是通过一个"on"方法来实现的。jQuery on()方法是官方推荐的绑定事件的一个方法。<br /> 基本用法：.on( events [, selector ] [, data ] )<br />
+		<hr /> 最常见的给元素绑定一个点击事件，对比下一下快捷方式与on方式的不同
+		<br /> $("#elem").click(function(){}) //快捷方式<br /> $("#elem").on('click',function(){}) //on方式<br /> 最大的不同点就是on是可以自定义事件名，当然不仅仅只是如何，继续往下看
+		<br />
+		<hr /> 多个事件绑定同一个函数
+		<br /> $("#elem").on("mouseover mouseout",function(){ });<br /> 通过空格分离，传递不同的事件名，可以同时绑定多个事件
+		<br />
+		<hr /> 多个事件绑定不同函数
+		<br /> $("#elem").on({
+		<br /> mouseover:function(){},
+		<br /> mouseout:function(){},
+		<br /> });
+		<br /> 通过空格分离，传递不同的事件名，可以同时绑定多个事件，每一个事件执行自己的回调方法
+
+		<br />
+		<hr /> 将数据传递到处理程序
+		<br /> function greet( event ) {<br /> alert( "Hello " + event.data.name ); //Hello 慕课网<br /> }
+		<br /> $( "button" ).on( "click", {<br /> name: "慕课网"<br /> }, greet );<br /> 可以通过第二参数（对象），当一个事件被触发时，要传递给事件处理函数的
+		<br /> 以上都是on方法基本用法，具体可以参考下边的代码的一些使用
+
+		<br />
+		<hr />
+		<pre>
+		//单事件绑定一
+		$("#test1").on('click', function(e) {
+			$(this).text('触发事件：' + e.type)
+		})
+		</pre>
+		<hr />
+		<pre>
+	//多事件绑定一
+    $("#test2").on('mousedown mouseup', function(e) {
+        $(this).text('触发事件：' + e.type)
+    })
+</pre>
+		<hr />
+		<pre>
+	 //多事件绑定二
+    $("#test3").on({
+        mousedown: function(e) {
+            $(this).text('触发事件：' + e.type)
+        },
+        mouseup: function(e) {
+            $(this).text('触发事件：' + e.type)
+        }
+    })
+</pre>
+		<hr />
+		<h2>实验：on绑定多事件</h2>
+
+		<h4>测试一</h4>
+		<div class="left">
+			点击触发：on('click',fn)
+			<div id="test1"></div>
+		</div>
+		<script type="text/javascript">
+			//事件绑定一
+			$("#test1").on('click', function(e) {
+				$(this).text('触发事件：' + e.type)
+			})
+		</script>
+
+		<h4>测试二</h4>
+		<div class="left">
+			点击触发：on('mousedown mouseup')
+			<div id="test2"></div>
+		</div>
+		<script type="text/javascript">
+			//多事件绑定一
+			$("#test2").on('mousedown mouseup', function(e) {
+				$(this).text('触发事件：' + e.type)
+			})
+		</script>
+
+		<h4>测试三</h4>
+		<div class="right">
+			点击触发：on(mousedown:fn1,mouseup:fn2)
+			<div id="test3"></div>
+		</div>
+		<script type="text/javascript">
+			//多事件绑定二
+			$("#test3").on({
+				mousedown: function(e) {
+					$(this).text('触发事件：' + e.type)
+				},
+				mouseup: function(e) {
+					$(this).text('触发事件：' + e.type)
+				}
+			})
+		</script>
+	</body>
+
+</html>

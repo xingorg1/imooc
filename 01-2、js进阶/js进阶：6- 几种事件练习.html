@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>事件练习</title>
+		<style type="text/css">
+			div {
+				width: 80px;
+				height: 80px;
+				background-color: #BC8F8F;
+				margin: 20px;
+				margin-top: 10px;
+				line-height: 80px;
+				text-align: center;
+				cursor: pointer;
+				cursor: hand;
+				cursor: -ms-hand;
+				color: white;
+				font-size: 14px;
+				font-family: "微软雅黑";
+				
+			}
+			input{
+				width: 300px;
+				display: block;
+				padding: 10px;
+				margin: 20px;
+			}
+			select{
+				width: 300px;
+			}
+		</style>
+		<script type="text/javascript">
+		
+			function l() {
+				alert('页面加载中，请稍等...')
+			}
+			
+//		    window.onunload = quithtml;//据说是有兼容性的问题的
+//			function quithtml(){
+//				confirm('您确定退出此页面吗？');
+//			}
+
+			function clicksj(num1, num2) {
+				var sum = num1 + num2;
+				alert(sum);
+			}
+
+			function dblclick() {
+				alert('我是dblclick');
+			}
+//			function mr(){
+//				document.getElementById('mr').style.width='300px';
+//			}
+			function changesj(){
+				var b=document.getElementById('c').value;
+				var a = window.prompt('确定要将内容改变为',b);
+				
+				if(a == true){
+					document.getElementById('c').value = b;
+				}else{
+//					document.getElementById('c').value = null;
+				}
+			}
+			function selectsj(){
+				alert('选中后你要把他们怎么样呢？');
+			}
+			function focusj(){
+				alert('请输入你的姓名');
+			}
+			function focusj2(){
+				alert('请选择你的职业');
+			}//这个有兼容性问题
+			function blursj(){
+				var aa = document.getElementById('bl').value;
+				prompt('您填入的内容为',aa)
+			}
+			
+		</script>
+	</head>
+
+	<body onload="l()">
+		<h1>事件集合</h1>
+		<ol>
+			<li>点击：onclick</li>
+			<li style="color: dimgray;">双击：ondblclick</li>
+			<li>鼠标经过：onmouseover</li>
+			<li>鼠标移开：onmouseout</li>
+			<li>文本框内容改变：onchange</li>
+			<li>文本框内容被选中：onselect</li>
+			<li>光标聚集：onfocus</li>
+			<li>光标离开：onblur</li>
+			<li>网页导入：onload</li>
+			<li>关闭网页：onunload</li>
+		</ol>
+		<input type="button" id="b" value="点击" onclick="clicksj(3,4)" />
+		<input type="button" id="d" value="双击" ondblclick="dblclick()" />
+		<!--<div id="mr" onmouseover="mr()">
+			鼠标移进
+		</div>-->
+		<div id="mr" >
+			鼠标移进
+		</div>
+		<div id="mt">
+			鼠标移出
+		</div>
+		<input type="text" name="c" id="c" value="改变内容会有变化" onchange="changesj()" />
+		<input type="text" name="c" id="s" value="选中文本框内容会有变化" onselect="selectsj()" />
+		<input type="text" name="c" id="f" value="光标聚集" onfocus="focusj()" />
+		<select name="" onfocus="focusj2()">
+			<option value="student">学生</option>
+			<option value="teacher">教师</option>
+		</select>
+		<input type="text" name="c" id="bl" value="光标离开" onblur="blursj()" />
+
+	</body>
+<script type="text/javascript">
+	var omr = document.getElementById('mr');
+			omr.onmouseover=function(){
+				alert('我是鼠标经过我(div#mr)的时候显示的弹出框')
+			}
+			//注意，这段代码我放到body的前面就不成功，说明你定义的变量的id名称，他在js中还没有找到，所以这种方法会报错说自己加载没成功，可以用调用函数的方法，就是全局通用，用这种方法，是要考虑文档流的顺序的
+			var omt = document.getElementById('mt');
+			omt.onmouseout = function(){
+				alert('我是鼠标不在‘mt’div时的弹出框')
+			}
+			
+			//退出页面的设置，具有兼容性问题
+//			window.onunload = onunload_message;
+//			function onunload_message(){
+//				alert('您是否要退出本页面？')
+//			}
+</script>
+</html>

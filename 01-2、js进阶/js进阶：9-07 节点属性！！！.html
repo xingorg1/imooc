@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>JS-节点属性（常用！）（开始很生疏，不想看的知识点，后来DOM中用的特别多，才发现很重要。还有几个点，是比较容易忽略的，值得注意！）</title>
+	</head>
+	<body>
+		<h1>节点属性</h1>
+在文档对象模型 (DOM) 中，每个节点都是一个对象。DOM 节点有三个重要的属性 ：<br/>
+
+1. nodeName : 节点的名称<br/>
+
+2. nodeValue ：节点的值<br/>
+
+3. nodeType ：节点的类型<br/>
+
+一、nodeName 属性: 节点的名称，是只读的。<br/>
+
+1. 元素节点的 nodeName 与标签名相同<br/>
+2. 属性节点的 nodeName 是属性的名称<br/>
+3. 文本节点的 nodeName 永远是 #text<br/>
+4. 文档节点的 nodeName 永远是 #document<br/>
+
+二、nodeValue 属性：节点的值<br/>
+
+1. 元素节点的 nodeValue 是 undefined 或 null<br/>
+2. 文本节点的 nodeValue 是文本自身<br/>
+3. 属性节点的 nodeValue 是属性的值<br/>
+
+三、nodeType 属性: 节点的类型，是只读的。以下常用的几种结点类型:<br/>
+
+元素类型    节点类型<br/>
+  ！元素          1<br/>
+      属性          2<br/>
+  ！文本          3&nbsp;空格也是返回3<br/>
+      注释          8<br/>
+      文档          9<br/>
+      <h1>注意空格！！！！</h1>
+      <hr color="red" />
+  <h1>实验</h1>
+    <ul>
+     <li>javascript</li>
+     <li>HTML/CSS</li>
+     <li>jQuery</li>     
+  </ul>
+  <script type="text/javascript">
+  var m = document.getElementsByTagName("li");
+  for(var i=0;i<m.length;i++){
+    //   document.write(m[i].nodeType);
+      switch(m[i].nodeType){
+        case 1:
+            document.write("1:li节点的类型—【元素】—<br/>");
+            break;
+        case 2:
+            document.write("1:li节点的类型—【属性】—<br/>");
+        break;
+        case 3:
+            document.write("1:li节点的类型—【文本】—<br/>");
+        break;
+        case 8:
+            document.write("1:li节点的类型—【注释】—<br/>");
+        break;
+        case 9:
+            document.write("1:li节点的类型—【文档】—<br/>");
+        break;
+      }
+      
+        document.write("2:li里边的文本内容——"+m[i].nodeValue+"<br/>");
+        document.write("3：li节点的名称——"+m[i].nodeName+"<br/>");
+        document.write("<hr/>");
+        }
+    
+  </script>
+	</body>
+</html>

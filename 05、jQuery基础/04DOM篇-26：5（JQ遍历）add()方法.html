@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>add()方法</title>
+		 <style>
+    .left {
+        width: auto;
+        height: 150px;
+    }
+    
+    .left div {
+        width: 150px;
+        height: 120px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        background: #bbffaa;
+        border: 1px solid #ccc;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		jQuery是一个合集对象，通过$()方法找到指定的元素合集后可以进行一系列的操作。$()之后就意味着这个合集对象已经是确定的，如果后期需要再往这个合集中添加一新的元素要如何处理？jQuery为此提供add方法，用来创建一个新的jQuery对象 ，元素添加到匹配的元素集合中
+<br />
+.add()的参数可以几乎接受任何的$()，包括一个jQuery选择器表达式，DOM元素，或HTML片段引用。<br />
+简单的看一个案例：<br />
+
+<br />
+操作：选择所有的li元素，之后需要把p元素也加入到li的合集中
+<br />
+《ul><br />
+    《li>list item 1《/li><br />
+    《li>list item 3《/li><br />
+《/ul><br />
+《p>新的p元素《/p><br />
+<b>处理一：传递选择器</b>
+<br />
+$('li').add('p')<br />
+<b>处理二：传递dom元素</b>
+<br />
+$('li').add(document.getElementsByTagName('p')[0])<br />
+<b>还有一种方式，就是动态创建P标签加入到合集，然后插入到指定的位置，但是这样就改变元素的本身的排列了</b>
+<br />
+ $('li').add('《p>新的p元素《/p>').appendTo(目标位置)<br />
+具体的操作，请参考下边的代码<br />
+<pre>
+	1：不改变结构
+	$("button:first").click(function() {
+         //把p元素加到li合集中
+         $('li').add('p').css('background', 'red')
+    })
+</pre>
+<pre>
+	2：改变结构了
+	   $("button:last").click(function() {
+         //把html结构'《p>新的p元素《/p>'
+         //加入到li的合集中，为了能够在页面上显示
+         //需要在重新appendTo要指定的节点处
+         //值得注意：整个结构位置都改变了
+         $('li').add('《p>新的p元素《/p>').appendTo($('.right'))
+    })
+	
+</pre>
+<h2>实验：add方法()</h2>
+    <div class="left first-div">
+        <div class="div">
+            <ul>
+                <li>list item 1</li>
+                <li>list item 2</li>
+                <li>list item 3</li>
+            </ul>
+            <p>新的p元素</p>
+        </div>
+    </div>
+    <div class="right"></div>
+    <br/>
+    <button>点击：add传递元素标签</button>
+    <button>点击：add传递html结构</button>
+    <script type="text/javascript">
+    $("button:first").click(function() {
+         //把p元素加到li合集中
+         $('li').add('p').css('background', 'red')
+    })
+    </script>
+    <script type="text/javascript">
+    $("button:last").click(function() {
+         //把html结构'<p>新的p元素</p>'
+         //加入到li的合集中，为了能够在页面上显示
+         //需要在重新appendTo要指定的节点处
+         //值得注意：整个结构位置都改变了
+         $('li').add('<p>新的p元素</p>').appendTo($('.right'))
+    })
+    </script>
+	</body>
+</html>

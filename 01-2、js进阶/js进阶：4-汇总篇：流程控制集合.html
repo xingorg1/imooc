@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>流程控制</title>
+		<style type="text/css">
+			.mg {
+				display: inline-block;
+				padding: 45px;
+				padding-top: 5px;
+				margin-bottom: 10px;
+				border: 3px solid rosybrown;
+				-webkit-border-radius: 23px;
+				-moz-border-radius: 23px;
+				border-radius: 23px;
+			}
+			
+			input {
+				-webkit-border-radius: 12px;
+				-moz-border-radius: 12px;
+				border-radius: 12px;
+				border: 1px solid royalblue;
+				padding: 10px;
+			}
+			
+			#dx {
+				width: 100px;
+				text-align: center;
+			}
+		</style>
+		<script type="text/javascript">
+			//1-- if else多重
+			//		cc()函数，通过练习if else，执行一个多重的判断语句，来得到一个人的成绩处于什么水平并通过innerHTML写进标签内
+			function cc() {
+				var vj = parseInt(prompt('请输入你的成绩'));
+				var nr = document.getElementById('h1');
+				nr.style.textAlign = 'center';
+				var cc = document.getElementById('cc');
+				cc.value = vj;
+				if(vj != undefined) { //不为空的情况下再进行判断
+					if(vj >= 0 && vj < 60) {
+						nr.innerHTML = '很遗憾！你没有通过考试。加油了！'; //把总结写到一个h1里边
+						cc.style.color = nr.style.color = 'red'; //不同的成绩不同的颜色表示
+					} else if(vj >= 60 && vj < 75) {
+						nr.innerHTML = '恭喜你获得了良好的成绩！';
+						cc.style.color = nr.style.color = 'green';
+					} else if(vj >= 75 && vj < 85) {
+						nr.innerHTML = '可以，成绩很好呀！继续加油！';
+						cc.style.color = nr.style.color = 'royalblue';
+					} else if(vj >= 85 && vj <= 100) {
+						nr.innerHTML = '你很优秀！超级棒！请继续努力！';
+						cc.style.color = nr.style.color = 'darkmagenta';
+						//						nr.style.backgroundColor = 'green';
+					} else if(vj < 0 || vj > 100) { //如果输入超出的不符合成绩值，也弹出提醒
+						alert('别闹了，快输入你的正确成绩吧!');
+					} else {
+						alert('正经点！！不要输入非法值。')
+					}
+				} else {
+					alert('怎么还不舍得告诉我么？快快输入有效的成绩值啊！');
+				}
+			}
+
+			//2--if else多重
+			//		cb()函数，也是多重if else，通过value得到表单的值来判断这个年龄段是什么时候
+
+			function cb() {
+				var sv = document.getElementById('se_v').value;
+				var tv = document.getElementById('t_sc');
+				if(sv == '0-44') {
+					tv.value = '青少年阶段';
+				} else if(sv == '45-59') {
+					tv.value = '中年时期';
+				} else if(sv == '60-89') {
+					tv.value = '老年时期';
+				} else {
+					tv.value = '长寿老人';
+				}
+			}
+
+			//3--switch
+			//    cj（）函数练习switch，根据成绩写评语。注意对比switch和if else 的区别
+			//			这里总是出现错误的是，标签内容你用value获取，而input的表单内容你反倒用innerHTML了，不报错也，但就是不对，切记切记、
+			function cj() {
+				var cj = parseInt(prompt('请输入你的成绩'));
+				var hv = document.getElementById('hvs');
+				switch(cj) {
+					case 1:
+					case 2:
+					case 3:
+					case 4:
+					case 5:
+						hv.innerHTML = '继续努力';
+						break;
+					case 6:
+						hv.innerHTML = '及格，加油！';
+						break;
+					case 7:
+						hv.innerHTML = '凑合，奋进！';
+						break;
+					case 8:
+						hv.innerHTML = '很棒，很棒！';
+						break;
+					case 9:
+					case 10:
+						hv.innerHTML = '高手，大牛！';
+						break;
+				}
+				document.getElementById('cj').value = cj;
+				alert('h1的value要用innerHTML才能找得到' + '<br/>' + hv.innerHTML)
+			}
+
+			//4--switch
+			// 	cd（）制作多选情况下的输出内容
+			//不成功
+			function cd() {
+				var dx = document.getElementById('dx').value;
+				var dxv = document.getElementById('dxv');
+				var arr = [];
+				for(var i = 0; i < dx.length; i++) {
+					arr[i] = document.getElementById('dx').value;
+					dxv.innerHTML = arr + '，';
+				}
+
+				//				switch(dx){
+				//					case '苹果':
+				//					case '香蕉':
+				//					case '橘子':
+				//					case '油桃':
+				//					case '柠檬':
+				//					case '柚子':
+				//					case '西瓜':
+				//					case '菠萝':
+				//					case '荔枝':
+				//						
+				//					break;
+				//				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<div>
+			<h1>知识点汇总</h1>
+			<ol>
+				<li> <strong>if </strong><br />单个是做判断（成，就执行。不成，就滚蛋！）</li>
+				<li> <strong>if else  </strong><br />一组是二选一（成，执行条件1，否则，执行另一个）</li>
+				<li> <strong>if else  </strong><br />多个是多重判断（多个条件看谁成，最后只执行成的那一个）</li>
+				<li> <strong>switch  </strong><br />是多种选择（相比多组if else，可以同时执行多个满足条件后 的函数）</li>
+				<li> <strong>for  </strong><br />是重复重复（遍历）</li>
+				<li> <strong>while  </strong><br />是反反复复</li>
+				<li> <strong>do while  </strong><br />是来来回回</li>
+				<li> <strong>break  </strong><br />是退出循环</li>
+				<li> <strong>continue  </strong><br />是跳过并继续循环</li>
+			</ol>
+		</div>
+
+		<!--1-->
+		<span class="mg">
+			练习1 if else
+			<h1 id="h1"></h1>
+			<input type="text" id="cc" onclick="cc();" placeholder="输入成绩" />
+		</span>
+
+		<!--2-->
+		<span class="mg">
+			练习2 if else<br />
+			<strong>请选择您的年龄段</strong>
+			<select id="se_v">
+				<option>0-44</option>
+				<option>45-59</option>
+				<option>60-89</option>
+				<option>90以上</option>
+			</select>
+			<input type="button" value="提交" onclick="cb();" />
+			<br />
+			<input type="text" id="t_sc" />
+		</span>
+
+		<!--3-->
+		<span class="mg">
+			练习3:switch
+			<h1 id="hvs"></h1>
+			<input type="text" id="cj" onclick="cj();" placeholder="输入成绩" />
+		</span>
+
+		<!--4-->
+		<span class="mg">
+			练习4 switch<br />
+			<p style="color: red;">不成功</p>
+			<p>选出你喜欢的水果：</p>
+			<strong>可多选</strong>
+			<select id="dx" multiple="multiple">
+				<option>苹果</option>
+				<option>香蕉</option>
+				<option>橘子</option>
+				<option>油桃</option>
+				<option>柠檬</option>
+				<option>柚子</option>
+				<option>西瓜</option>
+				<option>菠萝</option>
+				<option>荔枝</option>
+			</select>
+			<input type="button" value="提交" onclick="cd();" />
+			<br /><span id="dxv"></span>
+
+		</span>
+
+		<!--4-->
+		<script type="text/javascript">
+			function xq() {
+				var xqv = document.getElementById('xq').value;
+				var jhv = document.getElementById('jh');
+				switch(xqv) {
+					case '星期一':
+					case '星期二':
+						jhv.innerHTML = '学习理念知识';
+						jhv.style.color = 'red';
+						break;
+					case '星期三':
+					case '星期四':
+						jhv.innerHTML = '到企业实践';
+						jhv.style.color = 'blueviolet';
+						break;
+					case '星期五':
+						jhv.innerHTML = '总结经验';
+						jhv.style.color = 'blue';
+						break;
+					case '星期六':
+					case '星期日':
+						jhv.innerHTML = '休闲娱乐';
+						jhv.style.color = 'green';
+						break;
+				}
+
+			}
+		</script>
+		<span class="mg">
+			练习5 switch<br />
+			看我的计划
+			<select id="xq">
+				<option>星期一</option>
+				<option>星期二</option>
+				<option>星期三</option>
+				<option>星期四</option>
+				<option>星期五</option>
+				<option>星期六</option>
+				<option>星期日</option>
+			</select>
+			<input type="button" value="提交" onclick="xq()" />
+			<h3 id="jh"></h3>
+		</span>
+
+		<!--6-->
+
+		<span class="mg">
+			练习6 for
+			<p>做100以内加法</p>
+			<input type="button" value="结果" id="jg"/>
+			<input type="text" id="jgv"/>
+			<pre>这里，i应该<=100，没有=号是不可以的</pre>
+		</span>
+		<script type="text/javascript">
+			var oJg = document.getElementById('jg');
+			oJg.onclick = function() {
+				var sum = 0;
+				for(var i = 0; i <= 100; i++) { //注意=号
+					sum += i;
+				}
+				document.getElementById('jgv').value = sum;
+			}
+		</script>
+
+		<!--7-->
+		<span class="mg">
+			练习7 while
+			<br/>用while语句，输出相应的数字
+			
+			<input type="button" value="填数字得结果" onclick="sc()" />
+			<br />结果是<p id="sc"></p>
+			<!--<input />-->
+		</span>
+		<script type="text/javascript">
+			function sc() {
+				var x = parseInt(prompt('请输入数字'));
+				//			alert(x)
+				if(isNaN(x)) { //判断如果是空或不是数字，就不执行
+					alert('请输入数值后再确定')
+				} else {
+					var num = 1;
+					while(num <= x) {
+						//				document.write('<br/>取出第'+num);
+						document.getElementById('sc').innerHTML += num + ',';
+						//				alert(document.getElementById('sc').innerHTML);
+						num = num + 1;
+					}
+				}
+			}
+		</script>
+		<p>js思考，写法之——第一步，先思考简单的，给定的一个数字，让条件在这个给定的数字内循环。<br/>然后第二步修改完善提高代码，就是把死的数值变成可以让用户自己填写的数字。<br/>最后第三步继续修改，添加if代码以判断用户填入的是否是数值，且是否符合规范等</p>
+
+		<!--8-->
+		<span class="mg">
+			练习8
+			do while
+			<p>确保代码先被执行一次再去做循环判断条件</p>
+			<input type="button" value="填数字" onclick="dov()" />
+			<span id="dov"></span>
+		</span>
+		<script type="text/javascript">
+			//写法之——第一步，先思考简单的，给定的一个数字，让条件在这个给定的数字内循环。然后第二步修改完善提高代码，就是把死的数值变成可以让用户自己填写的数字。最后第三步继续修改，添加if代码以判断用户填入的是否是数值，且是否符合规范等
+			
+				//第一步示例
+				//		var num = 1;
+				//			do{
+				//				document.getElementById('dov').innerHTML += num + ',';
+				//				num++;
+				//			}while(num <= 9);
+
+				//第二步示例
+				//			var numa = parseInt(prompt('请填写数字'));
+				//			var numb = 0;			
+				//			do{
+				//				document.getElementById('dov').innerHTML += numb + ','; 
+				//				numb ++;
+				//			}while(numb <= numa);
+
+				//第三步示例
+				function dov() {
+				var numa = parseInt(prompt('请填写数字'));
+				var numb = 0;
+				do {
+					document.getElementById('dov').innerHTML += numb + ',';
+					numb++;
+				} while (numb <= numa);
+				if(isNaN(numa)) {
+					alert('快快随心输入正确数字吧！');
+				} else {
+
+				}
+			}
+		</script>
+		<h1>综合练习</h1>
+		<p>根据获得的信息，组成数组，并从这一堆数据中找到大一女生的信息，然后把名字打印出来</p>
+		<script type="text/javascript">
+			var infos = [
+			['小A','女',21,'大一'],
+			['小B','男',23,'大三'],
+			['小C','男',24,'大四'],
+			['小D','女',21,'大一'],
+			['小E','女',22,'大四'],
+			['小F','男',21,'大一'],
+			['小G','女',22,'大一'],
+			['小H','女',20,'大三'],
+			['小I','女',20,'大一'],
+			['小J','男',20,'大三']
+			];
+//			alert(infos[0][1]);
+			for(var i=0;i<infos.length;i++){
+				var sex = infos[i][1];
+				var clas = infos[i][3];
+				var name = infos[i][0];
+//				document.write(sex);
+				if(sex == '女' && clas == '大一'){
+					document.write(name+'<hr />');
+				}else{
+					continue;//这里得用continue，如果不符合的信息跳过去然后接着执行，如果用了break，则就会打出第一个小A的信息后就停止了
+				}
+			}
+		</script>
+	</body>
+
+</html>

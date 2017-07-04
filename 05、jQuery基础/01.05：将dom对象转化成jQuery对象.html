@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>DOM对象转化成jQuery对象</title>
+		<script src="http://code.jquery.com/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+		$(function(){
+			var div = document.getElementsByTagName(div);
+			var $div = $('div');
+			var $first = $div.first();
+			$first.css("color","red");
+		})
+	</script>
+	</head>
+	<body>
+		<h1>DOM对象转化成jQuery对象</h1>
+相比较jQuery转化成DOM，开发中更多的情况是把一个dom对象加工成jQuery对象。$(参数)是一个多功能的方法，通过传递不同的参数而产生不同的作用。<br />
+
+如果传递给$(DOM)函数的参数是一个DOM对象，jQuery方法会把这个DOM对象给包装成一个新的jQuery对象<br />
+通过$(dom)方法将普通的dom对象加工成jQuery对象之后，我们就可以调用jQuery的方法了<br />
+
+HTML代码<br />
+
+<div>元素一</div>
+<div>元素二</div>
+<div>元素三</div>
+JavaScript代码<br />
+
+var div = document.getElementsByTagName('div'); //dom对象<br />
+var $div = $(div); //jQuery对象<br />
+var $first = $div.first(); //找到第一个div元素<br />
+$first.css('color', 'red'); //给第一个元素设置颜色<br />
+通过getElementsByTagName获取到所有div节点的元素，结果是一个dom合集对象，不过这个对象是一个数组合集(3个div元素)。通过$(div)方法转化成jQuery对象，通过调用jQuery对象中的first与css方法查找第一个元素并且改变其颜色。
+	</body>
+</html>

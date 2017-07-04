@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>event.target</title>
+		 <style>
+    .left div,
+    .right div {
+        width: 500px;
+        height: 100px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+    
+    .left div {
+        background: #bbffaa;
+    }
+    
+    .right div {
+        background: yellow;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>事件委托-通过事件对象区别触发元素——event.target</h3>
+		事件中的Event对象容易被初学者忽略掉，可能大多时候初学者不知道怎么去用它，但有些时候它还是非常有用的<p></p>
+
+一个标准的"click"点击事件<p></p>
+
+$(elem).on("click",function(event){<p></p>
+   event //事件对象<p></p>
+})<p></p>
+在不同浏览器之间事件对象的获取, 以及事件对象的属性都有差异。jQuery根据 W3C 标准规范了事件对象，所以在jQuery事件回调方法中获取到的事件对象是经过兼容后处理过的一个标准的跨浏览器对象<p></p>
+
+这里不在千篇一律的说方法的使用，通过实际的一个小案例，从而来了解事件对象的作用<p></p>
+
+《ul><p></p>
+    《li class="even1">《/li><p></p>
+    《li class="even2">《/li><p></p>
+    《li class="even2"《/li><p></p>
+    .........<p></p>
+《/ul><p></p>
+ul有N个子元素li(这里只写了3个)，如果我要响应每一个li的事件，那么常规的方法就是需要给所有的li都单独绑定一个事件监听，这样写法很符合逻辑，但是同时有显得繁琐<p></p>
+
+因为li都有一个共同的父元素，而且所有的事件都是一致的，这里我们可以采用要一个技巧来处理，也是常说的<span style="color: red;">"事件委托"</span><p></p>
+
+事件没直接和li元素发生关系，而且绑定父元素了。由于浏览器有事件冒泡的这个特性，我们可以在触发li的时候把这个事件往上冒泡到ul上，因为ul上绑定事件响应所以就能够触发这个动作了。唯一的问题怎么才知道触发的li元素是哪个一个？<p></p>
+
+这里就引出了事件对象了<p></p>
+
+<span style="color: red;">事件对象是用来记录一些事件发生时的相关信息的对象。事件对象只有事件发生时才会产生，并且只能是事件处理函数内部访问，在所有事件处理函数运行结束后，事件对象就被销毁</span><p></p>
+回到上面的问题，既然事件对象是跟当前触发元素息息相关的，所以我们就能从里面相关的信息，从事件对象中找到 event.target<p></p>
+
+event.target<p></p>
+
+target 属性可以是注册事件时的元素，或者它的子元素。通常用于比较 event.target 和 this 来确定事件是不是由于冒泡而触发的。经常用于事件冒泡时处理事件委托<span style="color: red;">我自己理解他这一段的意思就是event.target与this是一个用法一个意思。就是一切在js中用this的地方，在jq中用event.target可以取代</span><p></p>
+
+简单来说：event.target代表当前触发事件的元素，可以通过当前元素对象的一系列属性来判断是不是我们想要的元素<p></p>
+<h3>this和event.target的区别：</h3>
+
+js中事件是会冒泡的，所以this是可以变化的，但event.target不会变化，它永远是直接接受事件的目标DOM元素；
+<br />
+.this和event.target都是dom对象<br />
+
+如果要使用jquey中的方法可以将他们转换，为jquery对象：$(this)和$(event.target);比如：event.target和$(event.target)的使用：
+<h3>event.currentTarget : 在事件冒泡过程中的当前DOM元素</h3>
+
+冒泡前的当前触发事件的DOM对象, 等同于this.
+<pre>
+	 //多事件绑定一
+        $("ul").on('click',function(e){
+           alert('触发的元素是内容是: ' + e.target.textContent)
+        })
+</pre>
+ <h3>事件委托，通过事件对象区别触发元素</h3>
+    <div class="left">
+        <div class="aaron">
+            <ul>
+                <li>点击：触发一</li>
+                <li>点击：触发二</li>
+                <li>点击：触发三</li>
+                <li>点击：触发四</li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        //多事件绑定一
+        $("ul").on('click',function(e){
+           alert('触发的元素是内容是: ' + e.target.textContent)
+        })
+
+
+
+    </script>
+	</body>
+</html>

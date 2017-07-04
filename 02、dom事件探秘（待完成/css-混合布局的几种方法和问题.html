@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>混合布局编程挑战</title>
+<style type="text/css">
+/*
+ 
+body{ margin:0; padding:0; font-size:30px; color:#fff}
+.top{width:100%;background-color:#ccc;}
+.main{width:100%;height:350px;overflow:hidden;background-color:#f90;}
+.left{ width:200px;height:inherit;background-color:#6495ED;float: left;}
+.right{width:55%;height:inherit;float:right;background-color:lightgreen;}
+.foot{width:100%;background-color:#DC143C;}
+
+* 
+* 1-1:我打算是这么写的，很不高级，尤其是右边，根据页面的变化，他会向左挤掉left；看慕课兄的代码如下：*/
+.top{width:100%; height:50px;background:#ccc;}
+
+.main{width: 100%;/*width:1000px;*/ position:relative;height:300px;background:#f90;}
+.foot{width:100%;height:100px;background-color:#DC143C;}
+/*.left{width:200px;height:300px;background:#6495ED;position:absolute;}*/
+
+/*第二种也有问题*/
+/*2-2:为什么非要absolute呢?他是相对于body呀在这里,当main有定值时还通用吗?*/
+/*2-3:实验证明是不可以的*/
+/*2-4:既是他这中方法，也是让right盒子一直超出，还有水平滚动条。*/
+/*.right{margin-left:210px;width:100%;height:300px;background:lightgreen;position:absolute;}*/
+/*2-1:通过position:absolute和定值margin-left,这样width就可以设置成100%,进而成了响应式,不管窗口多大都不会挤掉left的效果*/
+/*1-1:其实一开始的让右边自适应,我想到的是width100%,但是会把left覆盖住.我这就没想到margin-left呢!*/
+
+/*第三种方法是可以*/
+.left{width: 200px;height: 300px;background:#6495ED;position: absolute;left:0;top: 0;}
+/*用left：0,top：0,固定left的位置。然后用right的margin-left把左边的位置给让出来*/
+.right{height:300px;/*width:100%;*/background:lightgreen;margin-left: 210px;}
+/*right不设置宽度，如果设置了宽度100%，就会出现水平条*/
+
+
+/*第四种也可以*/
+/*.main{width:100%;height:300px;background-color:red;}
+
+.left{ width:200px;height:300px;background-color:blue;float:left;}
+
+.right{height:300px;background-color:green;position:absolute;left:210px;right:0px;}*/
+/*方法是利用左侧浮动固定宽度,右侧通过绝对定位,*//*right不设置宽度，如果设置了宽度100%，就会出现水平条*/
+/*
+ 总结
+ * 普遍就是通过position的相对，绝对定位，++top，right，left；的相互配合，或通过margin的移动，实现效果。这里foot处没有清除浮动。看上去没什么影响就不清楚了。
+ * 
+ * */
+</style>
+
+</head>
+
+<body>
+<div class="top">top</div>
+<div class="main">
+    <div class="right">right</div><!--实现右侧先加载-->
+    <div class="left">left</div>
+</div>
+<div class="foot">foot</div>
+
+</body>
+</html>

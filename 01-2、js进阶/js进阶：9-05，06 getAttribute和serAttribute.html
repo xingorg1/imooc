@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			get/set Attribute
+		</title>
+
+	</head>
+
+	<body>
+		<!--1-->
+		<span id="mg" class="column"></span>
+		
+		<!--2-->
+		<p id="intro">我的课程</p>  
+  <ul>  
+    <li title="JS">JavaScript</li>  
+    <li title="JQ">JQuery</li>  
+    <li title="">HTML/CSS</li>  
+    <li title="JAVA">JAVA</li>  
+    <li title="">PHP</li>  
+  </ul>  
+  <h1>以下为li列表title的值,当title为空时，新设置值为"WEB前端技术":</h1>
+	</body>
+	<!--注意，用document.getElementById（）时。如果script部分放在body之上，由于找不到id，会报错，这时需要将script放到下边-->
+	<!--1-->
+	<script type="text/javascript">
+		var m = document.getElementById('mg');
+		document.write(m.getAttribute('class')+"——返回class属性的值<br/>");//获取标签
+		document.write(m.getAttribute('style')+"——没有style属性所以返回null<br/>");
+		m.setAttribute('style', 'border: 1px solid #4169E1;');//添加标签
+		document.write(m.getAttribute('style')+"——我是后加的<br/>");
+	</script>
+
+</html>
+  <!--2-->
+<script type="text/javascript">
+  var Lists=document.getElementsByTagName("li");
+  for (var i=0; i<Lists.length;i++)
+  {
+    var text = Lists[i].getAttribute("title");
+    //注意这里Lists[i]的形式，是要遍历每一个li，不是就一个li的title
+    document.write(text +"<br>");
+    if(text=="")
+    {
+    Lists[i].setAttribute("title","WEB前端技术");//注意这里是("属性名称","属性值")的格式
+    document.write(Lists[i].getAttribute("title")+"<br>");
+    }
+  }
+</script>

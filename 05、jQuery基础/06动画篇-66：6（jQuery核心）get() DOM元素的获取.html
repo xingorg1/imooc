@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>get()</title>
+		 <style>
+    a {
+       
+        font-size: 30px;
+        font-weight: 900;
+    }
+    
+    div {
+        width: 200px;
+        height: 100px;
+        background-color: yellow;
+        color: red;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>DOM元素的获取——get()</h3>
+		jQuery是一个合集对象，如果需要单独操作合集中的的某一个元素，可以通过.get()方法获取到
+<p></p>
+以下有3个a元素结构：<p></p>
+
+《a>1《/a><br />
+《a>2《/a><br />
+《a>3《/a><br />
+通过jQuery获取所有的a元素合集$("a")，如果想进一步在合集中找到第二2个dom元素单独处理，可以通过get方法
+<p></p>
+语法：<p></p>
+
+.get( [index ] )<p></p>
+<span style="color: red;">注意2点</span><p></p>
+<li>
+get方法是获取的dom对象，也就是通过document.getElementById获取的对象</li><li>
+get方法是从0开始索引</li>
+所以第二个a元素的查找： $(a).get(1)<p></p>
+
+<p style="font: bold 16px '微软雅黑';">负索引值参数</p>
+
+get方法还可以从后往前索引，传递一个负索引值，<span style="color: red;">注意的负值的索引起始值是-1</span><p></p>
+
+同样是找到第二元素，可以传递 $(a).get(-2) <p></p>
+
+具体的使用可以通过代码学习
+<hr />
+<pre>
+	$("#exec").click(function() {
+        var v = $("#animation").val();
+        var $aaron = $("#aaron a");
+
+        //通过get找到第二个a元素，并修改蓝色字体
+        if (v == "1") {
+           $aaron.get(1).style.color = "blue"
+        } else if (v == "2") {
+            //通过get找到最后一个a元素，并修改字体颜色
+            $aaron.get(-1).style.color = "#8A2BE2"
+        }
+    });
+</pre>
+<hr />
+ <h2>get方法</h2>
+
+    <div id="aaron">
+        <a>1</a>
+        <a>2</a>
+        <a>3</a>
+        <a>4</a>
+        <a>5</a>
+    </div>
+
+    <select id="animation">
+        <option value="1">get正数索引参数</option>
+        <option value="2">get负数索引参数</option>
+    </select>
+    <input id="exec" type="button" value="点击执行">
+    <script type="text/javascript">
+    $("#exec").click(function() {
+        var v = $("#animation").val();
+        var $aaron = $("#aaron a");
+
+        //通过get找到第二个a元素，并修改蓝色字体
+        if (v == "1") {
+           $aaron.get(1).style.color = "blue"
+        } else if (v == "2") {
+            //通过get找到最后一个a元素，并修改字体颜色
+            $aaron.get(-1).style.color = "#8A2BE2"
+        }
+    });
+    </script>
+	</body>
+</html>

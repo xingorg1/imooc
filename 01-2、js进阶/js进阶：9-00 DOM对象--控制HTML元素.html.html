@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>DOM对象——慕课网总结</title>
+		<style type="text/css">
+			td{
+				border: 1px solid #4169E1;
+			}
+			caption{
+				background-color: lightsteelblue;
+				padding: 10px 0;
+			}
+			table{
+				margin-top: 10px;
+				border: 4px solid lightsteelblue;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>
+			认识DOM
+		</h1>
+		<h2>去看看dom树</h2>
+		<h3>
+			文档对象模型DOM（Document Object Model）定义访问和处理HTML文档的标准方法。DOM 将HTML文档呈现为带有元素、属性和文本的树结构（节点树）。
+		</h3>
+		<h5>
+			HTML文档可以说由节点构成的集合，DOM节点有:
+
+1. 元素节点：上图中<'html'>、<'body'>、<'p'>等都是元素节点，即标签。
+
+2. 文本节点:向用户展示的内容，如<'li'>...</'li'>中的JavaScript、DOM、CSS等文本。
+
+3. 属性节点:元素属性，如<'a'>标签的链接属性href="http://www.imooc.com"。
+		</h5>
+		<table>
+			<caption>节点属性：</caption>
+			<thead>
+				<tr>
+					<td>方法</td>
+					<td>说明</td>
+				</tr>
+			</thead>
+			<tr>
+				<td>nodeName</td>
+				<td>返回一个字符串，其内容是给定节点的名字</td>
+			</tr>
+			<tr>
+				<td>nodeType</td>
+				<td>返回一个整数，这个数值代表给定节点的类型</td>
+			</tr>
+			<tr>
+				<td>nodeValue</td>
+				<td>返回给定节点的当前值</td>
+			</tr>
+		</table>
+		
+		<table>
+			<caption>DOM获取：</caption>
+			<thead>
+				<tr>
+					<td>方法</td>
+					<td>说明</td>
+					<td>备注</td>
+					<td>注意</td>
+				</tr>
+			</thead>
+			<tr>
+				<td>document.getElementById('id名')</td>
+				<td>通过标签的id名称获取元素。这种获取是唯一个</td>
+				<td> id属性就像人的身份证，是唯一的。所以通过getElementById获取的是指定的一个人。</td>
+				<td>就一个</td>
+			</tr>
+			<tr>
+				<td>document.getElementsByName('name属性名')</td>
+				<td>通过标签内的name属性获取元素。</td>
+				<td> name属性就像人的姓名，可以重复。所以通过getElementsByName获取名字相同的人集合。</td>
+				<td>注意获取的可能是一个集合（如果相同名字一样的超过两个的话），所以他有length属性</td>
+			</tr>
+			<tr>
+				<td>document.getElementsByTagName('标签')</td>
+				<td>TagName可看似某类，getElementsByTagName获取相同类的人集合。</td>
+				<td>input标签就像人的类别。</td>
+				<td>注意获取的可能是一个集合（如果相同标签（如p）一样的超过两个的话），所以他有length属性</td>
+			</tr>
+		</table>
+		
+		<table>
+			<caption>遍历DOM节点树：</caption>
+			<thead>
+				<tr>
+					<td>方法</td>
+					<td>说明</td>
+					<td>备注</td>
+				</tr>
+			</thead>
+			<tr>
+				<td>childNodes</td>
+				<td>返回一个数组，这个数组由给定元素节点的子节点构成</td>
+			</tr>
+			<tr>
+				<td>firstChild</td>
+				<td>返回第一个子节点</td>
+			</tr>
+			<tr>
+				<td>lastChild</td>
+				<td>返回最后第一个子节点</td>
+			</tr>
+			<tr>
+				<td>parentNode</td>
+				<td>返回一个给定节点的父节点</td>
+				<td>可以通过他多成查找给定节点的祖宗：parentNode.parentNode.parentNode.parentNode...但注意拼写方式，是Node不是Child</td>
+			</tr>
+			<tr>
+				<td>nextSibling</td>
+				<td>返回给定节点的下一个子节点</td>
+			</tr>
+			<tr>
+				<td>previousSibling</td>
+				<td>返回给定节点的上一个子节点</td>
+				<td>同样注意写法，两个ss，区分大小写</td>
+			</tr>
+		</table>
+		
+		<table>
+			<caption>DOM操作：</caption>
+			<thead>
+				<tr>
+					<td>方法</td>
+					<td>说明</td>
+					<td>备注</td>
+					<td>注意</td>
+				</tr>
+			</thead>
+			<tr>
+				<td>createElement(element)</td>
+				<td>创建一个新的元素节点</td>
+				<td>(element)是节点标签，加引号，如<p>标签('p')</td>
+				<td>1、document.createElement():document方法。2、create总是少些那个最后那个e字母，不报错，很难找出。</td>
+					
+			</tr>
+			<tr>
+				<td>createTextNode("string")</td>
+				<td>创建一个包含着给定文本的新文本节点</td>
+				<td>创建标签内的内容的，引号内加文本</td>
+				<td>document.createElement():document方法</td>
+			</tr>
+			<tr>
+				<td>appendChild(变量名或代码段)</td>
+				<td>指定节点的最后一个子节点列表之后添加一个新的子节点</td>
+				<td>很有用，不仅能在标签中添加标签，还能在标签中添加内容节点。</td>
+			</tr>
+			<tr>
+				<td>insertBefore()</td>
+				<td>将一个给定节点插入到一个给定元素节点的给定子节点的前面</td>
+			</tr>
+			<tr>
+				<td>removeChild()</td>
+				<td>从一个给定元素中删除一个子节点</td>
+			</tr>
+			<tr>
+				<td>replaceChild()</td>
+				<td>把一个给定父元素里的一个子节点替换为另外一个节点</td>
+			</tr>
+		</table>
+	</body>
+</html>

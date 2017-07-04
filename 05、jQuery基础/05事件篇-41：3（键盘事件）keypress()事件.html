@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>keypress事件</title>
+		 <style>
+    .left div,
+    .right div {
+        width: 500px;
+        height: 50px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+    
+    .left div {
+        background: #bbffaa;
+    }
+    em{
+        font-weight: 900;
+        color: red;
+    }
+    </style>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+	</head>
+	<body>
+		在input元素上绑定keydown事件会发现一个问题：
+<br />
+每次获取的内容都是之前输入的，当前输入的获取不到<br />
+keydown事件触发在文字还没敲进文本框，这时如果在keydown事件中输出文本框中的文本，得到的是触发键盘事件前的文本，而keyup事件触发时整个键盘事件的操作已经完成，获得的是触发键盘事件后的文本<br />
+
+当浏览器捕获键盘输入时，还提供了一个keypress的响应，这个跟keydown是非常相似，这里使用请参考keydown这一节，具体说说不同点
+<br />
+keypress事件与keydown和keyup的主要区别
+<br />
+<li>
+对中文输入法支持不好，无法响应中文输入（但是经过测试后，发现输入中文也可以，只是他和keydown一样，只能读取历史，不能实时读取）
+</li><li>
+无法响应系统功能键（如delete，backspace）</li><li>
+由于前面两个限制，keyCode与keydown和keyup不是很一致</li>
+总而言之，
+<br />
+KeyPress主要用来接收字母、数字等ANSI字符，而 KeyDown 和 KeyUP 事件过程可以处理任何不被 KeyPress 识别的击键。诸如：功能键（F1-F12）、编辑键、定位键以及任何这些键和键盘换档键的组合等。<br />
+<pre>
+	  //监听键盘按键
+    //获取输入的值
+    $('.target1').keypress(function(e) {
+        $("em").text(e.target.value)
+    });
+
+</pre>
+ <h2>实验：keypress()事件</h2>
+    <div class="left">
+        <div class="aaron">监听keypress输入:
+            <input class="target1" type="text" value="" /><br />
+            输入中文测试，无法显示:<em></em>
+            <p>但是经过测试后，发现输入中文也可以，只是他和keydown一样，只能读取历史，不能实时读取。</p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    //监听键盘按键
+    //获取输入的值
+    $('.target1').keypress(function(e) {
+        $("em").text(e.target.value)
+    });
+
+
+
+    </script>
+	</body>
+</html>

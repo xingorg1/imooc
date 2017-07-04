@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div>
+			id选择器：一个用来查找的ID，即元素的id属性 $( "#id" ) <br/>id选择器也是基本的选择器，
+			<br/>
+			jQuery内部使用JavaScript函数document.getElementById()来处理ID的获取。原生语法的支持总是非常高效的，所以在操作DOM的获取上，如果能采用id的话尽然考虑用这个选择器 值得注意： id是唯一的，每个id值在一个页面中只能使用一次。如果多个元素分配了相同的id，将只匹配该id选择集合的第一个DOM元素。但这种行为不应该发生;有超过一个元素的页面使用相同的id是无效的
+		</div>
+		//通过jQuery处理
+		$("#imooc").css("border", "3px solid red");
+		<br />
+		//通过原生方法处理
+		document.getElementById('imooc').style.border = "3px solid blue";
+		<br />这两种方法是一样的
+	</body>
+
+</html>

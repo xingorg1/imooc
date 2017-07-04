@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>隐藏元素的hide方法</title>
+		<style>
+    .left div,
+    .right div {
+        width: 100%;
+        height: 50px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+    
+    .left div {
+        background: #bbffaa;
+    }
+    
+    .right div {
+        background: yellow;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>显示元素——show方法</h3>
+		css中有display:none属性，同时也有display:block，所以jQuery同样提供了与hide相反的show方法<br />
+
+方法的使用几乎与hide是一致的，hide是让元素显示到隐藏，show则是相反，让元素从隐藏到显示<br />
+
+看一段代码：使用上一致，结果相反<br />
+
+$('elem').hide(3000).show(3000)<br />
+让元素执行3秒的隐藏动画，然后执行3秒的显示动画。<br />
+
+show与hide方法是非常常用的，但是一般很少会基于这2个属性执行动画，大多情况下还是直接操作元素的显示与隐藏为主<br />
+
+注意事项：<br />
+<li>
+show与hide方法是修改的display属性，通过是visibility属性布局需要通过css方法单独设置</li><li>
+如果使用!important在你的样式中，比如display: none !important，如果你希望.show()方法才能正常工作，必须使用.css('display', 'block !important')重写样式</li><li>
+如果让show与hide成为一个动画，那么默认执行动画会改变元素的高度，高度，透明度</li>
+<hr />
+<pre>
+	两个动画配合使用：
+	 //点击buttom
+    //执行3秒隐藏
+    //执行3秒显示
+    $("button").click(function() {
+        $("#a1").hide(3000).show(3000)
+    });
+</pre>
+<hr />
+<h2>hide-show</h2>
+    <div class="left">
+    
+        <div id="a1">hide-show</div>
+
+        <button>直接hide-show动画</button>
+
+    <script type="text/javascript">
+
+    //点击buttom
+    //执行3秒隐藏
+    //执行3秒显示
+    $("button").click(function() {
+        $("#a1").hide(3000).show(3000)
+    });
+
+    </script>
+	</body>
+</html>

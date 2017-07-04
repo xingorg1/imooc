@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>find()方法</title>
+		    <link rel="stylesheet" href="../css/imooc.css" type="text/css">
+    <style>
+    .left {
+        width: auto;
+        height: 200px;
+    }
+    
+    .left div {
+        width: 150px;
+        height: 70px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        background: #bbffaa;
+        border: 1px solid #ccc;
+    }
+    
+    span {
+        color: blue;
+    }
+    </style>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+	</head>
+
+	<body>
+		<h3>找子孙——find()方法</h3>
+		jQuery是一个合集对象，如果想快速查找DOM树中的这些元素的后代元素，此时可以用find()方法，这也是开发使用频率很高的方法。这里要注意 children与find方法的区别，children是父子关系查找，find是后代关系（包含父子关系）
+		<br /> 理解节点查找关系：
+		<br /> 《div class="div"><br /> 《ul class="son"><br /> 《li class="grandson">1《/li><br /> 《/ul>
+		<br /> 《/div>
+		<br /> 代码如果是$("div").find("li")，此时，li与div是祖辈关系，通过find方法就可以快速的查找到了。
+		<br />
+		<ul>
+
+			.find()方法要注意的知识点：
+			<li>
+				find是遍历当前元素集合中每个元素的后代。只要符合，不管是儿子辈，孙子辈都可以。</li>
+			<li>
+				与其他的树遍历方法不同，选择器表达式对于 .find() 是必需的参数。如果我们需要实现对所有后代元素的取回，可以传递通配选择器 '*'。</li>
+			<li>
+				find只在后代中遍历，不包括自己。</li>
+			<li>
+				选择器 context 是由 .find() 方法实现的；因此，$('li.item-ii').find('li') 等价于 $('li', 'li.item-ii')。</li>
+		</ul>
+		注意重点：<br />
+		<ul>
+			.find()和.children()方法是相似的
+			<li>
+				1.children只查找第一级的子节点</li>
+			<li>
+				2.find查找范围包括子节点的所有后代节点</li>
+		</ul>
+		具体的操作，请参考xia边的代码
+		<pre>
+	<b>练习一</b>
+	$("button:first").click(function() {
+        $('.left').find('li').last().css('border','1px solid blue');
+        //第二种写法：
+        //$(',left').find('li:last').css('border','1px solid blue');
+    })
+		</pre>
+		<pre>
+	<b>练习二</b>
+	$("button:last").click(function() {
+        //找到所有p元素，然后筛选出子元素是span标签的节点
+        //改变其字体颜色
+        var $spans = $('span');
+        $("p").find($spans).css('color', 'red');
+        //第二种写法：
+        // $('p').find('span').css('color','yellow');
+    })
+		</pre>
+		<hr />
+		    <h2>实验：find方法()</h2>
+    <div class="left first-div">
+        <div class="div">
+            <ul class="level-1">
+                <li class="item-1">1</li>
+                <li class="item-2">2</li>
+                <li class="item-3">3</li>
+            </ul>
+        </div>
+        <div class="div">
+            <ul class="level-2">
+                <li class="item-1">1</li>
+                <li class="item-2 test">2</li>
+                <li class="item-3">3</li>
+            </ul>
+        </div>
+        <div class="div">
+            <ul class="level-3">
+                <li class="item-1">1</li>
+                <li class="item-2">2</li>
+                <li class="item-3">3</li>
+            </ul>
+        </div>
+    </div>
+    <button>点击：find传递表达式</button>
+    <br/>
+    <br/>
+    <h3>find表达式</h3>
+    <div style="border:1px solid red;">
+        <p>
+            <span>测试1</span>
+            <a>测试2</a>
+        </p>
+        <p>
+            <span>慕课网1</span>
+            <a>慕课网2</a>
+        </p>
+        <div>
+            <span>Aaron1</span>
+            <a>Aaron2</a>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <button>点击：find传递$对象</button>
+    <script type="text/javascript">
+    $("button:first").click(function() {
+        $('.left').find('li').last().css('border','1px solid blue');
+        //第二种写法：
+        //$(',left').find('li:last').css('border','1px solid blue');
+    })
+    </script>
+    <script type="text/javascript">
+    $("button:last").click(function() {
+        //找到所有p元素，然后筛选出子元素是span标签的节点
+        //改变其字体颜色
+        var $spans = $('span');
+        $("p").find($spans).css('color', 'red');
+        //第二种写法：
+        // $('p').find('span').css('color','yellow');
+    })
+    </script>
+	</body>
+
+</html>

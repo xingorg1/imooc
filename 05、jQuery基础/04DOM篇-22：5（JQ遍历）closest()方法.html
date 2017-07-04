@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>closest()方法</title>
+		    <link rel="stylesheet" href="../css/imooc.css" type="text/css">
+    <style>
+    .left {
+        width: auto;
+        height: 200px;
+    }
+    
+    .left div {
+        width: 350px;
+        height: 150px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        background: #bbffaa;
+        border: 1px solid #ccc;
+    }
+    
+    span {
+        color: blue;
+    }
+    </style>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+	</head>
+	<body>
+		<h3>找指定的祖宗——closest()方法</h3>
+		以选定的元素为中心，往内查找可以通过find、children方法。如果往上查找，也就是查找当前元素的父辈祖辈元素，jQuery提供了closest()方法，这个方法类似parents但是又有一些细微的区别，属于使用频率很高的方法
+		<br />
+closest()方法接受一个匹配元素的选择器字符串
+	<hr />
+从元素本身开始，在DOM 树上逐级向上级元素匹配，并返回最先匹配的祖先元素
+	<hr />
+例如：在div元素中，往上查找所有的li元素，可以这样表达
+	<hr />
+$("div").closet("li')	<hr />
+<h4>注意：jQuery是一个合集对象，所以通过closest是匹配合集中每一个元素的祖先元素</h4>
+	<hr />
+closest()方法给定的jQuery集合或元素来过滤元素
+	<hr />
+同样的也是因为jQuery是合集对象，可能需要对这个合集对象进行一定的筛选，找出目标元素，所以允许传一个jQuery的对象
+	<br />
+<ul>
+注意事项：在使用的时候需要特别注意下	<br />
+
+粗看.parents()和.closest()是有点相似的，都是往上遍历祖辈元素，但是两者还是有区别的，否则就没有存在的意义了
+<li>
+起始位置不同：.closest开始于当前元素 .parents开始于父元素</li><li>
+遍历的目标不同：.closest要找到指定的目标，.parents遍历到文档根元素，closest向上查找，知道找到一个匹配就停止查找，parents一直查找到根元素，并将匹配的元素加入集合</li><li>
+结果不同：.closest返回的是包含零个或一个元素的jquery对象，parents返回的是包含零个或一个或多个元素的jquery对象</li>
+<p style="color: red;">自我理解：其实closest和parent一样，都会在没有符合条件的时候，返回零个，符合条件的最终都会返回一个，但是：他返回的可能是爸爸，也可能是爷爷，还有可能是某个祖宗，而parent返回的只能是爸爸。至于parents和closest的区别就是，他们都会返回爸爸或者更高层级的祖宗，但是，parents返回的是多数，会把家谱上有的祖宗包括爸爸都返回出来成为一个集合，但是closest返回的只有一个被指定的包括爸爸的祖宗。</p>
+</ul>
+具体使用可以参考下边代码区域：
+<pre>
+	//1 closest()方法 利用接受一个匹配元素的选择器字符串
+	  $("button:first").click(function() {
+           $('li.item-1').closest('.level-2').css('border','1px solid red');
+    })
+    //这里迟迟矫正不了，是closest（）括号里的选择器选错了。写了一个li.level-2，人家class=level-2的也不是li、是ul啊！
+</pre>
+<pre>
+	//2 closest()方法 利用给定的jQuery集合或元素来过滤元素
+    $("button:last").click(function() {
+       var itemB = $('.item-b')
+        $('li.item-1')
+             .closest(itemB)//或者直接写：.closest($('.item-b')).不用var那一行
+            .css('border', '1px solid blue');
+    })
+</pre>
+    <h2>实验：closest方法()</h2>
+    <div class="left first-div">
+    <div class="div">
+        <ul class="level-2">
+            <li class="item-a">A</li>
+            <li class="item-b">B
+                <ul class="level-3">
+                    <li class="item-1">1</li>
+                    <li class="item-2">2</li>
+                    <li class="item-3">3</li>
+                </ul>
+            </li>
+            <li class="item-c">C</li>
+        </ul>
+    </div>
+    </div>
+    <br/>
+    <button>点击：closest传递选择器 </button>
+    <button>点击：closest传递一个元素对象</button>
+    <script type="text/javascript">
+    $("button:first").click(function() {
+          $('li.item-1').closest('.level-2').css('border','1px solid red');
+    })
+    </script>
+    <script type="text/javascript">
+    $("button:last").click(function() {
+         var itemB = $('.item-b')
+        $('li.item-1')
+            .closest(itemB)//或者直接写：.closest($('.item-b')).不用var那一行
+            .css('border', '1px solid blue');
+    })
+    
+    </script>
+	</body>
+</html>

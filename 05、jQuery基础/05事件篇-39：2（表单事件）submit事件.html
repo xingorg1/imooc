@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>submit事件</title>
+	</head>
+	<body>
+	提交表单是一个最常见的业务需求，比如用户注册，一些信息的输入都是需要表单的提交。同样的有时候开发者需要在表单提交的时候过滤一些的数据、做一些必要的操作（例如：验证表单输入的正确性，如果错误就阻止提交，从新输入）此时可以通过submit事件，监听下提交表单的这个动作
+<br />
+使用上非常简单，与基本事件参数处理保持一致
+<br />
+<hr/>
+方法一：$ele.submit()
+<br />
+绑定$ele元素，不带任何参数一般是用来指定触发一个事件，用的比较少
+<br />
+《div id="test">点击触发《div><br />
+$("ele").submit(function(){<br />
+    alert('触发指定事件')<br />
+})<br />
+$("#text").click(function(){<br />
+     $("ele").submit()  //指定触发事件<br /> 
+});<br />
+ 
+<hr/>
+方法二：$ele.submit( handler(eventObject) )<br />
+
+绑定$ele元素，每次$ele元素触发点击操作会执行回调 handler函数<br />
+
+这样可以针对事件的反馈做很多操作了<br />
+
+《form id="target" action="destination.html"><br />
+  《input type="submit" value="Go" /><br />
+《/form>
+<br />
+$("#target").submit(function() { //绑定提交表单触发<br />
+    //this指向 from元素 <br />
+});<br />
+ 
+<hr />
+方法三：$ele.submit( [eventData ], handler(eventObject) )<br />
+
+使用与方法二一致，不过可以接受一个数据参数，这样的处理是为了解决不同作用域下数据传递的问题<br />
+
+《form id="target" action="destination.html"><br />
+  《input type="submit" value="Go" /><br />
+《/form><br />
+$("#target").submit(11111,function(data) { //绑定提交表单触发
+<br />
+    //data => 1111 //传递的data数据<br />
+});<br />
+ 
+
+通过在《form>元素上绑定submit事件，开发者可以监听到用户的提交表单的的行为<br />
+
+<h5>具体能触发submit事件的行为：</h5><br />
+<li>
+《input type="submit"></li><li>
+《input type="image"></li><li>
+《button type="submit"></li><li>
+当某些表单元素获取焦点时，敲击Enter（回车键）</li><br />
+上述这些操作下，都可以截获submit事件。<br />
+
+<h5>这里需要特别注意：</h5><br />
+
+form元素是有默认提交表单的行为，如果通过submit处理的话，需要禁止浏览器的这个默认行为<br />
+<span style="color: red;">传统的方式是调用事件对象  e.preventDefault() 来处理，</span> jQuery中可以直接在函数中最后结尾return false即可<br />
+<h5>jQuery处理如下：</h5><br />
+
+$("#target").submit(function(data) {<br /> 
+   return false; //阻止默认行为，提交表单<br />
+});<br />
+<pre>
+	   $('#target1').submit(function(e) {
+        alert('捕获提交表达动作,不阻止页面跳转')
+    });
+    </pre>
+    <hr />
+ <pre>   //回车键或者点击提交表单,禁止浏览器默认跳转：
+    $('#target2').submit(function() {
+        alert('捕获提交表达动作,阻止页面跳转')
+        return false;//阻止提交表单的默认行为
+    });
+</pre>
+	</body>
+</html>

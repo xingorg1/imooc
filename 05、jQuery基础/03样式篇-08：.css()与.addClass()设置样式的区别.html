@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>.css()与.addClass()设置样式的区别</title>
+  <style>
+    .left,
+    .right {
+        width: 300px;
+        height: 120px;
+    }
+    
+    .left div,
+    .right div {
+        width: 200px;
+        height: 90px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+    }
+    a{
+        font-size: 14px;
+        display:block;
+    }
+    .newClass{
+        background: #bbffaa;
+    }
+
+    .imoocClass{
+        background: red;
+    }
+    .addBorder{
+        border: 1px solid red;
+    }
+
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+</head>
+
+<body>
+	
+		<div>
+			对于样式的设置，我们学了addClass与css方法，那么两者之间有什么区别？
+<br/>
+<h1>可维护性：</h1>
+
+.addClass()的本质是通过定义个class类的样式规则，给元素添加一个或多个类。css方法是通过JavaScript大量代码进行改变元素的样式<br/>
+
+通过.addClass()我们可以批量的给相同的元素设置统一规则，变动起来比较方便，可以统一修改删除。如果通过.css()方法就需要指定每一个元素是一一的修改，日后维护也要一一的修改，比较麻烦<br/>
+
+<h1>灵活性：</h1>
+
+通过.css()方式可以很容易动态的去改变一个样式的属性，不需要在去繁琐的定义个class类的规则。一般来说在不确定开始布局规则，通过动态生成的HTML代码结构中，都是通过.css()方法处理的<br/>
+
+<h1>样式值：</h1>
+
+.addClass()本质只是针对class的类的增加删除，不能获取到指定样式的属性的值，.css()可以获取到指定的样式值。<br/>
+
+<h1>样式的优先级：</h1>
+
+css的样式是有优先级的，当外部样式、内部样式和内联样式同一样式规则同时应用于同一个元素的时候，优先级如下<br/>
+
+<h3>外部样式 "<" 内部样式  "<" 内联样式
+</h3>
+	
+.addClass()方法是通过增加class名的方式，那么这个样式是在外部文件或者内部样式中先定义好的，等到需要的时候在附加到元素上<br/>
+通过.css()方法处理的是内联样式，直接通过元素的style属性附加到元素上的<br/>
+通过.css方法设置的样式属性优先级要高于.addClass方法<br/>
+总结：<br/>
+
+.addClass与.css方法各有利弊，一般是静态的结构，都确定了布局的规则，可以用addClass的方法，增加统一的类规则<br/>
+如果是动态的HTML结构，在不确定规则，或者经常变化的情况下，一般多考虑.css()方式<br/>
+		</div>
+		
+    <h2>.addClss()与.css()方法区别</h2>
+    <div class="left">
+        <div class="aaron">
+            <a>css优先级高于addClass</a>
+            <a>1：第一次addClss背景色</a>
+            <a>2：第二次css修改背景色</a>
+        </div>
+    </div>
+    <div class="right">
+        <div class="aa bb imooc">
+            <article>
+                <a>imoocClass</a>
+            </article>
+        </div>
+    </div>
+
+    
+    <script type="text/javascript"> 
+        //给所有的div统一增加边宽
+        $('div').addClass('addBorder');
+    </script>
+
+    <script type="text/javascript"> 
+        //class=left下div元素增加一个新的样式，增加背景颜色
+        $('.aaron').addClass('newClass');
+    </script>
+
+    <script type="text/javascript"> 
+        //通过css覆盖addClass方式设置背景色
+        $('.aaron').css('background-color','pink');
+    </script>
+
+	</body>
+</html>

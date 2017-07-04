@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>offset</title>
+	</head>
+	<body>
+		<h1>网页尺寸/网页中元素的尺寸大小</h1>
+		offsetHeight和offsetWidth，获取网页内容高度和宽度(包括滚动条等边线，会随窗口的显示大小改变)。<br/>
+
+<h4>一、值</h4>
+
+offsetHeight = clientHeight + 滚动条 + 边框。<br/>
+
+<h4>二、浏览器兼容性</h4>
+
+var w= document.documentElement.offsetWidth
+    || document.body.offsetWidth;<br/>
+var h= document.documentElement.offsetHeight
+    || document.body.offsetHeight;<br/>
+任务<br/>
+在script标签内，补充右边编辑器代码，获取网页的宽度和高度,并输出。<br/>
+<!--<h1>我看见很多人问为什么高这么小，是因为这个高是内容高度，你在里面输入内容，如：<p>大大声</p>，看看   然后再加入其他内容例如多加点<p>就可以很明显看出高度数值变大.height、clientHeight、scrollHeight、offsetHeight区别图解 http://www.cnblogs.com/yuteng/articles/1894578.html</h1>-->
+
+ <script type="text/javascript">
+var w = document.documentElement.offsetWidth || document.body.offsetWidth;
+var h = document.documentElement.offsetHeight || document.body.offsetHeight;
+document.write(w+"px<br/>"+h+"px");
+</script>
+	</body>
+</html>

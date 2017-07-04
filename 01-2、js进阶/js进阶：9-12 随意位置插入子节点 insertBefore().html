@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<h1>insertBefore(要插入的新标签newlist，要放在这个标签之前的旧标签childlist)</h1>
+<h3>
+	newlist：要插入的新标签的名字
+</h3>
+<h3>
+	oldlist：把新建立的标签插入到这个标签的前面，可以用父元素标签名.lastChild/firstChild、也可以用父元素标签.childNodes[i],要选第几个，填i为数字调试即可得到，childNodes是获取这个标签下边的子元素集，注意如果有换行和空格也是默认为一个childNodes的，ie是这样，其他主流浏览器还好点会忽略
+</h3>
+<ul id="test"><li>JavaScript</li><li>HTML</li></ul> 
+ 
+<script type="text/javascript">
+
+  var otest = document.getElementById("test");  
+  var newstest = document.createElement('li');
+  newstest.innerHTML = "PHP";
+  newstest.style.color = "red";
+//otest.insertBefore(newstest,otest.lastChild);
+otest.insertBefore(newstest,otest.childNodes[1]);//这个ul#test下就两个li，从0开始论，最后一个就是[1]了。
+</script> 
+
+</body>
+</html>

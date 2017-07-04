@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>on()的高级用法</title>
+		    <style>
+    .left div,
+    .right div {
+        width: 500px;
+        height: 50px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+    
+    .left div {
+        background: #bbffaa;
+    }
+    
+    .right div {
+        background: yellow;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>on的高级用法</h3>
+		针对自己处理机制中，不仅有on方法，还有根据on演变出来的live方法(1.7后去掉了)，delegate方法等等。这些方法的底层实现部分 还是on方法，这是利用了on的另一个<span style="color: red;">事件机制委托的机制</span>衍变而来的<br />
+
+委托机制<br />
+
+.on( events [, selector ] [, data ], handler(eventObject) )<br />
+在on的第二参数中提供了一个selector选择器，简单的来描述下<br />
+
+参考下面3层结构<br />
+
+《div class="left"><br />
+    《p class="aaron"><br />
+        《a>目标节点《/a> //点击在这个元素上<br />
+    《/p><br />
+《/div><br />
+给出如下代码：<br />
+
+$("div").on("click","p",fn)<br />
+<p style="color: red;">事件绑定在最上层div元素上，当用户触发在a元素上，事件将往上冒泡，一直会冒泡在div元素上。如果提供了第二参数，那么事件在往上冒泡的过程中遇到了选择器匹配的元素，将会触发事件回调函数</p>
+<hr />
+<pre>
+	//给body绑定一个click事件
+    //没有直接a元素绑定点击事件
+    //通过委托机制，点击a元素的时候，事件触发
+    $('body').on('click', 'a', function(e) {
+       alert(e.target.textContent)
+    })
+</pre>
+<hr />
+ <h2>on事件委托</h2>
+    <div class="left">
+        <div class="aaron">
+            <a>点击这里</a>
+        </div>
+    </div>
+    <script type="text/javascript">
+    //给body绑定一个click事件
+    //没有直接a元素绑定点击事件
+    //通过委托机制，点击a元素的时候，事件触发
+    $('body').on('click', 'a', function(e) {
+       alert(e.target.textContent)
+    })
+    </script>
+	</body>
+</html>

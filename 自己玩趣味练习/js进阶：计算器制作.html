@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>自制计算器</title>
+		<style type="text/css">
+		input{
+				border: 1px solid #4169E1;
+				-webkit-border-radius: 12px;
+				-moz-border-radius: 12px;
+				border-radius: 12px;
+				padding: 10px;
+			}
+			select{
+				border: 1px solid #4169E1;
+				-webkit-border-radius: 12px;
+				-moz-border-radius: 12px;
+				border-radius: 12px;
+				padding: 10px;
+			}
+			input[type='button']{
+				padding: 10px 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" id="n1" placeholder="请输入第一个数" />
+		<input type="text" id="n2" placeholder="请输入第二个数" />
+		<select name="" id="fh">
+			<option value="+">加</option>
+			<option value="-">减</option>
+			<option value="*">乘</option>
+			<option value="/">除 </option>
+			<option value="%">取余 </option>
+		</select>
+		<input type="button" id="s" value="求值" onclick="s()"/>
+	</body>
+	<script type="text/javascript">
+		function s(){
+			var num1 = parseInt(document.getElementById('n1').value);
+			var num2 = parseInt(document.getElementById('n2').value);
+			var fh = document.getElementById('fh').value;
+			var sum;
+			switch(fh){
+				case '+':
+					sum = num1 + num2;
+					document.write(num1+'+'+num2+'='+sum);
+				break;
+				case '-':
+					sum = num1 - num2;
+					document.write(num1+'-'+num2+'='+sum);
+				break;
+				case '*':
+					sum = num1 * num2;
+					document.write(num1+'*'+num2+'='+sum);
+				break;
+				case '/':
+					sum = num1 / num2;
+					document.write(num1+'/'+num2+'='+sum);
+				break;
+				case '%':
+					sum = num1 % num2;
+					document.write(num1+'%'+num2+'='+sum);
+				break;
+			}
+		}
+	</script>
+</html>

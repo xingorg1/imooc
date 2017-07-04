@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>focusout事件</title>
+		  <style>
+    .left div,
+    .right div {
+        width: 500px;
+        height: 50px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+    .left div {
+        background: #bbffaa;
+    }
+    
+    .right div {
+        background: yellow;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>失焦事件——focusout()</h3>
+		当一个元素，或者其内部任何一个元素失去焦点的时候，比如input元素，用户在点击失去焦的时候，如果开发者需要捕获这个动作，jQuery提供了一个focusout事件<br />
+
+使用上非常简单：<br />
+<hr />
+方法一：$ele.focusout()<br />
+
+绑定$ele元素，不带任何参数一般是用来指定触发一个事件，可能一般用的比较少<br />
+
+《div id="test">点击触发《div><br />
+$("ele").focusout(function(){<br />
+    alert('触发指定事件')<br />
+})<br />
+$("#text").mouseup(function(){<br />
+     $("ele").focusout()  //指定触发事件<br />
+     
+});<br />
+ 
+<hr />
+方法二：$ele.focusout( handler )<br />
+
+绑定$ele元素，每次$ele元素触发点击操作会执行回调 handler函数<br />
+
+这样可以针对事件的反馈做很多操作了<br />
+
+《div id="test">点击触发《div><br />
+$("#text").focusout(function() {<br />
+    //this指向 div元素<br />
+});<br />
+ 
+<hr />
+方法三：$ele.focusout( [eventData ], handler )<br />
+
+使用与方法二一致，不过可以接受一个数据参数，这样的处理是为了解决不同作用域下数据传递的问题<br />
+
+《div id="test">点击触发《div><br />
+$("#text").focusout(11111,function(e) {<br />
+    //this指向 div元素<br />
+    
+    //e.date  => 11111 传递数据<br />
+});<br />
+ 
+
+事件非常简单，具体的操作参考代码区域<br />
+<hr />
+<p>这次的参考代码可是我自己写的奥，第二段比之前的简化了一步，删掉了定义函数再调用函数的步骤，直接增加鼠标事件了。</p>
+<pre>
+	//传一个回调函数
+	$(selector).focusout(function(){
+		$(this).css('color','red');
+	});
+</pre>
+<hr />
+<pre>
+	//传一个回调函数和一个数据
+	function fn(e){
+		$(this).val(e.data);
+	}
+	$(selector).focusout('要输出的文字',fn)
+	
+</pre>
+<hr />
+ <h2>.focusout()方法</h2>
+    <div class="left">
+        <div class="aaron">
+            点击触发失去焦点：<input type="text" />
+        </div>
+    </div>
+    <div class="right">
+        <div class="aaron1">
+            点击触发失去焦点并传递参数：<input type="text" />
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+
+        //input失去焦点
+        //给input元素增加一个边框
+        $("input:first").focusout(function() {
+             $(this).css('border','2px solid red')
+        })
+
+    </script>
+
+
+    <script type="text/javascript">
+
+        //不同函数传递数据
+        function fn(e) {
+             $(this).val(e.data)
+        }
+        // function a() {
+            $("input:last").focusout('慕课网', fn)
+        // }
+        // a();
+        
+
+    </script>
+	</body>
+</html>

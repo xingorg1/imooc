@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Date对象</title>
+		<style type="text/css">
+		div{
+			display: inline-block;
+			padding: 10px;
+			margin: 5px;
+			border: 4px solid #4169E1;
+		}
+			table,
+			td {
+				border: 1px solid slateblue;
+				padding: 2px 5px;
+			}
+			
+			td {
+				max-width: 300px;
+			}
+		</style>
+		<script type="text/javascript">
+			var myDate = new Date(); //定义一个获得系统的当期那时间的全局变量
+			function year() {
+				document.write('现在时间是：' + myDate + '格式为：星期、月、日、年、时、分、秒、时区' + '（火狐浏览器）');
+				var num = myDate.getFullYear();
+				document.write('<br/>获得现在的年份：' + num);
+				var num1 = myDate.setFullYear(2014);
+				document.write('<br/>1970年到现在的毫秒数：' + num1);
+				var num2 = myDate.getFullYear();
+				document.write('<br/>更改后的年份：' + num2);
+			}
+
+			function day() {
+				var mydate = new Date(); //获得系统的当期那时间
+				var num = mydate.getDay(); //获得当前时间下的星期数，返回值是0-6，分别对应日-一，然后把返回的数字赋值给num变量，这样num就成了0-6的某个数字。【这里是值得学习之处，】之后配合数组的索引下标，得到对应的数组中的值
+				var day = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+				document.getElementById('text1').value = (day[num]); //day[num]！高明之处
+//				第二种写法
+//				var day=myDate.getDay();
+//				demo.innerHTML='星期'+'日一二三四五六'.charAt(day);利用charAt下标从字符串中选取对应的文字并提取出来。
+			}
+
+			function time() {
+				//将目前日期对象的时间推迟一小时
+				var num = myDate.getTime(); //获得到当前时间的毫秒数
+				document.write("<br />从1970年1月1日零时到日期对象所指的日期的毫秒数为：" + num); //输出
+				myDate.setTime(myDate.getTime() + 60 * 60 * 1000); //重新设置当前时间再加一小时：因为一小时是60分钟，一分钟是60秒，一秒又等于1000毫秒。所以，推迟1小时就是60*60*1000，若推迟两小时：2*60*60*1000/120*60*1000（2小时又等于120分钟）
+				var num1 = myDate.getTime();//重新获得推迟后的时间毫秒数
+				document.write("<br />将目前日期对象的时间推迟一小时后的结果是：" + num1);
+			}
+		</script>
+	</head>
+
+	<body>
+		<div>
+		<em>1.getFullYear()练习</em><br />
+		<input type="button" value="获取年份" onclick="year()" /></div><div>
+		<br /><em>2.getDay()练习</em><br />
+		<input type="button" value="获取星期" onclick="day()" />
+		<input type="text" id="text1" style="padding: 10px 5px;" placeholder="点击按钮后显示星期" />
+		<h1>总结</h1>
+		<p style="width: 300px;line-height: 1.6em;">此案例的高明之处，就是day[num]，把得到的系统星期数赋值给num，然后变成数字后的num代替了数组day的下标索引处，，进而变换推导出星期天。这种方法很适合方法获取值后返回的是0-x的数值，getDay就是这种。<strong>很实用</strong>，以后要掌握这种思维方式。day[num]
+		</p></div><div>
+		<br /><em>3.getTime()练习</em><br />
+		<input type="button" value="返回时间" onclick="time()" />
+		<h1>总结</h1>
+		<p style="width: 300px;line-height: 1.6em;">重新设置当前时间再加一小时：因为一小时是60分钟，一分钟是60秒，一秒又等于1000毫秒。所以，推迟1小时就是<strong>60*60*1000</strong>，若推迟两小时：2*60*60*1000/120*60*1000（2小时又等于120分钟）
+		</p></div>
+		<div style="border: 1px solid #4169E1;padding: 10px;">
+			<h1>知识点</h1>
+			<table>
+				<caption>Date对象中处理时间和日期的常用方法</caption>
+				<thead>
+					<tr>
+						<td>方法名称</td>
+						<td>功能描述</td>
+						<td>备注</td>
+					</tr>
+				</thead>
+				<tr>
+					<td>get/setFullYear()</td>
+					<td>返回/设置年份</td>
+					<td>用四位数表示</td>
+				</tr>
+				<tr>
+					<td>get/setYear()</td>
+					<td>返回/设置年份</td>
+				</tr>
+				<tr>
+					<td>get/setMonth()</td>
+					<td>返回/设置月份</td>
+					<td>返回/从0-11，分别对应一月——十二月，0:一月；10：十一月；11：十二月！所以调用正确的月份值，应同星期的获取方法一样，把12个月份定义给数组，然后用返回的数值做数组的下标索引，调出数组中对应的正确的月份数。</td>
+				</tr>
+				<tr>
+					<td>get/setDay()</td>
+					<td>返回/设置星期</td>
+					<td>返回/从0-6，分别对应星期日——星期六，0:周日；5：周五；6：周六；！调用正确的星期值，应把7个星期定义给数组，然后用返回的数值做数组的下标索引，调出数组中对应的正确的星期数。</td>
+				<tr>
+					<tr>
+					<td>get/setDate()</td>
+					<td>返回/设置日期</td>
+					<td>获得日期、号值</td>
+				</tr>
+					<td>get/setHours()</td>
+					<td>返回/设置小时</td>
+					<td>24小时制</td>
+				</tr>
+				<tr>
+					<td>get/setMinutes()</td>
+					<td>返回/设置分钟数</td>
+				</tr>
+				<tr>
+					<td>get/setSeconds()</td>
+					<td>返回/设置秒钟数</td>
+				</tr>
+				<tr>
+					<td>get/setTime()</td>
+					<td>返回/设置时间</td>
+					<td>毫秒为单位</td>
+				</tr>
+			</table>
+		</div>
+
+	</body>
+
+</html>

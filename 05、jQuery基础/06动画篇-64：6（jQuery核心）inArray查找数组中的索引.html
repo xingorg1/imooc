@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>查找数组中的索引inArray</title>
+		 <style>
+    p {
+        color: red;
+    }
+    div{
+        width:200px; 
+        height: 100px; 
+        background-color: yellow;
+        color:red;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>查找数组中的索引——inArray</h3>
+		在PHP里,有in_array()判断某个元素是否存在数组中，JavaScript却没有，但是jQuery封装了inArray()函数判断元素是否存在数组中。注意了：在ECMAScript5已经有数据的indexOf方法支持了，但是jQuery保持了版本向下兼容，所以封装了一个inArray方法<p></p>
+
+jQuery.inArray()<span style="color: red;font: bold 14px '微软雅黑';">【代码中写法：$.inArray()】</span>函数用于在数组中搜索指定的值，并返回其索引值。如果数组中不存在该值，则返回 -1。<p></p>
+
+语法：<p></p>
+
+jQuery.inArray( value, array [, fromIndex ] )<p></p>
+用法非常简单，传递一个检测的目标值，然后传递原始的数组，可以通过fromIndex规定查找的起始值，默认数组是0开始
+<p></p>
+例如：在数组中查找值是5的索引<p></p>
+
+$.inArray(5,[1,2,3,4,5,6,7]) //返回对应的索引：4<p></p>
+注意：<p></p>
+
+<p style="color: red;font: bold 24px '微软雅黑';">如果要判断数组中是否存在指定值，你需要通过该函数的返回值不等于(或大于)-1来进行判断</p>
+<pre>示例代码中的一种写法：
+var index = $.inArray('a',['a','b','c','d','a','c'],2);//
+<span style="color: blueviolet;font: bold 14px '微软雅黑';">思考：为什么index会是4不是0呢？
+答：最后面的数字2是指从索引2开始找，只找到第一个匹配的值返回索引，可以改最后那个2为0，结果返回的索引值就是0
+</span></pre>
+<pre>
+	 $("#exec").click(function() {
+        var v = $("#animation").val();
+        var $aaron = $("#aaron");
+           $aaron.empty();
+        if (v == "1") {
+
+            var index = $.inArray('Aaron',['test','Aaron', 'array','慕课网']);
+
+            $aaron.text('Aaron的索引是: '+ index)
+
+        } else if (v == "2") {
+
+            //指定索引开始的位置
+            var index = $.inArray('a',['a','b','c','d','a','c'],2);//思考：为什么index会是4不是0呢？答：最后面的数字2是指从索引2开始找，只找到第一个匹配的值返回索引，可以改最后那个2为0，结果返回的索引值就是0
+
+            $aaron.text('a的索引是: '+ index)
+        } 
+    });
+</pre>
+<h2>inArray方法</h2>
+    <p>慕课网,专注分享</p>
+    <div id="aaron"></div>
+    点击观察结果：
+    <select id="animation">
+        <option value="1">inArray</option>
+        <option value="2">inArray</option>
+    </select>
+    <input id="exec" type="button" value="执行动画">
+    <script type="text/javascript">
+    $("#exec").click(function() {
+        var v = $("#animation").val();
+        var $aaron = $("#aaron");
+           $aaron.empty();
+        if (v == "1") {
+
+            var index = $.inArray('Aaron',['test','Aaron', 'array','慕课网']);
+
+            $aaron.text('Aaron的索引是: '+ index)
+
+        } else if (v == "2") {
+
+            //指定索引开始的位置
+            var index = $.inArray('a',['a','b','c','d','a','c'],2);
+
+            $aaron.text('a的索引是: '+ index)
+        } 
+    });
+    </script>
+	</body>
+</html>

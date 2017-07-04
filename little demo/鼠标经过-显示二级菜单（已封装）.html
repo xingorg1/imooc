@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				font-size: 14px;
+			}
+			
+			a {
+				color: #333;
+				text-decoration: none
+			}
+			
+			ul {
+				list-style: none;
+			}
+			
+			.subMenu {
+				height: 30px;
+				border-bottom: 5px solid #F60;
+				margin-left: 50px;
+				width: 600px;
+			}
+			
+			.subMenu li {
+				float: left;
+				position: relative;
+				height: 30px;
+				width: 120px
+			}
+			
+			.subMenu li a {
+				display: block;
+				height: 30px;
+				text-align: center;
+				line-height: 30px;
+				width: 120px;
+				background: #efefef;
+				margin-left: 1px;
+			}
+			
+			.subNav {
+				position: absolute;
+				top: 30px;
+				left: 0;
+				width: 120px;
+				height: 0;
+				overflow: hidden;
+			}
+			
+			.subNav li a {
+				background: #ddd
+			}
+			
+			.subNav li a:hover {
+				background: #efefef
+			}
+		</style>
+		<script>
+			window.onload = function() {
+				var Submenu_li = document.getElementsByClassName('li');
+				for(var i = 0; i < Submenu_li.length; i++) {
+					Submenu_li[i].onmouseover = function() {
+						var subNav = this.getElementsByClassName('subNav')[0];
+						if(subNav) {
+							clearInterval(subNav.timer);
+							subNav.timer = setInterval(function() {
+								subNav.style.height = subNav.offsetHeight + 20 + "px";
+								if(subNav.offsetHeight > 120) {
+									subNav.style.height = '120px';
+									clearInterval(subNav.timer)
+								}
+							}, 30)
+						}
+					}
+					Submenu_li[i].onmouseout = function() {
+						var subNav = this.getElementsByTagName('ul')[0];
+						if(subNav) {
+							clearInterval(subNav.timer);
+							subNav.timer = setInterval(function() {
+								subNav.style.height = subNav.offsetHeight - 20 + "px";
+								if(subNav.offsetHeight <= 0) {
+									clearInterval(subNav.timer)
+								}
+							}, 30)
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<ul class="subMenu">
+			<li class="li">
+				<a href="#">一级菜单</a>
+				<ul class="subNav">
+					<li>
+						<a href="#">二级菜单</a>
+					</li>
+					<li>
+						<a href="#">二级菜单</a>
+					</li>
+					<li>
+						<a href="#">二级菜单</a>
+					</li>
+					<li>
+						<a href="#">二级菜单</a>
+					</li>
+				</ul>
+			</li>
+			<li class="li">
+				<a href="#">一级菜单</a>
+				<ul class="subNav">
+					<li>
+						<a href="#">二级菜单</a>
+					</li>
+					<li>
+						<a href="#">二级菜单</a>
+					</li>
+					<li>
+						<a href="#">二级菜单</a>
+					</li>
+					<li>
+						<a href="#">二级菜单</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">一级菜单</a>
+			</li>
+			<li>
+				<a href="#">一级菜单</a>
+			</li>
+			<li>
+				<a href="#">一级菜单</a>
+			</li>
+		</ul>
+
+	</body>
+
+</html>

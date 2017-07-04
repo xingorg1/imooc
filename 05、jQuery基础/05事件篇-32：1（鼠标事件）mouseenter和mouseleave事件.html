@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>mouseenter和mouseleave</title>
+		<style>
+			.left div,
+			.right div {
+				width: 350px;
+				height: 150px;
+				padding: 5px;
+				margin: 5px;
+				border: 1px solid #ccc;
+			}
+			
+			p {
+				height: 50px;
+				border: 1px solid red;
+				margin: 30px;
+			}
+			
+			.left div {
+				background: #bbffaa;
+			}
+			
+			.right div {
+				background: yellow;
+			}
+		</style>
+		<script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+
+	<body>
+		<h2>移入移出事件——mouseenter和mouseleave：不冒泡</h2> 用交互操作中，经常需要知道用户操作鼠标是否有移到
+		<span style="color: red;">元素内部或是元素外部</span>，因此jQuery提供了一个mouseenter和mouseleave的快捷方法可以监听用户移动到内部的操作<br /> 使用上非常简单，三种参数传递方式与mouseover和mouseout是一模一样的，所以这里不再重复，主要讲讲区别，下面以mouseenter为例：
+
+		<br /> mouseenter JavaScript事件是Internet Explorer专有的。由于该事件在平时很有用，jQuery的模拟这一事件，以便它可用于所有浏览器。该事件在鼠标移入到元素上时被触发。任何HTML元素都可以接受此事件。<br /> mouseenter事件和mouseover的区别
+
+		<br />
+
+		<h3 style="color: red;">关键点就是：冒泡的方式处理问题</h3><br /> 简单的例子：
+		<br /> mouseover为例：
+
+		<br /> 《div class="aaron2"><br /> 《p>鼠标离开此区域触发mouseleave事件《/p>
+		<br /> 《/div>
+		<br /> 如果在p元素与div元素都绑定mouseover事件，鼠标在离开p元素，但是没有离开div元素的时候，触发的结果:
+		<br /> 1、p元素响应事件
+
+		<br /> 2、div元素响应事件
+		<br /> 这里的问题是div为什么会被触发？ 原因就是事件冒泡的问题，p元素触发了mouseover，他会一直往上找父元素上的mouseover事件，如果有、全触发了<br /> 所以在这种情况下面，jQuery推荐我们使用 mouseenter事件<br />
+
+		<p style="color: blue;">mouseenter事件只会在绑定它的元素上被调用，而不会在后代节点上被触发，简而言之就是不冒泡</p>
+
+		这就是最本质的区别，具体的对应可以参考后边的案例：<br /> PS：同学可以根据xia侧代码，自己写出mouseout与mouseleave的区别哦~
+<p>mouseenter对应mouseover ；那么mouseout对应mouseleave，细微的关于冒泡的区别，mouseleave也通用。mouseout在离开子元素的时候，父元素也会被触发mouseout事件，但是mouseleave在鼠标离开子元素的时候，不会触发他爸爸也拥有的mouseleave事件。而且兼容性来说，比mouseover和mouseout好。mouseenter在js中，是ie所专有的。现在可以通用各大浏览器</p>
+		<br />
+		<pre>
+	1、mouseover方法：
+	 var i = 0;
+        $(".aaron1 p").mouseover(function(e) {
+            $(".aaron1 a:first").html('p上的mouseover事件触发次数：' + (++i))
+        })
+
+        var n = 0;
+        $(".aaron1").mouseover(function() {
+            $(".aaron1 a:last").html('div尚的mouseover冒泡事件触发次数：' + (++n))
+        })
+</pre>
+		<hr />
+		<pre>
+	2：mouseenter方法
+	    var i = 0;
+        $(".aaron2 p").mouseenter(function(e) {
+            $(".aaron2 a:first").html('p上的mouseenter事件触发次数：' + (++i))
+        })
+
+        var n = 0;
+        $(".aaron2").mouseenter(function() {
+            $(".aaron2 a:last").html('div上的mouseenter冒泡事件触发次数：' + (++n))
+        })
+</pre>
+		<h2>.mouseover()方法</h2>
+		<div class="left">
+			<div class="aaron1">
+				<p>鼠标离开此区域触发mouseover事件</p>
+				<a>p上的mouseover事件触发次数：</a><br/>
+				<a>div上的mouseover冒泡事件触发次数：</a>
+			</div>
+		</div>
+
+		<h2>.mouseenter()方法</h2>
+		<div class="right">
+			<div class="aaron2">
+				<p>鼠标离开此区域触发mouseenter事件</p>
+				<a>p上的mouseenter事件触发次数：</a><br/>
+				<a>div上的mouseenter冒泡事件触发次数：</a>
+			</div>
+		</div>
+		<br/>
+
+		<script type="text/javascript">
+			var i = 0;
+			$(".aaron1 p").mouseover(function(e) {
+				$(".aaron1 a:first").html('p上的mouseover事件触发次数：' + (++i))
+			})
+
+			var n = 0;
+			$(".aaron1").mouseover(function() {
+				$(".aaron1 a:last").html('div上的mouseover冒泡事件触发次数：' + (++n))
+			})
+		</script>
+
+		<script type="text/javascript">
+			var i = 0;
+			$(".aaron2 p").mouseenter(function(e) {
+				$(".aaron2 a:first").html('p上的mouseenter事件触发次数：' + (++i))
+			})
+			var n = 0;
+			$(".aaron2").mouseenter(function() {
+				$(".aaron2 a:last").html('div上的mouseenter冒泡事件触发次数：' + (++n))
+			})
+		</script>
+	</body>
+
+</html>

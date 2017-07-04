@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>createElement()</title>
+		<style type="text/css">
+			.a-class {
+				font: bold 24px "微软雅黑";
+			}
+			
+			.aa {
+				text-decoration: line-through;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p>行内js测试，与主题无关</p>
+		<input type="button" value="点击" onclick="javascript:alert('this is a test!');" />
+		<hr />
+
+		<h1>createElement(),注意，那个create的拼写，总是少了最后的那个e</h1>
+		<h3>【少个e的】错误提示是</h3>
+		<p>[Web浏览器] "Uncaught TypeError: undefined is not a function"</p>
+		<hr />
+
+		<h1>实验</h1>
+		<p>在body中插入一个a链接：</p>
+		<p>第一种写法:普通想法——变量名.属性名的方法</p>
+		<script type="text/javascript">
+			var main = document.body;
+			//创建链接
+			function createa(url, text) {
+				var a = document.createElement('a');
+				a.href = url;
+				a.title = text;
+				a.style.color = "red";
+				a.className = "a-class"; //添加class样式名字
+				a.innerHTML = "点击进入慕课网"; //添加内容的一种方法
+				main.appendChild(a);
+			}
+			// 调用函数创建链接
+			createa('http://www.imooc.com', '慕课网');
+		</script>
+		<p>在body中插入一个a链接：</p>
+		<p>第二种写法:通过setAttribute()</p>
+		<script type="text/javascript">
+			var main = document.body;
+			//创建链接
+			function createa1(url, text) {
+				var a = document.createElement('a');
+				var innertext = document.createTextNode("欢迎加入慕课网");
+				a.setAttribute("href", url);
+				a.setAttribute("title", text);
+				a.setAttribute("style", "color:red;");
+				//a.setAttribute(className,"aa");//这个也不能这么用了。因为在<a>中，没有className这个属性
+				//填入内容方法试验：
+				//				a.setAttribute(innertext);错误示范1				
+				//				a.setAttribute(innerHTML,"wenzi");错误示范2
+				//这种添加内容的方法就不能用了。如下，用appendChild().
+				a.appendChild(innertext); //正确，可见appendChild不仅能在标签中添加标签，还能在标签中添加内容节点。
+				main.appendChild(a);
+			}
+			createa1('http://www.imooc.com', '慕课网');
+		</script>
+		//法2
+		<script>
+			function createa2(url, text) {
+				var docu = document.createElement('a');
+				docu.setAttribute("href", url);
+				docu.setAttribute("title", text);
+				docu.setAttribute("style", "color:blue;");
+				var innertext = document.createTextNode("点我点我，你就能进慕课网！");
+				docu.appendChild(innertext);
+				main.appendChild(document.createElement('br'));//插入中创建，少一个定义变量的环节
+				main.appendChild(docu);
+			}
+			createa2('http://www.imooc.com', '慕课网');
+		</script>
+		<input  type="image" value="111111111"src="img/SelfieCity_20160302174837_save.jpg" name="image"/>
+	</body>
+
+</html>

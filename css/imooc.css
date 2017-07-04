@@ -1,0 +1,94 @@
+.left {
+        width: auto;
+        height: 120px;
+    }
+    
+    .left div {
+        width: 100px;
+        height: 70px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        background: #bbffaa;
+        border: 1px solid #ccc;
+    }
+    
+    .bottom {
+        width: 800px;
+    }
+    
+    .bottom div,
+    .bottom span {
+        display: block;
+        width: 80px;
+        height: 80px;
+        margin: 5px;
+        background: #bbffaa;
+        float: left;
+        font-size: 14px;
+    }
+    
+    .bottom .small {
+        width: 60px;
+        height: 25px;
+        font-size: 12px;
+        background: #fab;
+    }.left {
+        width: auto;
+        height: 120px;
+    }
+    
+    .left div {
+        width: 100px;
+        height: 70px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        background: #bbffaa;
+        border: 1px solid #ccc;
+    }
+    
+    .bottom {
+        width: 800px;
+    }
+    
+    .bottom div,
+    .bottom span {
+        display: block;
+        width: 80px;
+        height: 80px;
+        margin: 5px;
+        background: #bbffaa;
+        float: left;
+        font-size: 14px;
+    }
+    
+    .bottom .small {
+        width: 60px;
+        height: 25px;
+        font-size: 12px;
+        background: #fab;
+    }
+    div.first, div.second, div.third,div.fourth,div.fifth,div.sixth,div.seventh{
+        width: 60px;
+        height: 60px;
+        margin: 5px;
+        float: left;
+        font-size: 0.8em;
+        background: #40E0D0
+    }
+    div.first{
+		background-color:lightSkyBlue;
+	}
+	div.second{
+		background-color: #ccc;
+		color: red;
+		font-size: 1.2em;
+	}
+	div.third{
+		/*这里，因为选择器优先级的关系，不得已把div也加上，这样多加一个标签选择器，样式优先级权重就+1，*/
+		background-color:yellow;
+	}
+	div.sixth{
+		font-size: 12px;
+	}

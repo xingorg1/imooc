@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>创建节点和节点属性</title>
+	</head>
+	<body>
+		<div>通过JavaScript可以很方便的获取DOM节点，从而进行一系列的DOM操作。但实际上一般开发者都习惯性的先定义好HTML结构，但这样就非常不灵活了。</div>
+		<div>
+			试想下这样的情况：如果我们通过AJAX获取到数据之后然后才能确定结构的话，这种情况就需要动态的处理节点了
+		</div>
+		<div>
+			本文向大家介绍一下如何使用JavaScript创建div节点元素，主要包括创建div节点元素的属性和创建div节点元素的样式两大部分内容，相信本文介绍一定会让你有所收获。
+		</div>
+		<div>
+			先介绍下需要用到的浏览器提供的一些原生的方法（这里不处理低版本的IE兼容问题）
+		</div>
+		<ul>
+			创建流程比较简单，大体如下：
+<li>创建节点(常见的：元素、属性和文本)</li>
+<li>添加节点的一些属性</li>
+<li>加入到文档中</li>
+</ul>
+	<ul>
+流程中涉及的一点方法：
+<li>创建元素：document.createElement</li>
+<li>设置属性：setAttribute</li>
+<li>添加文本：innerHTML</li>
+<li>加入文档：appendChild</li>
+		</ul>
+		<div>
+			如xia边代码所示，写一个最简单的元素创建，我们会发现几个问题：
+<br/>
+<li>每一个元素节点都必须单独创建</li>
+<li>节点是属性需要单独设置，而且设置的接口不是很统一</li>
+<li>添加到指定的元素位置不灵活</li>
+<li>最后还有一个最重要的：浏览器兼容问题处理</li>
+针对这一系列的DOM操作的问题，jQuery给出了一套非常完美的接口方法，我们之后就开始深入学习
+		</div>
+		<p style="color: red;">知识点还蛮多的，querySelector、addEventListener、function(){}、createEvent、setAttribute、className、appendChild</p>
+		<pre>
+			var body = document.querySelector('body');
+
+       		document.addEventListener('click',function(){
+	    	
+	    	//创建2个div元素
+		    var rightdiv = document.createElement('div')
+		    var rightaaron = document.createElement("div");
+
+		    //给2个div设置不同的属性
+		    rightdiv.setAttribute('class', 'right')
+		    rightaaron.className = 'aaron'
+		    rightaaron.innerHTML = "动态创建DIV元素节点";
+
+		    //2个div合并成包含关系
+		    rightdiv.appendChild(rightaaron)
+		   	
+		   	//绘制到页面body
+		   	body.appendChild(rightdiv)
+
+	    },false)//这个还不包括写ie添加事件的兼容attachEvent呢！
+		</pre>
+		<h1>新知识querySelector：</h1>
+		<p>
+			获取文档中 id="demo" 的第一个元素：<br />
+document.querySelector("#demo");
+		</p>
+		<p>
+			querySelector() 方法返回文档中匹配指定 CSS 选择器的一个元素。<br />
+<b>注意：</b> querySelector() 方法仅仅返回匹配指定选择器的第一个元素。如果你需要返回所有的元素，请使用 querySelectorAll() 方法替代
+		</p>
+	</body>
+</html>

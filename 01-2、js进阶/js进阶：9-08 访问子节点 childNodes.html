@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>childNodes</title>
+	</head>
+
+	<body>
+		<div>
+			javascript
+			<p>javascript</p>
+			<div>jQuery</div>
+			<h5>PHP</h5>
+		</div>
+		<script type="text/javascript">
+			var d = document.getElementsByTagName("div")[0].childNodes;
+			document.write("div下子节点的长度——" + d.length + "<br/>");
+			// document.write("第一个子节点的类型"+d[0].nodeType+"<br/>");
+			var arr = ["元素", "属性", "文本", "注释", "文档"];
+			var s = "第一个子节点的类型是：";
+			// alert(d[0].nodeType);
+			// alert(arr[0]);
+			switch(d[0].nodeType) {
+				case 1:
+					document.write(s + arr[0]);
+					break;
+				case 2:
+					document.write(s + arr[1]);
+					break;
+				case 3:
+					document.write(s + arr[2]);
+					break;
+				case 8:
+					document.write(s + arr[3]);
+					break;
+				case 9:
+					document.write(s + arr[4]);
+					break;
+			}
+		</script>
+	</body>
+
+</html>

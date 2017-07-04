@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>keydown()与keyup()事件</title>
+		 <style>
+    .left div,
+    .right div {
+        width: 500px;
+        height: 50px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+    
+    .left div {
+        background: #bbffaa;
+    }
+    em{
+        font-weight: 900;
+        color: red;
+    }
+    </style>
+   <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+	</head>
+	<body>
+		<h3>获取键盘事件——keydown和keyup</h3>
+		鼠标有mousedown,mouseup之类的事件，这是根据人的手势动作分解的2个触发行为。相对应的键盘也有这类事件，将用户行为分解成2个动作，键盘按下与松手，针对这样的2种动作，jQuery分别提供了对应keydown与keyup方法来监听<br />
+
+<span style="color: red;">keydown事件：</span><br />
+
+当用户在一个元素上第一次按下键盘上字母键的时候，就会触发它。使用上非常简单，与基本事件参数处理保持一致，这里使用不在重复了，列出使用的方法
+<br />
+<h4>//直接绑定事件</h4><br />
+$elem.keydown( handler(eventObject) )<br />
+<h4>//传递参数</h4><br />
+$elem.keydown( [eventData ], handler(eventObject) )<br />
+<h4>//手动触发已绑定的事件</h4><br />
+$elem.keydown()<br />
+ 
+
+<span style="color: red;">keyup事件：</span><br />
+
+当用户在一个元素上第一次松手键盘上的键的时候，就会触发它。使用方法与keydown是一致的只是触发的条件是方法的<br />
+
+ 
+
+注意：
+<br />
+<li>
+keydown是在键盘按下就会触发</li><li>
+keyup是在键盘松手就会触发</li><li style="color: red;">
+理论上它可以绑定到任何元素，但keydown/keyup事件只是发送到具有焦点的元素上，不同的浏览器中，可获得焦点的元素略有不同，但是表单元素总是能获取焦点，所以对于此事件类型表单元素是最合适的。
+ </li>
+
+注意右边的案例，会发现一个<span style="color: red;">问题：keydown事件：  每次获取的内容都是之前输入的，当前输入的获取不到，</span>
+<h3>原因是：</h3>
+<p>
+	keydown事件触发在文字还没敲进文本框，这时如果在keydown事件中输出文本框中的文本，得到的是触发键盘事件前的文本，而keyup事件触发时整个键盘事件的操作已经完成，获得的是触发键盘事件后的文本
+</p>
+<pre>
+	 //监听键盘按键 keydown
+    //获取输入的值
+    $('.target1').keydown(function(e) {
+        $("em:first").text(e.target.value)
+    });
+</pre>
+<hr />
+<pre>
+    //监听键盘按键 keyup
+    //获取输入的值
+    $('.target2').keyup(function(e) {
+        $("em:last").text(e.target.value)
+    });
+</pre>
+<h2>keydown()与keyup()事件</h2>
+    <div class="left">
+        <h4>测试一</h4>
+        <div class="aaron">监听keydown输入:
+            <input class="target1" type="text" value="" /><br />
+            按下显示输入的值:<em></em>
+        </div>
+        <h4>测试二</h4>
+        <div class="aaron">监听keyup输入:
+            <input class="target2" type="text" value="" /><br />
+            松手显示输入的值:<em></em>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    //监听键盘按键
+    //获取输入的值
+    $('.target1').keydown(function(e) {
+        $("em:first").text(e.target.value)
+    });
+    //监听键盘按键
+    //获取输入的值
+    $('.target2').keyup(function(e) {
+        $("em:last").text(e.target.value)
+    });
+
+    </script>
+	</body>
+</html>

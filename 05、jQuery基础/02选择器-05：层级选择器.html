@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>层级选择</title>
+		<link rel="stylesheet" href="../css/imooc.css" type="text/css">
+		
+		<script src="http://code.jquery.com/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div>层级选择器
+文档中的所有的节点之间都是有这样或者那样的关系。我们可以把节点之间的关系可以用传统的家族关系来描述，可以把文档树当作一个家谱，那么节点与节点直接就会存在父子，兄弟，祖孙的关系了。
+
+选择器中的层级选择器就是用来处理这种关系
+
+子元素 后代元素 兄弟元素 相邻元素
+通过一个列表，对比层级选择器的区别</div>
+		<img src="../img/5590e98b0001f60d06130229.jpg" />
+		<div>
+			 仔细观察层级选择器之间还是有很多相似与不同点
+
+层级选择器都有一个参考节点
+后代选择器包含子选择器的选择的内容
+一般兄弟选择器包含相邻兄弟选择的内容
+相邻兄弟选择器和一般兄弟选择器所选择到的元素，必须在同一个父元素下
+		</div>
+		<div>
+			> （大于号）紧跟父子关系 如$("div > p")表示选择div下的直接层是p的节点。<br/>
+
++ （加号）  紧跟兄弟关系 如$("div + p")表示选择div同层的左右相邻的p节点。<br/>
+
+~ （波浪线）任意距离兄弟关系 如$("div + p")表示选择div同层的p节点。<br/>
+
+(空格)    任意层父子关系 如$("div p")表示选择div下的p节点（不管中间隔多少层）。<br/>
+
+,(逗号)   表示选择器组合，如$("div p, span p")表示div下p节点和span下p节点。<br/>
+<p>$( "parent > child" ) 子选择器：选择所有指定“parent”元素中指定的"child"的直接子元素。 $("ancestor descendant") 后代选择器：选择给定的祖先元素的所有后代元素, 一个元素的后代可能是该元素的一个孩子，孙子，曾孙等 $("prev + next") 相邻兄弟选择器：选择所有紧接在“prev”元素后的“next”元素 $("prev ~ siblings") 一般兄弟选择器：匹配“prev”元素之后的所有 兄弟元素。具有相同的父元素，并匹配过滤“siblings”选择器  </p>
+相应的jQuery提供了 功能方法   .children() 是获得子元素   .find() 是获得后代元素  .siblings() 获得同级元素 {另外还有，preSiblings()   nextSiblings() }
+		</div>
+		
+		 <h2>子选择器与后代选择器</h2>
+    <div class="left">
+        <div class="aaron">
+            <p>div下的第一个p元素</p>
+        </div>
+        <div class="aaron">
+            <p>div下的第一个p元素</p>
+        </div>
+    </div>
+    <div class="right">
+        <div class="imooc">
+            <article>
+                <p>div下的article下的p元素</p>
+            </article>
+        </div>
+        <div class="imooc">
+            <article>
+                <p>div下的article下的p元素</p>
+            </article>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        //子选择器
+        //$('div > p') 选择所有div元素里面的子元素P
+        $('div>p').css("border", "1px groove red");
+    </script>
+
+    <script type="text/javascript">
+        //后代选择器
+        //$('div  p') 选择所有div元素里面的p元素
+        $('div p').css("border", "1px groove red");
+    </script>
+
+
+    <h2>相邻兄弟选择器与一般兄弟选择器</h2>
+    <div class="bottom">
+        <div>兄弟节点div, +~选择器不能向前选择</div>
+        <span class="prev">选择器span元素</span>
+        <div>span后第一个兄弟节点div</div>
+        <div>兄弟节点div
+            <div class="small">子元素div</div>
+        </div>
+        <span>兄弟节点span,不可选</span>
+        <div>兄弟节点div</div>
+    </div>
+
+    <script type="text/javascript">
+        //相邻兄弟选择器
+        //选取prev后面的第一个的div兄弟节点
+        $('.prev + div').css("border", "3px groove blue");
+    </script>
+
+    <script type="text/javascript">
+        //一般相邻选择器
+        //选取prev后面的所有的div兄弟节点
+        $('.prev ~ div').css("border", "3px groove blue");
+    </script>
+	</body>
+</html>

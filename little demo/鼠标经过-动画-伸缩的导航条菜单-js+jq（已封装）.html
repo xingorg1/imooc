@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>可伸缩的导航菜单</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				font-size: 14px;
+			}
+			
+			a {
+				color: #333;
+				text-decoration: none
+			}
+			
+			ul {
+				list-style: none;
+				height: 30px;
+				border-bottom: 5px solid #F60;
+				margin-top: 20px;
+				padding-left: 50px;
+			}
+			
+			ul li {
+				float: left
+			}
+			
+			ul li a {
+				display: block;
+				height: 30px;
+				text-align: center;
+				line-height: 30px;
+				width: 120px;
+				background: #efefef;
+				margin-left: 1px;
+			}
+			
+			a.on,
+			a:hover {
+				background: #F60;
+				color: #fff;
+			}
+		</style>
+		<script>
+			window.onload = function() {
+				var aA = document.getElementsByTagName('a');
+				for(var i = 0; i < aA.length; i++) {
+					aA[i].onmouseover = function() {
+						var This = this;
+						clearInterval(This.time);//一开始要清楚定时器！！删了一下试试还是可以的呀。
+						This.time = setInterval(function() {
+							This.style.width = This.offsetWidth + 8 + "px";
+							if(This.offsetWidth >= 160)//这里，只有一行代码，所以不加花括号也是可以的。
+								clearInterval(This.time);
+						}, 30)
+					}
+					aA[i].onmouseout = function() {//和over时的效果一样，就是缩回来罢了
+						clearInterval(this.time);
+						var This = this;
+						This.time = setInterval(function() {
+							This.style.width = This.offsetWidth - 8 + "px";
+							if(This.offsetWidth <= 120) {//offsetWidth还有这个妙用，这的是元素的实际宽度吗？offsetWidth指网页中元素的宽度，加上this就是指代当前元素的宽度
+								This.style.width = '120px';
+								clearInterval(This.time);
+							}
+						}, 30)
+					}
+				}
+			}
+		</script>
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>-->
+		<!--调用jq-->
+		<!--<script>
+			//		jq的制作方法
+			$(function() { //$()==js里面的：window.onload = function(){};让页面加载完成之后再进行调用函数。
+				$('a').hover(
+					//$('x')选择器，选择标签是x的，括号里的引号里添加的是标签名
+					//hover方法，表示鼠标经过的时候的效果
+					//下设两个函数，一个鼠标移入动作，一个鼠标移出动作。
+					function() {
+						$(this).stop().animate({//stop停止定时一下
+							"width": "160px"
+						}, 200); //jq自带的animate动画效果
+					},
+					function() {
+						$(this).stop().animate({
+							"width": "120px"
+						}, 200);
+					}
+
+				)
+
+			})
+		</script>-->
+	</head>
+
+	<body>
+		<ul>
+			<li>
+				<a class="on" href="#">首　　页</a>
+			</li>
+			<li>
+				<a href="#">新闻快讯</a>
+			</li>
+			<li>
+				<a href="#">产品展示</a>
+			</li>
+			<li>
+				<a href="#">售后服务</a>
+			</li>
+			<li>
+				<a href="#">联系我们</a>
+			</li>
+		</ul>
+		<p>来自慕课网教程
+			<a>http://www.imooc.com/video/93</a>
+		</p>
+	</body>
+
+</html>

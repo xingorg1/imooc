@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>二维数组</title>
+	<script type="text/javascript">
+		//二维数组定义方法——1
+		var myarr = new Array();//声明一维
+		for(var i=0;i<2;i++){//一维长度为2
+//			alert(myarr[i]);
+			myarr[i]=new Array();//再声明二维
+			for(var j=0;j<3;j++){//二维长度为3
+				myarr[i][j]=i+j;//赋值，每个数组元素的值为i+j
+//				alert(myarr);
+			}
+//		document.write(myarr+'<br/>'+myarr[i]+'<br/>'+myarr[i][j]+'<br/>');
+		document.write('<hr color="red"/>'+myarr+'<br/>');
+		document.write('<hr color="green"/>'+myarr[i]+'<br/>');
+		document.write('<hr color="blue"/>'+myarr[i][j]+'<br/>');
+		}
+		
+	</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

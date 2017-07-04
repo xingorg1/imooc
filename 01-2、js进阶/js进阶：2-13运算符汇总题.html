@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>运算符综合练习题</title>
+		<script type="text/javascript">
+			var a,b,sum;
+			a = 5;
+			b = 100%7;
+//			alert(b);
+			sum = a > b && a * b > 0;
+			document.write('我认为a的值为&nbsp'+a+'<br />b的值为&nbsp'+b+'<br />sum的值为&nbsp'+sum);
+			document.write('<hr />第一轮计算后，答案是：<br />a为&nbsp'+a+"<br />b为&nbsp"+b+'<br />sum为&nbsp'+sum+'<br/>sum的类型为：'+typeof sum);
+			sum = ( (++a) + 3 ) / ( 2 - (--b) ) * 3;
+			document.write('<hr color="red" />再一次计算后，我认为<br />a的值为：&nbsp'+a+'<br/>b的值为:&nbsp'+b+'<br />sum的值为:&nbsp'+sum);
+			document.write('<hr />第一轮计算后，答案是：<br />a为：&nbsp'+a+'<br />b为：&nbsp'+b+'<br />第二轮计算后，<br />sum的值为：&nbsp'+sum+'<br />sum的类型也发生了变化：'+typeof sum);
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

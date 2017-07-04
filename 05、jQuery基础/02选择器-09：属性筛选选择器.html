@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>属性筛选</title>
+		 <link rel="stylesheet" href="../css/imooc.css" type="text/css">
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<div>属性选择器让你可以基于属性来定位一个元素。可以只指定该元素的某个属性，这样所有使用该属性而不管它的值，这个元素都将被定位，也可以更加明确并定位在这些属性上使用特定值的元素，这就是属性选择器展示它们的威力的地方。</div>
+		<img src="../img/57d654200001c46507360560.jpg" />
+		<p>
+			浏览器支持：
+
+[att=val]、[att]、[att|=val]、[att~=val]  属于CSS 2.1规范<br/>
+[ns|attr]、[att^=val]、[att*=val]、[att$=val] 属于CSS3规范<br/>
+[name!="value"]  属于jQuery 扩展的选择器<br/>
+CSS选择器无论CSS2.1版本还是CSS3版本，IE7和IE8都支持，webkit、Gecko核心及Opera也都支持，只有IE6以下浏览器才不支持
+在这么多属性选择器中[attr="value"]和[attr*="value"]是最实用的
+<br/>
+[attr="value"]能帮我们定位不同类型的元素，特别是表单form元素的操作，比如说input[type="text"],input[type="checkbox"]等<br/>
+[attr*="value"]能在网站中帮助我们匹配不同类型的文件
+		</p>
+		<h1>实验
+		</h1>
+		 <h2>属性筛选选择器</h2>
+    <h3>[att=val]、[att]、[att|=val]、[att~=val]</h3>
+    <div class="left" testattr="true" >
+        <div class="div" testattr="true" name='p1'>
+            <a>[att=val]</a>
+        </div>
+        <div class="div" testattr="true" p2>
+            <a>[att]</a>
+        </div>
+        <div class="div" testattr="true" name="-">
+            <a>[att|=val]</a>
+        </div>
+        <div class="div" testattr="true" name="a b">
+            <a>[att~=val]</a>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+         //查找所有div中，属性name=p1的div元素
+         $('div[name=p1]').css("border", "3px groove red"); 
+    </script>
+
+    <script type="text/javascript">
+        //查找所有div中，有属性p2的div元素
+        $('div[p2]').css("border", "3px groove blue"); 
+    </script>
+
+    <script type="text/javascript">
+        //查找所有div中，有属性name中的值只包含一个连字符“-”的div元素
+        $('div[name|="-"]').css("border", "3px groove #00FF00"); 
+    </script>
+
+    <script type="text/javascript">
+        //查找所有div中，有属性name中的值包含一个连字符“空”的div元素
+        $('div[name~="a"]').css("border", "3px groove #668B8B"); 
+    </script>
+
+
+    <h3>[att^=val]、[att*=val]、[att$=val]、[att!=val]</h3>
+    <div class="left" testattr="true" >
+        <div class="div" testattr="true"  name='imooc-aaorn'>
+            <a>[att^=val]</a>
+        </div>
+        <div class="div" testattr="true"  name='aaorn-imooc'>
+            <a>[att$=val]</a>
+        </div>
+        <div class="div" testattr="true"  name="attr-test-selector">
+            <a>[att*=val]</a>
+        </div>
+        <div class="div" name="a b">
+            <a>[att!=val]</a>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+         //查找所有div中，属性name的值是用imooc开头的
+         $('div[name^=imooc]').css("border", "3px groove red"); 
+    </script>
+
+    <script type="text/javascript">
+         //查找所有div中，属性name的值是用imooc结尾的
+         $('div[name$=imooc]').css("border", "3px groove blue"); 
+    </script>
+
+    <script type="text/javascript">
+        //查找所有div中，有属性name中的值包含一个test字符串的div元素
+        $('div[name*="test"]').css("border", "3px groove #00FF00"); 
+    </script>
+
+    <script type="text/javascript">
+        //查找所有div中，有属性testattr中的值没有包含"true"的div
+        $('div[testattr!="true"]').css("border", "3px groove #668B8B"); 
+    </script>
+	</body>
+</html>

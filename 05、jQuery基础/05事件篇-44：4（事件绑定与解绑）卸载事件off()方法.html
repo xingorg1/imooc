@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>卸载事件off()方法</title>
+	</head>
+	<body>
+		<h3>卸载事件——off()方法</h3>
+		<li>
+		通过.on()绑定的事件处理程序</li><li>
+		通过.off() 方法移除该绑定</li>
+根据on绑定事件的一些特性，off方法也可以通过相应的传递组合的事件名，名字空间，选择器或处理函数来移除绑定在元素上指定的事件处理函数。当有多个过滤参数时，只有与这些参数完全匹配的事件处理函数才会被移除<br />
+
+绑定2个事件<br />
+
+$("elem").on("mousedown mouseup",fn)<br />
+<hr />
+删除一个事件<br />
+
+$("elem").off("mousedown")<br />
+<hr />
+删除所有事件<br />
+
+$("elem").off("mousedown mouseup")<br />
+快捷方式删除所有事件，这里不需要传递事件名了，节点上绑定的所有事件将全部销毁<br />
+
+$("elem").off()<br />
+<pre>
+	1：删除一个事件
+	  var n  = 0;
+    //绑定事件
+    $(".aaron:first").on('mousedown mouseup', function(e) {
+        $(this).text( '触发类型:' +  (e.type) + ",次数" + n)
+        ++n;
+    })
+
+    //删除事件
+    $("button").click(function() {
+        $(".aaron:first").off('mousedown')
+    })
+</pre>
+<hr />
+<pre>
+	2:快捷删除所有事件
+	 var n  = 0;
+    //绑定事件
+    $(".aaron:last").on('mousedown mouseup', function(e) {
+        $(this).text( '触发类型:' +  (e.type) + ",次数" + n)
+        ++n;
+    })
+
+    //删除事件
+    $("button").click(function() {
+        $(".aaron:last").off()
+    })
+</pre>
+	</body>
+</html>

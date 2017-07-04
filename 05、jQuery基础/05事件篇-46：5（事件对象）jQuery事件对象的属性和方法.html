@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jQuery事件对象的属性和方法</title>
+		    <style>
+    .left div,
+    .right div {
+        width: 500px;
+        height: 100px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+    
+    .left div {
+        background: #bbffaa;
+    }
+    
+    .right div {
+        background: yellow;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>集合：</h3>
+		事件对象的属性与方法有很多，但是我们经常用的只有那么几个，这里我主要说下作用与区别<br />
+
+<h3>event.type：获取事件的类型</h3>
+
+触发元素的事件类型<br />
+
+$("a").click(function(event) {<br />
+  alert(event.type); // "click"事件<br />
+});<br />
+<h3>event.pageX 和 event.pageY：获取鼠标当前相对于页面的坐标</h3>
+
+通过这2个属性，可以确定元素在当前页面的坐标值，鼠标相对于文档的左边缘的位置（左边）与 （顶边）的距离，简单来说是从页面左上角开始,即是以页面为参考点,不随滑动条移动而变化
+
+<h3>event.preventDefault() 方法：阻止默认行为</h3>
+
+这个用的特别多，在执行这个方法后，如果点击一个链接（a标签），浏览器不会跳转到新的 URL 去了。我们可以用 event.isDefaultPrevented() 来确定这个方法是否(在那个事件对象上)被调用过了
+
+<h3>event.stopPropagation() 方法：阻止事件冒泡</h3>
+
+事件是可以冒泡的，为防止事件冒泡到DOM树上，也就是不触发任何前辈元素上的事件处理函数
+
+<h3>event.which：获取在鼠标单击时，单击的是鼠标的哪个键</h3>
+
+event.which 将 event.keyCode 和 event.charCode 标准化了。event.which也将正常化的按钮按下(mousedown 和 mouseupevents)，鼠标左键报告1，中间键报告2，右键报告3
+
+<h3>event.currentTarget : 在事件冒泡过程中的当前DOM元素</h3>
+
+冒泡前的当前触发事件的DOM对象, 等同于this.
+
+<h3>this和event.target的区别：</h3>
+
+js中事件是会冒泡的，所以this是可以变化的，但event.target不会变化，它永远是直接接受事件的目标DOM元素；
+<br />
+.this和event.target都是dom对象<br />
+
+如果要使用jquey中的方法可以将他们转换，为jquery对象：$(this)和$(event.target);比如：event.target和$(event.target)的使用：
+<pre>
+ //为 《span> 元素绑定 click 事件  
+    $("span").click(function() {
+        $("#msg").html($("#msg").html() + "《p>内层span元素被单击《/p>");
+        //span这里的事件没有阻止冒泡，所以点击span，div的也会跟着出来
+    });
+    
+    
+    //为 Id 为 content 的 《div> 元素绑定 click 事件  
+    $("#content").click(function(event) {
+        $("#msg").html($("#msg").html() + "《p>外层div元素被单击《/p>");
+        event.stopPropagation(); //阻止事件冒泡 。如果把这一句删掉，点击div也会触发body的事件 
+    });
+    
+    
+    //为 《body> 元素绑定 click 事件  
+    $("body").click(function() {
+        $("#msg").html($("#msg").html() + "《p>body元素被单击《/p>");
+    });	
+</pre>
+ <h3>实验：——冒泡：事件对象的属性与方法</h3>
+    <div class="left">
+        <div id="content">
+            外层div元素
+            <br />
+            <span style="background: silver;">内层span元素</span>
+            <br /> 外层div元素
+        </div>
+        <br />
+        <div id="msg"></div>
+    </div>
+    <script type="text/javascript">
+    //为 <span> 元素绑定 click 事件  
+    $("span").click(function() {
+        $("#msg").html($("#msg").html() + "<p>内层span元素被单击</p>");
+        //span这里的事件没有阻止冒泡，所以点击span，div的也会跟着出来
+    });
+    //为 Id 为 content 的 <div> 元素绑定 click 事件  
+    $("#content").click(function(event) {
+        $("#msg").html($("#msg").html() + "<p>外层div元素被单击</p>");
+        event.stopPropagation(); //阻止事件冒泡 。如果把这一句删掉，点击div也会触发body的事件 
+    });
+    //为 <body> 元素绑定 click 事件  
+    $("body").click(function() {
+        $("#msg").html($("#msg").html() + "<p>body元素被单击</p>");
+    });
+    </script>
+	</body>
+</html>

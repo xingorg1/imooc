@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>外部插入after()与before()</title>
+		<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+		<style>
+			.aaron {
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div>
+			节点与节点之前有各种关系，除了父子，祖辈关系，还可以是兄弟关系。之前我们在处理节点插入的时候，接触到了内部插入的几个方法，这节我们开始讲外部插入的处理，也就是兄弟之间的关系处理，这里jQuery引入了2个方法，可以用来在匹配I的元素前后插入内容
+		</div>
+		<h5>选择器的描述：</h5>
+		<img src="../img/57481b6b00018e3405210197.jpg" />
+		<ul>
+			<li>
+				before与after都是用来对相对选中元素外部增加相邻的兄弟节点</li>
+			<li>
+				2个方法都是都可以接收HTML字符串，DOM 元素，元素数组，或者jQuery对象，用来插入到集合中每个匹配元素的前面或者后面</li>
+			<li>
+				2个方法都支持多个参数传递after(div1,div2,....) 可以参考xia边案例代码
+			</li>
+		</ul>
+		<h5>注意点：</h5>
+		<li>after向元素的后边添加html代码，如果元素后面有元素了，那将后面的元素后移，然后将html代码插入</li>
+		<li>
+			before向元素的前边添加html代码，如果元素前面有元素了，那将前面的元素前移，然后将html代码插</li>
+		<h2>通过before与after添加元素</h2>
+		<button id="bt1">点击通过jQuery的before添加元素</button>
+		<button id="bt2">点击通过jQuery的after添加元素</button>
+		<div class="aaron">
+			<p class="test1">测试before</p>
+		</div>
+		<div class="aaron">
+			<p class="test2">测试after</p>
+		</div>
+		<script type="text/javascript">
+			$("#bt1").on('click', function() { //获取到btn，然后添加点击事件
+				//在匹配test1元素集合中的每个元素前面插入p元素
+				$(".test1").before('<p style="color:red">before,在匹配元素之前增加</p>', '<p style="color:red">多参数演示</p>')
+			})
+		</script>
+		<script type="text/javascript">
+			$("#bt2").on('click', function() {
+				//在匹配test1元素集合中的每个元素后面插入p元素
+				$(".test2").after('<p style="color:blue">after,在匹配元素之后增加</p>', '<p style="color:blue">多参数演示</p>')
+
+			})
+		</script>
+	</body>
+
+</html>

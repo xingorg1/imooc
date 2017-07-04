@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>*</title>
+		<link rel="stylesheet" href="../css/imooc.css" type="text/css">
+		<script src="http://code.jquery.com/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div>
+			全选择器（*选择器）
+在CSS中，经常会在第一行写下这样一段样式
+
+* {padding: 0; margin: 0;}
+通配符*意味着给所有的元素设置默认的边距。jQuery中我们也可以通过传递*选择器来选中文档页面中的元素
+
+描述：
+
+$( "*" )
+抛开jQuery，如果要获取文档中所有的元素，通过document.getElementsByTagName()中传递"*"同样可以获取到
+
+不难发现，id、class、tag都可以通过原生的方法获取到对应的节点，但是我们还需要考虑一个兼容性的问题，我这里顺便提及一下，比如:
+
+IE会将注释节点实现为元素，所以在IE中调用getElementsByTagName里面会包含注释节点，这个通常是不应该的
+getElementById的参数在IE8及较低的版本不区分大小写
+IE7及较低的版本中，表单元素中，如果表单A的name属性名用了另一个元素B的ID名并且A在B之前，那么getElementById会选中A
+IE8及较低的版本，浏览器不支持getElementsByClassName
+看到了吧，作为一名合格的前端不是那么简单的，就一个基本的选择器上面都需要做这么多兼容，幸好有jQuery的出现，让我们省了很多功夫，如果大家对jQuery的实现感兴趣，可以看我另一个门课程 <a href="http://www.imooc.com/learn/172" target="_blank">《jQuery源码解析》</a>
+		</div>
+		 <div class="aaron">
+        <p>class="aaron"</p>
+        <p>选中</p>
+    </div>
+    <div class="aaron">
+        <p>class="aaron"</p>
+        <p>选中</p>
+    </div>
+    <div class="imooc">
+        <p>class="imooc"</p>
+        <p>jQuery选中</p>
+    </div>
+    <div class="imooc">
+        <p>class="imooc"</p>
+        <p>jQuery选中</p>
+    </div>
+    <script type="text/javascript">
+        //获取页面中所有的元素
+        var elements1 = document.getElementsByTagName('*');
+    </script>
+    <script type="text/javascript">
+        //获取页面中所有的元素
+        var elements2 = $('*');
+        //原生与jQuery方法比较
+        //===表示数据和类型都相等
+        if(elements2.length === elements1.length){
+           elements2.css("border","1px solid red");
+        }
+    </script>
+	</body>
+</html>

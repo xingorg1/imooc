@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>addClass()</title>
+		    <style>
+    .left,
+    .right {
+        width: 300px;
+        height: 120px;
+    }
+    
+    .left div,
+    .right div {
+        width: 100px;
+        height: 90px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+        
+    .newClass{
+        background: #bbffaa;
+    }
+
+    .imoocClass{
+        background: red;
+    }
+
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+
+	<body>
+		<div>通过动态改变类名（class），可以让其修改元素呈现出不同的效果。在HTML结构中里，多个class以空格分隔，当一个节点（或称为一个标签）含有多个class时，DOM元素响应的className属性获取的不是class名称的数组，而是一个含有空格的字符串，这就使得多class操作变得很麻烦。同样的jQuery开发者也考虑到这种情况，增加了一个.addClass()方法，用于动态增加class类名
+		</div>
+		<h3>.addClass( className )方法</h3> .addClass( className ) : 为每个匹配元素所要增加的一个或多个样式名<br/> .addClass( function(index, currentClass) ) : 这个函数返回一个或更多用空格隔开的要增加的样式名<br/> 注意事项：
+		<br/> .addClass()方法不会替换一个样式类名。它只是简单的添加一个样式类名到元素上 简单的描述下：在p元素增加一个newClass的样式
+		<br/> 《p class="orgClass"》<br/> $("p").addClass("newClass")
+		<br/>
+		<p>
+			那么p元素的class实际上是 class="orgClass newClass"样式只会在原本的类上继续增加，通过空格分隔
+		</p>
+		    <h2>.addClss()方法</h2>
+    <div class="left">
+        <div class="aaron">
+            <p>newClass</p>
+        </div>
+        <div class="aaron">
+            <p>newClass</p>
+        </div>
+    </div>
+    <div class="right">
+        <div class="aa bb imooc">
+            <article>
+                <p>imoocClass</p>
+            </article>
+        </div>
+        <div class="bb cc imooc ">
+            <article>
+                <p>imoocClass</p>
+            </article>
+        </div>
+    </div>
+
+    <script type="text/javascript"> 
+        //class=left下div元素增加一个新的样式，增加背景颜色
+        $('.left div').addClass('newClass')
+    </script>
+
+    <script type="text/javascript"> 
+    
+        //通过className(fucntion)方法
+        //这个函数返回一个或更多用空格隔开的要增加的样式名。
+        //接收index 参数表示元素在匹配集合中的索引位置和html 参数表示元素上原来的 HTML 内容
+
+        //找到所有的div，然后通过addClass设置颜色，根据返回的className的判断，
+        $("div").addClass(function(index,className) {
+
+            //找到类名中包含了imooc的元素
+            if(-1 !== className.indexOf('imooc')){
+                //this指向匹配元素集合中的当前元素
+                $(this).addClass('imoocClass')
+            }
+        });
+    </script>
+	</body>
+
+</html>

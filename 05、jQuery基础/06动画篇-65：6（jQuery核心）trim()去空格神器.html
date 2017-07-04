@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>trim()去空格</title>
+		 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>去空格——trim()</h3>
+		页面中，通过input可以获取用户的输入值，例如常见的登录信息的提交处理。用户的输入不一定是标准的，输入一段密码：'  1123456  "，注意了： 密码的前后会留空，这可能是用户的无心的行为，但是密码确实又没错，针对这样的行为，开发者应该要判断输入值的前后是否有空白符、换行符、制表符这样明显的无意义的输入值。
+<p></p>
+jQuery.trim()<span style="color: red;font: bold 14px '微软雅黑';">【代码中写法：$.trim()】</span>函数用于去除字符串两端的空白字符<p></p>
+
+这个函数很简单，没有多余的参数用法<p></p>
+
+需要注意：<p></p>
+<li>
+移除字符串开始和结尾处的所有换行符，空格(包括连续的空格)和制表符（tab）</li><li>
+如果这些空白字符在字符串中间时，它们将被保留，不会被移除</li>
+通过代码可以明显看到trim使用后的效果
+<pre>
+	$("#exec1").click(function() {
+        alert("值的长度：" + $("#results1").val().length)
+    });
+
+    $("#exec2").click(function() {
+         alert("值的长度：" + $.trim($("#results2").val()).length)
+    });
+</pre>
+ <h2>trim方法</h2>
+
+    未处理
+    <input type="text" name="" id="results1" value=" 前后留空 " />
+    <input id="exec1" type="button" value="点击执行"> <br />
+    
+    trim处理
+    <input type="text" name="" id="results2" value=" 前后留空 " />
+    <input id="exec2" type="button" value="点击执行">
+    <script type="text/javascript">
+    $("#exec1").click(function() {
+        alert("值的长度：" + $("#results1").val().length)
+    });
+
+    $("#exec2").click(function() {
+         alert("值的长度：" + $.trim($("#results2").val()).length)
+    });
+    </script>
+	</body>
+</html>

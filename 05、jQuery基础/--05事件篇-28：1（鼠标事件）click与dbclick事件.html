@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>click与dbclick事件</title>
+		  <style>
+    .test2 {
+        background: #bbffaa;
+    }
+    .test3 {
+        background: yellow;
+    }
+    .test2,.test3{
+        border: 1px solid red;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h2>单击双击事件-click和dblclick</h2>
+		在交互操作中，最简单直接就是点击操作。jQuery提供了两个方法：一个是click方法、用于监听用户单击操作，另一个方法是dbclick方法、用于监听用户双击操作。这两个方法的用户是类似，下面以click()事件为例
+<br />
+使用上非常简单：
+<br /><hr />
+方法一：$ele.click()<br />
+
+
+绑定$ele元素，不带任何参数一般是用来指定触发一个事件，用的比较少
+<br />
+《div id="test">点击触发《div><br />
+$("ele").click(function(){<br />
+    alert('触发指定事件')<br />
+})<br />
+$("#text").click(function(){<br />
+     $("ele").click()  //手动指定触发事件<br /> 
+});<br /><hr />
+方法二：$ele.click( handler(eventObject) )<br />
+
+
+绑定$ele元素，每次$ele元素触发点击操作会执行回调 handler函数，这样可以针对事件的反馈做很多操作了，方法中的this是指向了绑定事件的元素<br />
+
+《div id="test">点击触发《div><br />
+$("#text").click(function() {<br />
+    //this指向 div元素<br />
+});<br /><hr />
+方法三：$ele.click( [eventData ], handler(eventObject) )<br />
+
+使用与方法二一致，不过可以接受一个数据参数，这样的处理是为了解决不同作用域下数据传递的问题
+<br />
+《div id="test">点击触发《div><br />
+$("#text").click(11111,function(e) {<br />
+    //this指向 div元素<br />
+    //e.date  => 11111 传递数据<br />
+});<br />
+<hr />
+dbclick()的用法和click()的用法是类似的，可以参考以上click()的用法。<br />
+
+<b>dbclick与click事件不同的是：</b><br />
+
+click事件触发需要以下几点：<br />
+
+click事件其实是由mousedown与mouseup 2个动作构成，所以点击的动作只有在松手后才触发<br />
+PS:mousedown和mouseup下一节会讲到<br />
+
+dblclick事件触发需要以下几点：<br />
+
+dblclick又是由2个click叠加而来的，所以dblclick事件只有在满足以下条件的情况下才能被触发
+<br />
+<li>
+鼠标指针在元素里面时点击。<br /></li><li>
+鼠标指针在元素里面时释放。<br /></li><li>
+鼠标指针在元素里面时再次点击，点击间隔时间，是系统而定。<br /></li><li>
+鼠标指针在元素里面时再次释放。<br /></li>
+注意：在同一元素上同时绑定 click 和 dblclick 事件是不可取的。各个浏览器事件触发的顺序是不同的，一些浏览器在dblclick之前接受两个 click 事件 ，而和其它浏览器只接受一个 click 事件。用户往往可通过不同的操作系统和浏览器配置双击灵敏度
+<h4>对应的三种方法：</h4>
+
+<pre>
+	  //this指向button元素
+         $("button:eq(0)").click(function() {
+            alert(this)
+        })
+</pre>
+<hr />
+<pre>
+	  $('p').click(function(e) {
+            alert(e.target.textContent)
+        })
+        //this指向button元素
+        $("button:eq(1)").click(function() {
+            $('p').click() //指定触发绑定的事件
+        })
+</pre>
+<hr />
+<pre>
+	 //不同函数传递数据
+        function data(e) {
+            alert(e.data) //1111
+        }
+
+        function a() {
+            $("button:eq(2)").click(1111, data)
+        }
+        a();
+</pre>
+<hr />
+  <h2>.click()方法</h2>
+
+    <h4>测试一</h4>
+    <button>元素绑定事件,弹出回调中的this</button>
+    <script type="text/javascript">
+        //this指向button元素
+         $("button:eq(0)").click(function() {
+            alert(this)
+        })
+    </script>
+
+
+
+    <h4>测试二</h4>
+    <div class="test2">
+        <p>$('button:first').click(function(e) {alert(this)})</p>
+    </div>
+    <button>指定触发事件</button>
+    <script type="text/javascript">
+        $('p').click(function(e) {
+            alert(e.target.textContent)
+        })
+        //this指向button元素
+        $("button:eq(1)").click(function() {
+            $('p').click() //指定触发绑定的事件
+        })
+    </script>
+
+
+
+    <h4>测试三</h4>
+    <div class="test3">
+        <p>$('.right').click(1111, set)</p>
+    </div>
+
+    <button>不同函数传递数据</button>
+    <script type="text/javascript">
+
+        //不同函数传递数据
+        function data(e) {
+            alert(e.data) //1111
+        }
+
+        function a() {
+            $("button:eq(2)").click(1111, data)
+        }
+        a();
+
+    </script>
+	</body>
+</html>

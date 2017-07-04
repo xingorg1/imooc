@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>淡入动画fadeIn</title>
+		 <style>
+    select{
+        width:100%;
+        height: 30px;
+    }
+    p {
+        color: red;
+        display: none;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>淡入动画——fadeIn</h3>
+		fadeOut是淡出效果，相反的还有淡入效果fadeIn,方法使用上两者都是一致的，只是结果相反
+<p></p>.fadeIn( [duration ] [, complete ] )<p></p>duration：指定过渡动画运行多长时间(毫秒数)，默认值为400。该参数也可以为字符串"fast"(=200)或"slow"(=600)。<p></p>元素显示完毕后需要执行的函数。函数内的this指向当前DOM元素。<p></p>fadeIn()函数用于显示所有匹配的元素，并带有淡入的过渡动画效果。<p></p>
+注意：<p></p><li>
+淡入的动画原理：操作元素的不透明度从0%逐渐增加到100%</li><li style="color: red;">
+如果元素本身是可见的，不对其作任何改变。如果元素是隐藏的，则使其可见</li>
+<pre>
+    //【显示】按钮
+    $("#btnFadeIn").click(function() {
+        var v = $("#animation").val();
+        if (v == "1") {
+            $("p").fadeIn();
+        } else if (v == "2") {
+            $("p").fadeIn("slow");
+        } else if (v == "3") {
+            $("p").fadeIn(3000);
+        } else if (v == "4") {
+            $("p").fadeIn(2000, function() {
+                alert("显示完毕!");
+            });
+        } else if (v == "5") {
+            $("p").fadeIn(1000, "linear");
+        } else if (v == "6") {
+            $("p").fadeIn({
+                duration: 1000
+            });
+        }
+    });
+
+    // 【隐藏】按钮
+    $("#btnHide").click(function() {
+        $("p").hide();
+    });
+</pre>
+ <h2>fadeIn</h2>
+    <p>测试文字淡出效果</p>
+    <p>慕课网,专注分享</p>
+    选择：淡出的隐藏效果
+    </br>
+    </br>
+    <select id="animation">
+        <option value="1">fadeIn( )</option>
+        <option value="2">fadeIn( "slow" )</option>
+        <option value="3">fadeIn( 3000 )</option>
+        <option value="4">fadeIn( 2000, complete )</option>
+        <option value="5">fadeIn( 1000, "linear" )</option>
+        <option value="6">fadeIn( options )</option>
+    </select>
+    </br></br>
+    <input id="btnFadeIn" type="button" value="执行淡出效果" />
+    <input id="btnHide" type="button" value="点击隐藏" />
+    <script type="text/javascript">
+    //【显示】按钮
+    $("#btnFadeIn").click(function() {
+        var v = $("#animation").val();
+        if (v == "1") {
+            $("p").fadeIn();
+        } else if (v == "2") {
+            $("p").fadeIn("slow");
+        } else if (v == "3") {
+            $("p").fadeIn(3000);
+        } else if (v == "4") {
+            $("p").fadeIn(2000, function() {
+                alert("显示完毕!");
+            });
+        } else if (v == "5") {
+            $("p").fadeIn(1000, "linear");
+        } else if (v == "6") {
+            $("p").fadeIn({
+                duration: 1000
+            });
+        }
+    });
+
+    // 【隐藏】按钮
+    $("#btnHide").click(function() {
+        $("p").hide();
+    });
+    </script>
+	</body>
+</html>

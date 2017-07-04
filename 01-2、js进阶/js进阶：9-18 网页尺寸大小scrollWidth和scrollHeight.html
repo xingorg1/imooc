@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>网页尺寸scrollHeight</title>
+	</head>
+
+	<body>
+		<h1>网页尺寸scrollHeight</h1> scrollHeight和scrollWidth，获取网页内容高度和宽度。
+		<br /> 一、针对IE、Opera:
+
+		<br /> scrollHeight 是网页内容实际高度，可以小于 clientHeight。<br /> 二、针对NS、FF:
+
+		<br /> scrollHeight 是网页内容高度，不过最小值是 clientHeight。也就是说网页内容实际高度小于 clientHeight 时，scrollHeight 返回 clientHeight 。<br />
+
+		<h3>三、浏览器兼容性</h3> var w=document.documentElement.scrollWidth || document.body.scrollWidth;<br /> var h=document.documentElement.scrollHeight || document.body.scrollHeight;<br /> 注意:区分大小写
+		<br /> scrollHeight和scrollWidth还可获取Dom元素中内容实际占用的高度和宽度。
+
+		<br /> 任务
+
+		<br /> 在script标签内，补充右边编辑器代码，获取网页的实际宽度和高度。
+		<br />
+
+		<h1>实验</h1>
+		<h1></h1>
+		<!--增加了一行h1，高由8变成了21px;-->
+		<h1>2</h1>
+		<!--等你加了文字，高立马又变了，-->
+		<h2>总结：实验证明:</h2>
+		<p>‘高’是Html内容的高还是浏览器可视窗口的高！，内容的高是随着内容的增减而改变的，宽说是因为有些内容是占据一行的，所以是稳定不变。另外Html文档内容默认是有margin值的！可以在css中*{margin:0}清除margin值</p>
+		<script type="text/javascript">
+			var w = document.documentElement.scrollWidth || document.body.scrollWidth;
+			var h = document.documentElement.scrollHeight || document.body.scrollHeight;
+			document.write(w + "px<pr/>" + h + "px");
+		</script>
+	</body>
+
+</html>

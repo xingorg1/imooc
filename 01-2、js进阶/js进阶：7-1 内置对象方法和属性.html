@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>获取对象的属性和方法</title>
+		<script type="text/javascript">
+		function mm(){
+//		获取对象的属性: 对象名.属性;
+			var arr = new Array(5);
+			var arr2 = arr.length;
+			alert(arr2);
+			//一步完成版
+			alert(new Array(7).length);
+//			获取对象的方法: 对象名.方法();
+			var string1 = 'hello';
+			var daxie = string1.toUpperCase();
+			alert(daxie)
+			//一步完成版
+			alert('gjf'.toUpperCase());
+		}
+		</script>
+	</head>
+	<body>
+		<input type="button" onclick="mm()" value="调用函数">
+	</body>
+</html>

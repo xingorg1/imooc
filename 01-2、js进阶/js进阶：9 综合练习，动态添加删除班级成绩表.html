@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>dom对象综合练习</title>
+		<style type="text/css">
+			table {
+				margin: 0 auto;
+			}
+			
+			td {
+				text-align: center;
+			}
+			
+			input {
+				width: 30%;
+				margin-top: 5px;
+				cursor: pointer;
+			}
+		</style>
+		<script type="text/javascript">
+			//【1 】鼠标移动改变背景,可以通过给每行绑定鼠标移上事件和鼠标移除事件来改变所在行背景色。
+			//！难点问题1-3！！window.onload在最上面，也是页面加载完成后执行的效果，就和我之前做ZTA官网的bug一样了，那么后添加的就不能执行onmouseover的变色函数了。那该怎么办，后添加的东西怎么再调用这个已经加载好的函数？把函数放到下面起作用吗？很明显，不行，即使放到下面，也是只有加载进来的这两行html中已经写好的tr会执行变色函数，你利用添加button后添加的还是不能调用。，那么就把变色函数封装到一个函数中，放到最下面，然后window.onload还是在最上面，以保证页面加载完成后首先调用函数让已经存在的两行能够执行变色命令，但是封装的变色函数除了在window.onload下调用一次，在添加函数内部，也得调用一次，这样新添加的函数就能够执行变色函数了。
+			/*  1-3解决前的：旧代码块
+			 * window.onload = function() {
+				var table = document.getElementById('table');
+				var tr = document.getElementsByTagName('tr');
+				//				if(){
+				//					
+				//				}1-1问题：本来还打算用if判断，让i不是0的时候再执行函数，后来想想，直接把i的初始值改为1，把第一行排除掉不就行了。
+				for(var i = 1; i < tr.length; i++) { //1-1解决：i=1,是为了排除第一排的表头，你可以把i=0，然后把鼠标放到学号那一行，就知道为什么改1了
+					tr[i].onmouseover = function() {
+						this.style.backgroundColor = "red";
+					}
+					tr[i].onmouseout = function() {
+						this.style.backgroundColor = "white"; //1-2问题及解决：white也可以，最好是none，但是换none不起作用不知道是不是不该加引号。测试后，不加引号的none是undefined，算了，直接white把、正常的背景色。
+					}
+				}
+				//				alert(tr);用tagname得到的是一个集合！！！关键点！！
+
+			}
+			 */
+			//【新代码块】1-3得以解决
+			window.onload = function(){
+				bianse();
+			}//实现一开始就调用变色函数，让本来就有的tr先用着
+			var bianse = function(){
+				var table = document.getElementById('table');
+				var tr = document.getElementsByTagName('tr');
+//				alert(tr.length);
+				for(var i = 1; i<tr.length;i++){
+					tr[i].onmouseover = function(){
+						this.style.backgroundColor = "red";
+//						this.childNodes.style.backgroundColor = "red";//2-1：想着怎么解决后添加的input框的背景颜色
+						
+					}
+					tr[i].onmouseout = function(){
+						this.style.backgroundColor = "white";
+					}
+				}
+			}
+
+
+			// 【2】编写一个函数，供添加按钮调用，动态在表格的最后一行添加子节点；
+			function append() {
+				var table = document.getElementById('table');
+				var tr = document.createElement('tr');
+				var td = document.createElement('td');
+//				var j=0;
+//				do {
+//					tr.appendChild(td);
+//					j++;
+//				} while (j<3)//2-2：试图一次性添加三行，不成功.后来看参考代码，就是连着appendchils三次就行了、
+				
+				//td.innerHTML = "删除"//2-3：思路都是对的，就差那么一点变通，就是添加了的td是空的，怎么把它撑开的问题，参开代码是用iNput type="text"解决的，没想到，不过想想还有别的方法吗？那就是链接数据库了？把提交的数据传进去以后不调用这个函数，调用后台的数据，把td的内容innerHTML来等于后台的代码
+				td.innerHTML = "<input type='text' />";
+				tr.appendChild(td);
+				td =document.createElement('td');//2-2解决：又创建了一个td单元格
+				td.innerHTML = "<input type='text' style='border: none;width: 100%;height: 100%;'/>";//2-3解决：给列里面插入一个单元格，，把列撑起来、然后借鉴第一个单元格的样式，这里改进为把border去掉，显性上，只是一个单元格，隐形上，还有一个input框，但是因为input的范围太窄小，改成了尊重父元素td的大小。这样。，鼠标在单元格哪里点击都可以输入信息。
+				tr.appendChild(td);
+				td = document.createElement('td');//2-2 添加第三个td
+				//td.innerHTML = "删除";//2-4：这样删除调用不了删除函数，那就利用添加input的道理，添加一个html中一样的a标签，然后a标签内有点击事件触发删除函数。
+				td.innerHTML = "<a href='javascript:;' onclick='deleteRow(this)'>删除</a>";//2-4解决<a href="javascript:;" onclick="deleteRow(this)">删除</a>
+				tr.appendChild(td);
+//				table.appendChild(tr);//2-5，tr添加给了他的爷爷table。
+				table.lastChild.appendChild(tr);//2-5解决，改户口给tr的爸爸tbody
+				bianse();//解决了1-3的问题，给后添加的内容调用变色函数（又生了一个新问题：这里的不足之处是，text文本框没办法变色。至今没有解决，2-1尝试解决失败）
+			}
+
+			// 【3】创建删除函数
+			//遇到的难点
+			//1.删除地方的a链接哪里不会接函数调用，打算写JavaScript:del();来着，但是w3c不提倡，改成onclick=“del()";再然后发现，()里还要传参数；
+			//2 obj是传进来的参数，但是他传的是什么呢？this，就是<a>,那么要实现删除的话，就要找到<tr>,就要找父节点
+			//高了半天不对，是onclick拼错了。oncilck。我说怎么deleteRow(this)地方不变色呢
+			//3，就是找到正确的tr的位置，然后删除，这里大家都说还有一个隐藏的tbody，究竟是什么不讲理的东西？被注销的代码都是在寻找需要删除的那个tr.正解如下面的3-1,3-2,3-3
+			//4，也找到爸爸了，也能删除了，可是新增加的tr行不能实现删除函数的调用可咋办？
+			function deleteRow(obj) {
+				var table1 = document.getElementById('table');
+//				alert(table1.lastChild);
+				var tbody = table1.lastChild;
+				var tr = obj.parentNode.parentNode;
+				
+				//下面这是赤裸裸的滴血认亲啊！
+				//alert(tbody);//3-3:得到TableSecondElement。证明他就是table和tr之间的那个隐形标签，而且，他就是tr的父亲。那么要想删除这一行的tr，就得用父元素.removeChild(tr)；这么个形式，代码如下。所以，这里找到tr的爸爸是关键。
+				tbody.removeChild(tr);
+				//4-1.新增的不能删除，最后经过排查，是因为新增的不是tbody的孩子，也就是说，你孩子当时上的户口没在tbody的名下，进而说明，是添加tr的时候除了问题。那就去添加函数中找吧。最后发现2-5处，你添加的tr是添加给了table，也就是说生下来的孩子户口上给了爷爷，法律上讲，他和table是父子关系，真正的爸爸tbody，却成了tr的哥哥，自然也就不能通过tbody来删除他名义下的对应的tr子元素。注意关键点：<table><tbody><tr></tr></tbody></table>
+				
+//1次错误摸索
+				//alert(tr.parentNode);//3-1:是TableSecondElement，而不是table。看来果真还有一层
+//				for(var i = 0;i<tr.length;i++){
+//					alert(tr[i]);
+//					}
+				//table1.removeChild(tr);//3-2:tr不是table1的孩子，证明，table和tr之间还有一个没写出来的tbody，如上3-1实验
+				
+//2次错误摸索
+				//				var tbody = document.getElementById
+				//
+				//					('table').lastChild; //对应的是table中tbody标签
+				//
+				//				var tr = obj.parentNode.parentNode;
+				//
+				//				tbody.removeChild(tr);
+
+			}
+//3次错误摸索
+			//			var table1 = document.getElementById('table');
+			//			var table2 = document.getElementsByTagName("table");
+			//			alert(table2);
+			//			alert(table2.length);
+			//			alert(table2[0]);
+			////			alert(typeof table1);
+			//			var childs = table1.childNodes;
+			//			alert(childs.length);
+		</script>
+		<!--参考代码-->
+		<!--
+			<script type="text/javascript">
+			window.onload = function() {
+				Highlight();
+			}
+
+			function addOne(obj) {
+				var tbody = document.getElementById('table').lastChild;
+				var tr = document.createElement('tr');
+
+				var td = document.createElement("td");
+				td.innerHTML = "<input type='text'/>";
+				tr.appendChild(td);
+
+				td = document.createElement("td");
+				td.innerHTML = "<input type='text'/>";
+				tr.appendChild(td);
+
+				td = document.createElement("td");
+				td.innerHTML = "<a href='javascript:;' onclick='deleteRow(this)'>ɾ��</a>";
+				tr.appendChild(td);
+
+				tbody.appendChild(tr);
+				Highlight();
+			}
+
+			function deleteRow(obj) {
+				var tbody = document.getElementById('table').lastChild;
+				var tr = obj.parentNode.parentNode;
+				tbody.removeChild(tr);
+			}
+
+			function Highlight() {
+				var tbody = document.getElementById('table').lastChild;
+				trs = tbody.getElementsByTagName('tr');
+				for(var i = 1; i < trs.length; i++) {
+					trs[i].onmouseover = function() {
+						this.style.backgroundColor = "#f2f2f2";
+					}
+					trs[i].onmouseout = function() {
+						this.style.backgroundColor = "#fff";
+					}
+				}
+			}
+		</script>
+		-->
+	</head>
+
+	<body>
+		<table border="1" width="90%" id="table">
+			<tr>
+				<th>学号</th>
+				<th>姓名</th>
+				<th>操作</th>
+			</tr>
+
+			<tr>
+				<td>xh001</td>
+				<td>王小明</td>
+				<td>
+					<a href="javascript:;" onclick="deleteRow(this)">删除</a>
+					<!--在删除按钮上添加点击事件  -->
+				</td>
+
+			</tr>
+
+			<tr>
+				<td>xh002</td>
+				<td>刘小芳</td>
+				<td>
+					<a href="javascript:;" onclick="deleteRow(this)">删除</a>
+				</td>
+				<!--在删除按钮上添加点击事件  -->
+			</tr>
+
+		</table>
+		<div style="text-align: center;">
+			<input type="button" value="添加一行" onclick="append()" />
+
+			<!--在添加按钮上添加点击事件  -->
+		</div>
+		<!--
+			------------实验 onclick传参-------------
+			<input type="button" value="删除" onclick="deleteThis(this) "/>
+		<script>
+			function deleteThis(obj){
+				alert(obj.value);//就是删除
+			}
+		</script>-->
+
+	</body>
+
+</html>

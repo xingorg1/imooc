@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>parent()方法</title>
+		<link rel="stylesheet" href="../css/imooc.css" type="text/css">
+		<style>
+			.left {
+				display: block;
+				height: 180px;
+			}
+			
+			.left div {
+				width: 350px;
+				height: 150px;
+				padding: 5px;
+				margin: 5px;
+				float: left;
+				background: #bbffaa;
+				border: 1px solid #ccc;
+			}
+			
+			span {
+				color: blue;
+			}
+		</style>
+		<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+	</head>
+
+	<body>
+		<h3>找爸爸——parent()方法</h3>
+		jQuery是一个合集对象，如果想快速查找合集里面的每一个元素的父元素（这里可以理解为就是父亲-儿子的关系），此时可以用parent()方法
+
+		<p style="color: red;">因为是父元素，这个方法只会向上查找一级</p>
+
+		理解节点查找关系：
+		<br /> 《div class="div"><br /> 《ul class="son"><br /> 《li class="grandson">1《/li><br /> 《/ul>
+		<br /> 《/div>
+		<br /> 查找ul的父元素div, $(ul).parent()，就是这样简单的表达<br />
+
+		<b>parent()无参数</b> parent()方法允许我们能够在DOM树中搜索到这些元素的父级元素，从有序的向上匹配元素，并根据匹配的元素创建一个新的 jQuery 对象
+		<br />
+		<h4>注意：jQuery是一个合集对象，所以通过parent是匹配合集中每一个元素的父元素</h4> parent()方法选择性地接受同一型选择器表达式
+		<br /> 同样的也是因为jQuery是合集对象，可能需要对这个合集对象进行一定的筛选，找出目标元素，所以允许传一个选择器的表达式 具体的操作，
+		<br /> 请参考下边的代码
+		<pre>
+	//1 无参数
+	  $("button:first").click(function() {
+        $('ul.level-3').parent().css('border','1px solid red');
+    })
+</pre>
+		<pre>
+	//2 有参数
+	  $("button:last").click(function() {
+        //找到所有class=item-a的父元素
+        //然后给每个ul,然后筛选出最后一个，加上蓝色的边
+       $('.item-a').parent(':last').css('border', '1px solid blue')
+    })
+</pre>
+		<h2>实验：parent方法()</h2>
+		<div class="left first-div">
+
+			<div class="div">
+				<ul class="level-2">
+					<!-- A -->
+					<li class="item-a">A</li>
+					<!-- B -->
+					<li class="item-b">B
+						<ul class="level-3">
+							<li class="item-1">1</li>
+							<li class="item-2">2</li>
+							<li class="item-3">3</li>
+						</ul>
+					</li>
+					<!-- C -->
+					<li class="item-c">C</li>
+
+				</ul>
+			</div>
+
+			<div class="div">
+				<ul class="level-2">
+					<!-- A -->
+					<li class="item-a">A</li>
+					<!-- B -->
+					<li class="item-b">B
+						<ul class="level-3">
+							<li class="item-1">1</li>
+							<li class="item-2">2</li>
+							<li class="item-3">3</li>
+						</ul>
+					</li>
+					<!-- C -->
+					<li class="item-c">C</li>
+
+				</ul>
+			</div>
+		</div>
+
+		<button>点击：parent无参数</button>
+		<button>点击：paren传递选择器</button>
+		<script type="text/javascript">
+			$("button:first").click(function() {
+				$('ul.level-3').parent().css('border', '1px solid red');
+			})
+		</script>
+
+		<script type="text/javascript">
+			$("button:last").click(function() {
+				//找到所有class=item-a的父元素
+				//然后给每个ul,然后筛选出最后一个，加上蓝色的边
+				$('.item-a').parent(':last').css('border', '1px solid blue')
+			})
+		</script>
+	</body>
+
+</html>

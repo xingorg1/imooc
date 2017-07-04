@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jQuery</title>
+		<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<h1>引用jQuery并写第一个函数</h1>
+		<div style="color: red;font: bolder 26px '微软雅黑';">
+			目前我里边是有文字的，经过测试，结果是：用jq像元素内部添加的文字，会把元素内之前的文字覆盖掉，和js一样的德行。不过我想以后可以用div.innerHTML+"要添加的文字"，这样会不会之前的文字还在呢？
+		</div>
+		<p style="color: blueviolet;">经过测试，结果是：用jq像元素内部添加的文字，会把元素内之前的文字覆盖掉，和js一样的德行。不过我想以后可以用div.innerHTML+"要添加的文字"，这样会不会之前的文字还在呢？</p>
+		<p>接下来做一个实验，利用jq在上边的div中添加文字。直接加选择器，都不要加id了，刁刁的jq，用了jq我就不用js了，但是还是要学js，毕竟是jq他爸爸啊。</p>
+		<script type="text/javascript">
+			//$(function(){
+				
+			//})
+			//以上用于页面加载完成后执行。接下来同一作用的：
+			$(document).ready(function(){//准备好了就执行。
+				$('div').html("恭喜！您已经成功利用了jQuery向html中添加文字了！")
+			});
+		</script>
+	</body>
+</html>

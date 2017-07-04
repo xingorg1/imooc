@@ -1,0 +1,256 @@
+* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			a {
+				text-decoration: none;
+				color: black;
+			}
+			
+			li {
+				list-style: none;
+			}
+			.tapWrap {
+				/*width: 368px;*/
+				margin: 10px auto;
+				padding: 10px;
+				-webkit-border-radius: 8px;
+				-moz-border-radius: 8px;
+				border-radius: 8px;
+			}
+			
+			ul.tapHeadWrap li {
+				width: 75px;
+				height: 45px;
+				line-height: 45px;
+				text-align: center;
+				display: inline-block;
+				/*border: 2px solid #ccc;*/
+				background-color: white;
+			}
+			
+			.tapWrap div {
+				    /* width: 94%; */
+			    padding: 10px;
+			    margin-top: -4px;
+			    /* border: 2px solid #ccc; */
+			    position: absolute;
+			    z-index: 9998;
+			    left: 0;
+			    /* margin-left: -128px; */
+			}
+			.tapWrap>ul li:hover,
+			.tapWrap div {
+				color: #FFCC00;
+				/*border-top: 3px solid #DC143C;*/
+			}
+			/*.tapWrap div ul{
+				    position: relative;
+			    width: 235px;
+			    margin: 0 auto;
+			    padding-top: 5px;
+			    text-align: center;
+			    background: url(../img/bj.jpg) repeat 0px 0px;
+			    -webkit-border-radius: 15px;
+			    -moz-border-radius: 15px;
+			    border-radius: 15px;
+			}*/
+			
+			.tapWrap div li {
+				margin: 5px 0;
+			}
+			
+			.tapWrap div a:hover {
+				text-decoration: underline;
+				color: #DC143C;
+			}
+			.tapWrap>ul li:hover,
+			.tapWrap div a:hover {
+				cursor: pointer;
+			}
+			
+			ul.tapHeadWrap li.tapActiveLi {
+				color: #FFCC00;
+				/*border-top: 3px solid #DC143C;
+				border-bottom: 7px solid #fff;*/
+			}
+			.tapWrap{
+				position: relative;
+			}
+			#authorBg{
+				    position: absolute;
+				    top: 53px;
+				    left: 0;
+				    margin-left: 219px;
+				    z-index: 9999;
+				    height: 35px;
+				    padding: 0;
+				    width: 35px;
+				    border-radius: 50%;
+				    background: #F00;
+				    opacity: 0.4;
+			}
+			.tapHideDiv {
+				display: none;
+			}
+			/*——————————————————————————————————————————————————*/
+			/*#authorBg {
+		    background-color: rgba(0,0,0,0.75);
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    z-index: 10;
+		    }*/
+ol,
+			ul {
+				list-style: none;
+			}
+			
+			header>section,
+			article,
+			section.crumb ul,
+			section.Intro {
+				width: 1000px;
+				margin: 0 auto;
+			}
+			
+			section.Intro {
+				/*position: relative;*/
+				margin-top: 10px;
+				background-color: white;
+				padding: 35px 10px;
+			}
+			
+			section.Intro>img {
+				/*float: left;*/
+				width: 200px;
+				height: 281px;
+				border-radius: 10px;
+				margin-right: 35px;
+			}
+			
+			section.Intro>ul {
+				/*float: right;*/
+				/*width: 75%;*/
+			}
+			
+			section.Intro ul li {
+				margin-bottom: 25px;
+			}
+			
+			section.Intro ul li:last-child {
+				line-height: 30px;
+				margin-left: 75px;
+			}
+			
+			section.Intro ul li span {
+				width: 63px;
+				display: inline-block;
+				margin-right: 10px;
+				border-right: 2px solid #FFCC00;
+				font-weight: bold;
+			}
+			
+			section.Intro ul li span.jianjie {
+				border: 0;
+				width: 40px;
+			}
+			
+			section.Intro ul li a {
+				display: inline-block;
+				/*width: 25%;*/
+				text-decoration: underline;
+				color: #333;
+			}
+			
+			section.Intro ul li a:visited,
+			section.Intro ul li a:hover,
+			section.Intro ul li a:active {
+				color: #FFCC00;
+			}
+			/*section.Intro aside of author*/
+			
+			/*#authorBg {
+				background-color: rgba(0, 0, 0, 0.75);
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 9998;
+			}*/
+			
+			.authorIntor {
+				/*position: absolute;
+				z-index: 9999;*/
+				/*display: none;*/
+			}
+			
+			.authorIntor ul {
+				position: relative;
+				width: 235px;
+				margin: 0 auto;
+				padding-top: 5px;
+				text-align: center;
+				/*background: url(../img/bj.jpg) repeat 0px 0px;*/
+				background: #AF6CFF;
+				-webkit-border-radius: 15px;
+				-moz-border-radius: 15px;
+				border-radius: 15px;
+			}
+			
+			.authorIntor ul li {
+				margin: 5px 0;
+				font-size: 16px;
+				color: #333;
+			}
+			
+			.authorIntor ul li:first-child {
+				border-bottom: 1px solid #ddd;
+			}
+			
+			.authorIntor ul li:nth-last-child(2) img {}
+			
+			.authorIntor ul li.closeLI {
+				position: absolute;
+				top: -11px;
+				right: -7px;
+				height: 30px;
+				width: 30px;
+				line-height: 30px;
+				background-color: #FFCC00;
+				color: white;
+				font-size: 18px;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				border-radius: 50%;
+				cursor: pointer;
+			}
+			
+			.authorIntor ul li:last-child:hover {
+				cursor: pointer;
+			}
+			
+			.authorIntor h3 {
+				font-size: 22px;
+			}
+			
+			.authorIntor img.asideLogo {
+				width: 50px;
+				height: 30px;
+				margin-bottom: 8px;
+			}
+			
+			.authorIntor img.authorHead {
+				width: 40px;
+				height: 40px;
+				border: 2px solid white;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				border-radius: 50%;
+			}
+			
+			.authorIntor img.authorWeixin {
+				width: 150px;
+				height: 150px;
+				margin-bottom: 25px;
+			}

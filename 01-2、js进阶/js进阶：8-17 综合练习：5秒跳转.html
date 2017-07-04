@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>浏览器对象</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=gkb" />
+	</head>
+
+	<body>
+		<!--先编写好网页布局-->
+		<h3>操作成功</h3>
+		<p>
+			<span id="mm">5</span> 秒后回到主页
+			<a href="javascript:back1();">返回</a>
+		</p>
+
+		<script type="text/javascript">
+			var miaoshu = document.getElementById('mm');
+			//获取显示秒数的元素，通过定时器来更改秒数。
+			function z() {
+				miaoshu.innerHTML = parseInt(miaoshu.innerHTML) - 1;
+				if(miaoshu.innerHTML == 0) {
+					miaoshu.innerHTML = 0;
+					window.open('http://www.imooc.com/', '_self');
+				}
+			}
+			setInterval('z()', 1000);
+			//通过window的location和history对象来控制网页的跳转。
+			function back1() {
+				history.go(-1);
+			}
+		</script>
+	</body>
+
+</html>

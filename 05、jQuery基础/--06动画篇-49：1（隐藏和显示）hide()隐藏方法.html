@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>隐藏元素的hide方法</title>
+		<style>
+    .left div,
+    .right div {
+        width: 100%;
+        height: 50px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+    
+    .left div {
+        background: #bbffaa;
+    }
+    
+    .right div {
+        background: yellow;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>隐藏元素——hide方法</h3>
+		让页面上的元素不可见，一般可以通过设置css的display为none属性。但是通过css直接修改是静态的布局，如果在代码执行的时候，一般是通过js控制元素的style属性，这里jQuery提供了一个快捷的方法.hide()来达到这个效果<br />
+<br />
+$elem.hide()<br />
+<p></p>
+提供参数：<br />
+
+.hide( options )<br />
+当提供hide方法一个参数时，.hide()成为一个动画方法。.hide()方法将为匹配元素的宽度，高度，以及不透明度，同时进行动画操作<br />
+<p></p>
+快捷参数：<br />
+
+.hide(fast / slow)<br />
+这是一个动画设置的快捷方式，'fast' 和 'slow' 分别代表200和600毫秒的延时，就是元素会执行200/600毫秒的动画后在隐藏
+<br />
+<p></p>
+注意：<br />
+
+jQuery在做hide操作的时候，是会保存本身的元素的原始属性值，再之后通过对应的方法还原的时候还是初始值。比如一个元素的display属性值为inline，那么隐藏再显示时，这个元素将再次显示inline。一旦透明度 达到0，display样式属性将被设置为none，这个元素将不再在页面中影响布局<br />
+
+<hr />
+<pre>
+	  //点击buttom1 直接隐藏
+        $("button:first").click(function() {
+            $("#a1").hide()
+        });
+</pre>
+<hr />
+ <pre>       //点击buttom2 执行动画隐藏
+        $("button:last").click(function() {
+            $("#a2").hide({//.hide()方法将为匹配元素的宽度，高度，以及不透明度，同时进行动画操作
+                duration: 3000,
+                complete: function() {
+                    alert('执行3000ms动画完毕')
+                }
+            })
+        });
+</pre>
+<hr />
+ <h2>hide</h2>
+    <div class="left">
+        <h4>测试一</h4>
+        <div id="a1">hide操作</div>
+        <button>直接hide</button>
+        <script type="text/javascript">
+        //点击buttom1 直接隐藏
+        $("button:first").click(function() {
+            $("#a1").hide()
+        });
+        </script>
+
+        <h4>测试一</h4>
+        <div id="a2">hide动画操作</div>
+        <button>hide带动画</button>
+        <script type="text/javascript">
+        //点击buttom2 执行动画隐藏
+        $("button:last").click(function() {
+            $("#a2").hide({
+                duration: 3000,
+                complete: function() {
+                    alert('执行3000ms动画完毕')
+                }
+            })
+        });
+        </script>
+    </div>
+	</body>
+</html>

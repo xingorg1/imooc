@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>打飞机游戏设计——canvas</title>
+		<script src="http://code.jquery.com/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			#feiji,#beijing{
+				position: absolute;
+			}
+			@-webkit-keyframes flymove{
+				0%{
+					background-position: 0 0;
+				}
+				100%{
+					background-position: 0 600px;
+				}
+			}
+			@-moz-keyframes flymove{
+				0%{
+					background-position: 0 0;
+				}
+				100%{
+					background-position: 0 600px;
+				}
+			}
+			@-ms-keyframes flymove{
+				0%{
+					background-position: 0 0;
+				}
+				100%{
+					background-position: 0 600px;
+				}
+			}
+			@keyframes flymove{
+				0%{
+					background-position: 0 0;
+				}
+				100%{
+					background-position: 0 600px;
+				}
+			}
+			#beijing{
+				background: url(http://img612.ph.126.net/e19fjInt9MbVSOq0WE_vfA==/1701516234217638764.jpg);
+				/*
+				 *绝对路径：../img/star.jpg 
+				 * 
+				 * 相对路径，网搜图片可用的链接：
+				 * 寻找方法，是去图片右击审查元素，在资源处》image》找到对应图片》详细信息处有链接
+				 * http://img612.ph.126.net/e19fjInt9MbVSOq0WE_vfA==/1701516234217638764.jpg
+				 * "http://img1.cache.netease.com/catchpic/1/13/1312255A81CED991AED60CE4CB49F5DE.jpg"*/
+				z-index: 1;
+				-webkit-animation: flymove 10s linear 20000;
+				-moz-animation: flymove 10s linear 20000;
+				-ms-animation: flymove 10s linear 20000;
+				animation: flymove 10s linear 20000;
+			}
+		#feiji{
+			top: 0;
+			left: 0;
+			z-index: 2;
+		}
+		</style>
+	</head>
+	<body>
+		<!--<img src="http://img1.cache.netease.com/catchpic/1/13/1312255A81CED991AED60CE4CB49F5DE.jpg" />-->
+		<div style="position: relative;">
+			<canvas id="feiji" width="300" height="400">您的浏览器不支持canvas</canvas>
+			<canvas id="beijing" width="300" height="400">您的浏览器不支持canvas</canvas>
+		</div>
+		<script type="text/javascript">
+			var fjmap = document.querySelector("#feiji").getContext("2d");
+			(function(){
+				var loaded = 0,
+					jpg = {},
+					bullets = {},
+					enemys = {};
+				function load(pic,callback){
+					var img = new Image()
+					img.src = pic;
+					img.onload = function(){
+						loaded++;
+						jpg[pic] = img;
+						callback();
+					};
+				}
+				load("http://pic23.nipic.com/20120823/6566317_102829306107_2.png",init);//我方战机
+				load("http://img.web07.cn/UpImg/Png/201302/02/png296037021115341.png",init);//敌方战机
+				function init(){
+					if(loaded==2){
+						//资源总数，资源加载完毕后执行
+						//这里就是资源加载完成要做的事情
+					}else{
+						//这里是做一些loading的事情，表示未加载完成时，让用户怎么等待，可以设置一些gif动画增加兴趣
+					}
+				}
+			})();//闭包 结束
+			//我方战机、敌机和子弹
+			//---------我放站机对象的实现-----------
+			function fighter(){
+				this.x = 130
+				this.y = 350
+				this.w = jpg["http://pic23.nipic.com/20120823/6566317_102829306107_2.png"].width
+				this.h = jpg["http://pic23.nipic.com/20120823/6566317_102829306107_2.png"].height
+				var rs = this;
+				fjmap.drawImage(jpg["http://pic23.nipic.com/20120823/6566317_102829306107_2.png"],this.x,this.y);
+				window.addEventListener('keydown',function(e){
+					if(e.keyCode == 37){
+						rs.left();
+					}else{
+						rs.right();
+					}
+				},true);
+			}
+			fighter.prototype.move = function(x){
+				fjmap.clearRect(this.x,this.y,this.w,this.y);
+				fjmap.drawImage(jpg["http://pic23.nipic.com/20120823/6566317_102829306107_2.png"],this.x+=x,this.y);
+			}
+			//向左移动
+			fighter.prototype.left = function(){
+				this.move(-4);
+			}
+			//向右移动
+			fighter.prototype.right = function(){
+				this.move(4);
+			}
+			//---------敌方站机对象的实现-----------
+			function enemy(){
+				this.w = jpg["http://img.web07.cn/UpImg/Png/201302/02/png296037021115341.png"].width
+				this.h = jpg["http://img.web07.cn/UpImg/Png/201302/02/png296037021115341.png"].height
+				this.x = parseInt(Math.random()*(300-this.w));//让敌机随机出现
+				this.y = 0;
+				var rs = this;
+				fjmap.drawImage(jpg["http://img.web07.cn/UpImg/Png/201302/02/png296037021115341.png"],this.x,this.y);//显示敌机
+				this.timer = setInterval(function(){//让敌机向下攻击过来
+					if(rs.y>400){
+						rs.stop();
+						return;
+					}
+					rs.clear();
+					fjmap.drawImage(jpg["http://img.web07.cn/UpImg/Png/201302/02/png296037021115341.png"],rs.x,rs.y+=3);
+				},20)
+			}
+			//擦除敌机
+			enemy.prototype.clear = function(){
+				fjmap.clearRect(this.x,this.y,this.w,this.h);
+			}
+			enemy.prototype.stop = function(){//被打中后或飞出可视区域后自动销毁
+				clearInterval(this.timer);
+				enemy[this.name]=null;
+				delete enemy[this.name];
+			}
+			//---------子弹对象的实现-----------
+			function bullet(x,y){
+				this.x = x;
+				this.y = y;
+				//接受一个x,y发射点坐标
+				var rs = this;
+				this.timer = setInterval(function(){
+					if(rs.y<0){
+						rs.stop();
+						enemy[rs.name] = null;
+						return;
+					}
+					rs.fly();
+				},100);
+				fjmap.fillStyle = "#00f";
+				fjmap.fillRect(x,y,2,4);
+			}
+			bullet.prototype.stop = function(){
+				clearInterval(this.timer);
+				bullets[this.name]=null;
+			};
+			bullet.prototype.fly = function(){
+				this.check();                      //碰撞检测
+				fjmap.clearRect(this.x,this.y,2,4);//擦除旧子弹
+				fjmap.fillRect(this.x,this.y-=50,2,4)//绘制新子弹
+			};
+			bullet.prototype.check = function(){
+				var x1 = this.x;
+				var y1 = this.y;
+				var w1 = 2,h1 = 4;
+				for(var em in enemys){
+					var e = enemys[em];
+					if(!e) continue;
+					var x2 = e.x,
+						y2 = e.y,
+						w2 = e.w,
+						h2 = e.h;
+						if(x1 + w1 > x2 && x1 < x2 + w2 && y1 + h1 > y2 && y1 < y2 + h2){
+							enemys[e.name].clear();
+							enemys[e.name].stop();
+						}
+				}
+			}
+			//子弹和敌机类似，也用了setInterval来控制飞行，同时子弹还有一个人物就是检测是否打中了敌机，也就是检测碰撞，可能这个碰撞检测的效率不是很高，只是署名了碰撞的思路，大众敌机后就调用敌机的销毁方法（还可以扩展成华丽的爆炸动画。）
+			
+			//---------让游戏动起来-----------
+			function init(){
+				if(loaded==2){//资源总数，资源加载完毕后进行
+					//我方战机
+					var myfig = new fighter();
+					//持续出现敌机
+					setInterval(function(){
+						var n = Math.random();
+						enemys[n] = new enemy();
+						enemys[n].name = n;
+					},500);
+					//持续发射子弹
+					setInterval(function(){
+						var n = Math.random();
+						bullets[n]=new bullet(myfig.x+20,myfig.y-10);
+						bullets[n].name = n;
+					},200);
+					
+				}else{
+					//这里可以做一些loading之类的事情
+				}
+			}
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

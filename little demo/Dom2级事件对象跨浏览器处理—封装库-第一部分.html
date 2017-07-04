@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>dom2级事件跨浏览器处理-封装库</title>
+		<script src="DOM2级事件-跨浏览器处理-封装库-第二部分.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+					var btn = document.getElementById('btn');
+					eventUill.addHander(btn, 'click', function() {
+						alert('点击后通过封装的库辗转调用了这个匿名函数');
+						alert(eventUill.getEvent(btn).nodeName);
+						alert(eventUill.getElement(btn));
+					});
+				}
+				//测试调用的时候，出现四个问题：1，封装的库根本找不到，颜色都是灰的，说明代码是错的，通过在js中添加了一个var eventUill = {}，建立了一个对象，html这里调用对象的addHander,2，eventUill找不到，发现，引用外部库的js代码写在来调用库中函数的下边，根据文档流的优先级，说明还没有调出eventUill之前就执行函数了所以出错。那就把调用的外部库写到最上面，让他优先调用。
+				//3 。addEventLister不对，把ele改成了element，是不是以后写，这里也必须写element呢？全部改成element后变绿了，代码正确。
+				//4，说element为空。那么element接受传过来的参数是空的，但是html中的btn处是没有问题的，我getElementById的代码也没有错。看来是老毛病又犯了。js写在html上面，获取id为btn的按钮，根据文档流，他还没有读到input的时候就去获取，你让他去哪里获取。找不到btn，自然传过去的是undefined。紧接着element就成null了。解决就是加上window。onload=function(所有的js代码)调用id的代码写到html的下边。这也是js习惯上要放到body的后边的理由。
+		</script>
+
+	</head>
+
+	<body>
+		<input type="button" value="点击" id="btn" />
+	</body>
+
+</html>

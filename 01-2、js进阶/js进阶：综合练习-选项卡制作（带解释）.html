@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="author" content"郭菊锋,702004176@qq.com">
+		<meta charset="UTF-8">
+		<title>选项卡</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				/*-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;*/
+			}
+			
+			a {
+				text-decoration: none;
+				color: black;
+			}
+			
+			li {
+				list-style: none;
+			}
+			
+			.tapWrap {
+				/*border: 1px solid #4169E1;*/
+				width: 50%;
+				margin: 10px auto;
+				padding: 10px;
+			}
+			
+			ul.tapHeadWrap li {
+				width: 75px;
+				height: 45px;
+				line-height: 45px;
+				text-align: center;
+				/*padding: 5px 10px;*/
+				border: 2px solid #ccc;
+				background-color: white;
+				display: inline-block;
+			}
+			
+			.tapWrap>ul li:hover {
+				cursor: pointer;
+			}
+			
+			.tapWrap div {
+				width: 43%;
+				padding: 10px;
+				margin-top: -4px;
+				/*display: inline-block;*/
+				border: 1px solid #4169E1;
+				border-top: 3px solid #DC143C;
+			}
+			.tapWrap>ul li:hover,
+			.tapWrap div:hover{
+				border-top: 3px solid #DC143C;
+			}
+			.tapWrap div li{
+				margin: 5px 0;
+			}
+			.tapWrap div a:hover{
+				text-decoration: underline;
+				color: #DC143C;
+			}
+			ul.tapHeadWrap li.on {
+				border-top: 3px solid #DC143C;
+				border-bottom: 7px solid #fff;
+			}
+			.hide{
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="tapWrap" id="tapWrap">
+			<ul id="tapHeadWrap" class="tapHeadWrap">
+				<li class="on">房产</li>
+				<li>家居</li>
+				<li>二手房</li>
+			</ul>
+			<div>
+				<ul>
+					<li>
+						<a href="javascript:;">275万购昌平邻铁三居 总价20万买一居</a>
+					</li>
+					<li>
+						<a href="javascript:;">200万内购五环三居 140万安家东三环</a>
+					</li>
+					<li>
+						<a href="javascript:;">北京首现零首付楼盘 53万购东5环50平</a>
+					</li>
+					<li>
+						<a href="javascript:;">京楼盘直降5000 中信府 公园楼王现房</a>
+					</li>
+				</ul>
+			</div>
+			<div class="hide">
+				<ul>
+					<li>
+						<a href="javascript:;">40平出租屋大改造 美少女的混搭小窝</a>
+					</li>
+					<li>
+						<a href="javascript:;">经典清新简欧哀家 90平老房焕发新生</a>
+					</li>
+					<li>
+						<a href="javascript:;">新中式的酷色温情 66平撞色活泼家居</a>
+					</li>
+					<li>
+						<a href="javascript:;">瓷砖就像选好老婆 卫生间烟道的设计</a>
+					</li>
+				</ul>
+			</div>
+			<div class="hide"> 
+				<ul>
+					<li>
+						<a href="javascript:;">通州豪华3居260万 二环稀缺2居250w甩</a>
+					</li>
+					<li>
+						<a href="javascript:;">西3环通透2居290万 130万2居限量抢购</a>
+					</li>
+					<li>
+						<a href="javascript:;">皇城根小学学区仅260万 121平70万抛！</a>
+					</li>
+					<li>
+						<a href="javascript:;">独家别墅280万 苏州桥2居优惠价248万</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<h1>代码解释</h1>
+		<div>
+		<pre>
+	window.onload = function(){
+		var tapDivWrap = document.getElementById('tapWrap');
+		var tapDiv = tapDivWrap.getElementsByTagName('div');
+//		alert(tapDiv.length)
+		var tapUl = document.getElementById('tapHeadWrap');
+		var tapLi = tapUl.getElementsByTagName('li');
+//		alert(tapLi.length)
+		for(var i=0;i< tapLi.length;i++){
+//			alert(tapLi[i].index)
+			tapLi[i].index = i;/对三个li进行重新的编号，现在li[0,1,2]分别对应是0,1,2了，。具体原理明白就是说不出来，反正就是死记硬背知道这种方式，是用来对一个获取到的数组进行重新从零开始编号就对了，以方便下边获取他的下标索引对齐进行对应的操作
+//			alert(tapLi[i].index)
+			tapLi[i].onclick = function(){
+				for(var j = 0;j< tapLi.length;j++){/超出tapLi的长度就是超出了taoLi[i]中的值，会有未定义的错误出现
+					tapLi[j].className = "";/这里的tapLi[j]==tapLi[i]的值吗？不等于，这里的作用是让j【也就是从0-2，因为j小于li的长度，j又是从0开始的，所以j就是在0,1,2这三个数上面循环一遍】
+					alert(tapLi[j].index);/由此调试循环得出，j分别是0,1,2.对应到html中，就是第一个li、第二个li、第三个li的className都成了0.这样先全部清除掉，到了下边j循环外，this.className处，再把点击的对应的li加上className。
+					/总结：这个样式的思维很重要，以前刚开始做，想的都是，怎么获取到自己点击的是哪一个li，然后给他以对应的div样式。后来发现难点是，怎么找到另外两个没有被点击的li和他们对应的div。把他们的样式去掉。现在恍然，这种“打扫完屋子再请客”的思维，先把所有的都去掉，再想给谁添加就给谁添加就可以了呀！看来以后，想拿起什么东西前，得先学会把该放下的放下。不然，难为的只有自己。
+					tapDiv[j].className = "tapHideDiv";/让所有的都先隐藏
+				}
+				/j循环的外边
+				this.className = "tapActiveLi";//this代指tapLi[i]，当前所点击的li，给他添加类名
+				tapDiv[this.index].className = "";/this.index=tapLi[i].index,具体作用下边alert做调试得知，就是得到一个对应你点击的li的下标（即一个数字），这个数字再搭配tapDiv[]的方式，自然就是获取和当前li对应的div了，因为div的下标也是从0开始共三个数的。这样，给当前被点击li对应的div空类名，去除掉j循环中添加在他身上的hide枷锁，他就得意重见天日了！
+				/alert(this.index);/得到你当前点击的li的下标
+			}
+		}
+	}	
+**************第二用法之:直接通过css样式来更改,不用className了,如下:
+					// tapDiv[j].className = 'tapHideDiv';
+                    tapDiv[j].style.display = 'none';//对应的这里也就不能再用className了
+                }
+                this.className = 'tapActiveLi';
+               //tapDiv[this.index].className = '';//这里最后把className忘记了，害得我调试了半天。记得思维不能忘，就是通过className来更改他的css样式，或者也可以直接更改css样式:如下
+                tapDiv[this.index].style.display = 'block';****************
+		</pre>	
+		</div>
+	</body>
+	<script type="text/javascript">
+	window.onload = function(){
+		var divWrap = document.getElementById('tapWrap');
+		var div = divWrap.getElementsByTagName('div');
+//		alert(div.length)
+		var ul = document.getElementById('tapHeadWrap');
+		var li = ul.getElementsByTagName('li');
+//		alert(li.length)
+		for(var i=0;i<li.length;i++){
+			li[i].index = i;
+			li[i].onclick = function(){
+				for(var j = 0;j<li.length;j++){
+					li[j].className = "";
+					div[j].className = "hide";
+				}
+				this.className = "on";
+				div[this.index].className = "";
+			}
+		}
+	}	
+		
+	</script>
+	<!--讲解-->
+	<!--
+		/*
+		 * <script type="text/javascript">
+	window.onload = function(){
+		var tapDivWrap = document.getElementById('tapWrap');
+		var tapDiv = tapDivWrap.getElementsByTagName('div');
+//		alert(tapDiv.length)
+		var tapUl = document.getElementById('tapHeadWrap');
+		var tapLi = tapUl.getElementsByTagName('li');
+//		alert(tapLi.length)
+		for(var i=0;i<tapLi.length;i++){
+//			alert(tapLi[i].index)
+			tapLi[i].index = i;//对三个li进行重新的编号，现在li[0,1,2]分别对应是0,1,2了，。具体原理明白就是说不出来，反正就是死记硬背知道这种方式，是用来对一个获取到的数组进行重新从零开始编号就对了，以方便下边获取他的下标索引对齐进行对应的操作
+//			alert(tapLi[i].index)
+			tapLi[i].onclick = function(){
+				for(var j = 0;j<tapLi.length;j++){//超出tapLi的长度就是超出了taoLi[i]中的值，会有未定义的错误出现
+					tapLi[j].className = "";//这里的tapLi[j]==tapLi[i]的值吗？不等于，这里的作用是让j【也就是从0-2，因为j小于li的长度，j又是从0开始的，所以j就是在0,1,2这三个数上面循环一遍】
+					//alert(tapLi[j].index);//由此调试循环得出，j分别是0,1,2.对应到html中，就是第一个li、第二个li、第三个li的className都成了0.这样先全部清除掉，到了下边j循环外，this.className处，再把点击的对应的li加上className。
+					//总结：这个样式的思维很重要，以前刚开始做，想的都是，怎么获取到自己点击的是哪一个li，然后给他以对应的div样式。后来发现难点是，怎么找到另外两个没有被点击的li和他们对应的div。把他们的样式去掉。现在恍然，这种“打扫完屋子再请客”的思维，先把所有的都去掉，再想给谁添加就给谁添加就可以了呀！看来以后，想拿起什么东西前，得先学会把该放下的放下。不然，难为的只有自己。
+					tapDiv[j].className = "tapHideDiv";//让所有的都先隐藏
+				}
+				//j循环的外边
+				this.className = "tapActiveLi";//this代指tapLi[i]，当前所点击的li，给他添加类名
+				tapDiv[this.index].className = "";//this.index=tapLi[i].index,具体作用下边alert做调试得知，就是得到一个对应你点击的li的下标（即一个数字），这个数字再搭配tapDiv[]的方式，自然就是获取和当前li对应的div了，因为div的下标也是从0开始共三个数的。这样，给当前被点击li对应的div空类名，去除掉j循环中添加在他身上的hide枷锁，他就得意重见天日了！
+				//alert(this.index);//得到你当前点击的li的下标
+			}
+		}
+	}	
+		
+	</script>
+		 */
+	-->
+	<!--
+		/*
+	<script type="text/javascript">
+				var divWrap = document.getElementById('tapWrap');
+				var ul = document.getElementById('tapHeadWrap');
+				var divs = divWrap.childNodes;//此方法==var divs = divWrap.getElementsByTagName("div");==divWrap.children
+				var li1 = ul.childNodes;//==用这个获取，可是七个，把空文本换行符也包含进来的7个子集
+				var li2 = ul.getElementsByTagName('li');//用这个方法，获取的就是那干脆又干净的三个li
+				var li3 = ul.children;
+//				alert(li3.length);
+				//li1 == li2,方法获取到的都是一个集合，但是 【父元素.childNodes】方法的缺点是还有空文本在里面，需要你经过判断li1[i].nodeType==1（如下for循环处）.至于ByTagName的方法，取巧在【父元素.getElementsByTagName('标签')】,这样获取下来的就是父元素下的那几个干净的标签。而childNodes的改进方法就是 【父元素.children】,这样获取的就和ByTagName的一样，忽略空格换行符文本，只找实实在在存在的标签，然后汇成集合。最终长度也是只有3个li。
+//				alert(li1.length)
+//	            alert(li1[1].nodeType);
+		for(var i = 0; i < li1.length; i++) {
+			if(li1[i].nodeType == 1) {//这是用了【父元素.childNodes】方法后，必须判断，把空文本排除出来的方法。因为空文本的nodeType==3，而只有元素标签的nodeTypd==3。
+				this.onclick = function() { //li1[i]==this，可用li1[i]替换
+					//代码段
+				}
+			}
+		}
+		
+		/*
+		for(var j = 0; j < divs.length; j++) {
+			if(divs[j].nodeName == 'DIV') {
+				var arr = []; //尝试用数组，获取三个div，然后赋值给数组，再通过li的索引，调用对应的div/后来看参考，使用的tagname获取的三个div
+				
+				//				alert('yes');
+				arr = divs[j];
+				//				alert(divs[j]);
+
+			}
+		} 
+		*/
+	</script>
+			 */
+	-->
+	<!--
+/*
+ * //幕友第一名代码
+ * <script type="text/javascript">
+	    window.onload = function() {
+        var oUl1 = document.getElementById("ul1");
+        var aLi = oUl1.getElementsByTagName("li");
+        var oDiv = document.getElementById("tab-list");
+        var aDiv = oDiv.getElementsByTagName("div");
+        for(var i = 0; i < aLi.length; i++) {
+            aLi[i].index = i;//解释代码：http://www.imooc.com/qadetail/68459
+            aLi[i].onmouseover = function() {
+                for(var i = 0; i < aLi.length; i++) {
+                    aLi[i].className = "";
+                }
+                this.className = "active";
+                for(var j = 0; j < aDiv.length; j++) {
+                    aDiv[j].className = "hide";
+                }
+                aDiv[this.index].className = "show";
+            }        
+        }
+    }
+</script>
+//幕友第二名代码
+ <script type="text/javascript">     
+
+    window.onload=function(){
+        var oTab = document.getElementById("tabs")
+        var li = document.getElementsByTagName("li");
+        var div = oTab.getElementsByTagName("div");//oTabs.get...是为了定义className作用对象为id为tabs下的所有文本div
+        
+        for(var i=0;i<li.length;i++){//获取所有i编号的元素
+            li[i].index = i;  //定义一个index属性对li进行编号
+            li[i].onclick = function(){//再注册一个点击事件，当点击的时候所有标签都恢复最初状态
+            for(var n=0;n<li.length;n++){//这步是相对于未被点击部分的样式
+                li[n].className = "";
+                div[n].className = "hide";
+            }
+            this.className = "on";//再对点击事件添加相应的属性
+            div[this.index].className = "";//通过之前的index编号绑定的指定div
+            }
+        }
+    }
+    
+    </script>
+ */-->
+
+</html>

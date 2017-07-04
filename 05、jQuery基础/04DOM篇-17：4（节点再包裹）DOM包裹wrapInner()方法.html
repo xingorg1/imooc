@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>DOM包裹wrapInner()方法</title>
+		 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+    <style>
+    .left,
+    .right {
+        width: 250px;
+        height: 130px;
+    }
+    
+    .left div,
+    .right div {
+        width: 100px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+        background: #bbffaa;
+    }
+    
+    .right div {
+        background: yellow;
+    }
+   div p {
+        border: 1px solid red;
+    }
+    
+   div a {
+        border: 1px solid blue;
+    }
+    </style>
+	</head>
+
+	<body>
+		<p>如果要将合集中的元素内部所有的子元素用其他元素包裹起来，并当作指定元素的子元素，针对这样的处理，JQuery提供了一个wrapInner方法</p>
+		<p>.wrapInner( wrappingElement )：给集合中匹配的元素的内部，增加包裹的HTML结构</p>
+		<p>听起来有点绕，可以用个简单的例子描述下，简单的看一段代码：</p>
+		《p>p元素《/p><br/> 《p>p元素《/p>
+		<br/>
+		<p>给所有p元素增加一个div包裹</p>
+		$('p').wrapInner('《div>《/div>')
+		<p>最后的结构，匹配的p元素的内部元素被div给包裹了</p>
+		《p><br/> 《div>p元素《/div>
+		<br/> 《/p>
+		<br/> 《p>
+		<br/> 《div>p元素《/div>
+		<br/> 《/p>
+		<br/>
+		<p>.wrapInner( function ) ：允许我们用一个callback函数做参数，每次遇到匹配元素时，该函数被执行，返回一个DOM元素，jQuery对象，或者HTML片段，用来包住匹配元素的内容</p>
+		<p>以上面案例为例，</p>
+		$('p').wrapInner(function() { return '《div>《div/>'; })
+		<p>以上的写法的结果如下，等同于第一种处理了</p>
+		《p><br/> 《div>p元素《/div>
+		<br/> 《/p>
+		<br/> 《p>
+		<br/> 《div>p元素《/div>
+		<br/> 《/p>
+		<br/>
+		<p>
+			<b>注意：</b> 当通过一个选择器字符串传递给.wrapInner() 函数，其参数应该是格式正确的 HTML，并且 HTML 标签应该是被正确关闭的。意思就是正确的html闭标签呗</p>
+			<pre>
+//1
+		$(".aaron1").on('click', function() {
+        //给所有p元素，增加内部包裹父容器div
+       $('p').wrapInner('《div>《/div>');
+    })
+//2
+    $(".aaron2").on('click', function() {
+        //wrapInner接受一个回调函数
+        //每一次遍历this都指向了合集中每一个a元素
+        $('a').wrapInner(function() {
+            return '《div>《/div>'
+      })
+    })
+			</pre>
+			<h2>实验：DOM包裹wrapInner()方法</h2>
+    <div class="left">
+        <div class="aaron1">点击,通过wrapInner方法给所有P元素增加内部父容器div</div>
+        <div class="aaron2">点击,通过wrapInner的回调方法给每个a元素增加内部父容器div</div>
+    </div>
+    <div class="right">
+        <p>p元素</p>
+        <p>p元素</p>
+    </div>
+    <div class="left">
+        <a>a元素</a>
+        <a>a元素</a>
+    </div>
+
+
+    <script type="text/javascript">
+    $(".aaron1").on('click', function() {
+        //给所有p元素，增加内部包裹父容器div
+       $('p').wrapInner('<div></div>');
+    })
+    </script>
+    <script type="text/javascript">
+    $(".aaron2").on('click', function() {
+        //wrapInner接受一个回调函数
+        //每一次遍历this都指向了合集中每一个a元素
+        $('a').wrapInner(function() {
+            return '<div></div>'
+        })
+    })
+    </script>
+	</body>
+
+</html>

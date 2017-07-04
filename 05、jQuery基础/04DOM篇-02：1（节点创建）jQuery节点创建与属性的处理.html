@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jQuery节点创建与属性的处理</title>
+		 <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+		  <script type="text/javascript">
+    var $body = $('body');
+    $body.on('click', function() {
+        //通过jQuery生成div元素节点
+        var div = $("<div class='right'><div class='aaron'>动态创建DIV元素节点</div></div>")
+        $body.append(div)
+    })
+    </script>
+    
+	</head>
+	<body>
+		<h1>jQuery节点创建与属性的处理</h1>
+上一节介绍了通过JavaScript原生接口创建节点，在处理上是非常复杂与繁琐的。我们可以通过使用jQuery来简化了这个过程
+
+<h3>一、创建元素节点：</h3>
+
+可以有几种方式，后面会慢慢接触。常见的就是直接把这个节点的结构给通过HTML标记字符串描述出来，通过$()函数处理，$("html结构")
+<br/>
+$("《div>《/div>")
+<h3>二、创建文本节点：</h3>
+
+与创建元素节点类似，可以直接把文本内容一并描述
+<br/>
+$("《div>我是文本节点《/div>")
+<h3>三、创建为属性节点：</h3>
+
+与创建元素节点同样的方式
+<br/>
+$("《div id='test' class='aaron'>我是文本节点《/div>")<br/>
+我们通过jQuery把上一届的代码改造一下，如右边代码所示<br/>
+<br/>
+	
+一条一句就搞定了，跟写HTML结构方式是一样的
+<br/>
+$("《div class='right'>《div class='aaron'>动态创建DIV元素节点《/div>《/div>")<br/>
+这就是jQuery创建节点的方式，让我们保留HTML的结构书写方式，非常的简单、方便和灵活
+			 <h2>动态创建元素节点</h2>
+    <button>点击通过jQuery动态创建元素节点</button><h4>
+
+		<pre>
+	var $body = $('body');//获取到body元素
+    $body.on('click', function() {//添加点击事件
+        //通过jQuery生成div元素节点
+        var div = $("<div class='right'><div class='aaron'>动态创建DIV元素节点</div></div>");
+        $body.append(div);//把新生的标签装进body中
+    })
+		</pre>
+	</h4>
+	</body>
+	
+</html>

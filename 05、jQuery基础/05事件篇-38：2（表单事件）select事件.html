@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>select事件</title>
+		  <style>
+    .left div,
+    .right div {
+        width: 100%;
+        height: 80px;
+        padding: 5px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+    }
+    
+    .left div {
+        background: #bbffaa;
+    }
+    
+    .right div {
+        background: yellow;
+    }
+    
+    select {
+        height: 100px;
+    }
+    </style>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+	</head>
+	<body>
+		当 textarea 或文本类型的 input 元素中的文本被选择时，会发生 select 事件。
+		<br />
+这个函数会调用执行绑定到select事件的所有函数，包括浏览器的默认行为。可以通过在某个绑定的函数中返回false来防止触发浏览器的默认行为。
+<br />
+<span style="color: red;">select事件只能用于《input>元素与《textarea>元素</span><br />
+使用上非常简单：<br />
+<hr />
+方法一：.select()
+<br />
+触发元素的select事件:
+<br />
+$("input").select();
+ <br />
+<hr />
+方法二：$ele.select( handler(eventObject) )<br />
+
+绑定$ele元素，每次$ele元素触发点击操作会执行回调 handler函数<br />
+
+这样可以针对事件的反馈做很多操作了<br />
+
+《input id="test" value="文字选中">《/input><br />
+$("#text").select(function() { //响应文字选中回调<br />
+    //this指向 input元素 <br />
+});<br />
+ 
+<hr />
+方法三：$ele.select( [eventData ], handler(eventObject) )<br />
+
+使用与方法二一致，不过可以接受一个数据参数，这样的处理是为了解决不同作用域下数据传递的问题<br />
+
+《input id="test" value="文字选中">《/input><br />
+$("#text").select(11111,function(e) {//响应文字选中回调<br />
+    //this指向 div元素 <br />
+   //e.date  => 11111 传递数据<br />
+});<br />
+<hr />
+<pre>
+    //监听input元素中value的选中
+    //触发元素的select事件
+    $("input").select(function(e){
+        alert(e.target.value)
+    })
+    $("#bt1").click(function(){
+        $("input").select();
+    })
+</pre>
+<hr />
+<pre>
+    //监听textarea元素中value的选中
+    $('textarea').select(function(e) {
+        alert(e.target.value);
+    });
+	
+</pre>
+<h2>input与textarea</h2>
+    <div class="left">
+        <h4>测试一</h4>
+        <div class="aaron">
+            选中文字：input
+            <input type="text" value="慕课网" />
+        </div>
+        <button id="bt1">触发input元素的select事件</button>
+        
+        <h4>测试二</h4>
+        <div class="aaron">
+            textarea：
+            <textarea rows="3" cols="20">用鼠标选中文字</textarea>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+    //监听input元素中value的选中
+    //触发元素的select事件
+    $("input").select(function(e){
+        alert(e.target.value)
+    })
+    $("#bt1").click(function(){
+        $("input").select();
+    })
+
+
+    //监听textarea元素中value的选中
+    $('textarea').select(function(e) {
+        alert(e.target.value);
+    });
+
+    </script>
+	</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="author" content "郭菊锋,702004176@qq.com">
+		<meta charset="UTF-8">
+		<title>选项卡原来的</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			a {
+				text-decoration: none;
+				color: black;
+			}
+			
+			li {
+				list-style: none;
+			}
+			
+			.tapWrap {
+				width: 368px;
+				margin: 10px auto;
+				padding: 10px;
+			}
+			
+			ul.tapHeadWrap li {
+				width: 75px;
+				height: 45px;
+				line-height: 45px;
+				text-align: center;
+				display: inline-block;
+			}
+			
+			.tapWrap div {
+				/*width: 94%;*/
+				padding: 10px;
+				margin-top: -4px;
+				    position: absolute;
+    z-index: 9999;
+			}
+			.tapWrap div ul{
+				    position: relative;
+    width: 235px;
+    margin: 0 auto;
+    padding-top: 5px;
+    text-align: center;
+    background: url(../img/bj.jpg) repeat 0px 0px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+			}
+			
+			.tapWrap div li {
+				margin: 5px 0;
+			}
+			
+			.tapWrap div a:hover {
+				text-decoration: underline;
+				color: #DC143C;
+			}
+			
+			.tapWrap>ul li:hover,
+			.tapWrap div a:hover {
+				cursor: pointer;
+			}
+			
+			ul.tapHeadWrap li.tapActiveLi {
+				border-top: 3px solid #DC143C;
+				border-bottom: 7px solid #fff;
+			}
+			
+			.tapHideDiv {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="tapWrap" class="tapWrap">
+			<ul id="tapHeadWrap" class="tapHeadWrap">
+				<li class="tapActiveLi">作者名字</li>
+				<li>作者名字</li>
+				<li>作者名字</li>
+			</ul>
+			<div>
+				<ul>
+					<li>
+						<a href="javascript:;">275万购昌平邻铁三居 总价20万买一居</a>
+					</li>
+					<li>
+						<a href="javascript:;">200万内购五环三居 140万安家东三环</a>
+					</li>
+					<li>
+						<a href="javascript:;">北京首现零首付楼盘 53万购东5环50平</a>
+					</li>
+					<li>
+						<a href="javascript:;">京楼盘直降5000 中信府 公园楼王现房</a>
+					</li>
+				</ul>
+			</div>
+			<div class="tapHideDiv">
+				<ul>
+					<li>
+						<a href="javascript:;">40平出租屋大改造 美少女的混搭小窝</a>
+					</li>
+					<li>
+						<a href="javascript:;">经典清新简欧哀家 90平老房焕发新生</a>
+					</li>
+					<li>
+						<a href="javascript:;">新中式的酷色温情 66平撞色活泼家居</a>
+					</li>
+					<li>
+						<a href="javascript:;">瓷砖就像选好老婆 卫生间烟道的设计</a>
+					</li>
+				</ul>
+			</div>
+			<div class="tapHideDiv">
+				<ul>
+					<li>
+						<a href="javascript:;">通州豪华3居260万 二环稀缺2居250w甩</a>
+					</li>
+					<li>
+						<a href="javascript:;">西3环通透2居290万 130万2居限量抢购</a>
+					</li>
+					<li>
+						<a href="javascript:;">皇城根小学学区仅260万 121平70万抛！</a>
+					</li>
+					<li>
+						<a href="javascript:;">独家别墅280万 苏州桥2居优惠价248万</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		window.onload = function() {
+			var tapDivWrap = document.getElementById('tapWrap');
+			var tapDiv = tapDivWrap.getElementsByTagName('div');
+			var tapUl = document.getElementById('tapHeadWrap');
+			var tapLi = tapUl.getElementsByTagName('li');
+			for(var i = 0; i < tapLi.length; i++) {
+				tapLi[i].index = i;
+				tapLi[i].onclick = function() {
+					for(var j = 0; j < tapLi.length; j++) {
+						tapLi[j].className = "";
+						tapDiv[j].className = "tapHideDiv";
+					}
+					this.className = "tapActiveLi";
+					tapDiv[this.index].className = "";
+				}
+			}
+		}
+	</script>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>停止动画stop</title>
+		 <style>
+    p {
+        color: red;
+    }
+    
+    div {
+        width: 200px;
+        height: 100px;
+        background-color: yellow;
+        color: red;
+    }
+    a{
+        display: block
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	</head>
+	<body>
+		<h3>停止动画——stop</h3>
+		动画在执行过程中是允许被暂停的，当一个元素调用.stop()方法，当前正在运行的动画（如果有的话）立即停止<p></p>
+
+语法：<p></p>
+
+.stop( [clearQueue ] [, jumpToEnd ] )<br />
+.stop( [queue ] [, clearQueue ] [, jumpToEnd ] )<br />
+<p></p>
+stop还有几个可选的参数，简单来说可以这3种情况
+<li>
+.stop(); 停止当前动画，点击在暂停处继续开始</li><li>
+.stop(true); 如果同一元素调用多个动画方法，尚未被执行的动画被放置在元素的效果队列中。这些动画不会开始，直到第一个完成。当调用.stop()的时候，队列中的下一个动画立即开始。如果clearQueue参数提供true值,那么在队列中的动画其余被删除并永远不会运行</li><li>
+.stop(true,true); 当前动画将停止，但该元素上的 CSS 属性会被立刻修改成动画的目标值</li>
+<p></p>
+简单的说：参考下面代码、
+<p></p>
+$("#aaron").animate({<br />
+    height: 300<br />
+}, 5000)<br />
+$("#aaron").animate({<br />
+    width: 300<br />
+}, 5000)<br />
+$("#aaron").animate({<br />
+    opacity: 0.6<br />
+}, 2000)
+<p></p>
+<li>
+1、stop()：只会停止第一个动画，第二个第三个继续</li><li>
+2、stop(true)：停止第一个、第二个和第三个动画</li><li>
+3、stop(true ture)：停止动画，直接跳到第一个动画的最终状态 </li>
+<p></p>
+值得注意的问题：
+<p></p>
+如果动画未完成停止了，那么动画完成时执行的回调函数是不会被调用的
+<hr />
+<pre>
+	示例代码
+	 //点击执行动画
+    $("#exec").click(function(){
+        $("#aaron").animate({
+            height: 300
+        }, 5000)
+        $("#aaron").animate({
+            width: 300
+        }, 5000)
+        $("#aaron").animate({
+            opacity: 0.6
+        }, 2000)
+    })
+
+
+    $("#stop").click(function() {
+        var v = $("#animation").val();
+        var $aaron = $("#aaron");
+        if (v == "1") {
+            //当前当前动画
+            $aaron.stop()
+        } else if (v == "2") {
+            //停止所以队列
+            $aaron.stop(true)
+        } else if (v == "3") {
+            //停止动画，直接跳到当前动画的结束
+            $aaron.stop(true,true)
+        } 
+    });
+</pre>
+<hr />
+<h2>stop</h2>
+    <p>慕课网,专注分享</p>
+    <div id="aaron">内部动画</div>
+    <input id="exec" type="button" value="执行动画"><br /><br />
+
+    点击观察动画效果：
+    <select id="animation">
+        <option value="1">stop()</option>
+        <option value="2">stop(true)</option>
+        <option value="3">stop(true,true)</option>
+    </select>
+    <a></a>
+    <input id="stop" type="button" value="停止动画">
+    <script type="text/javascript">
+
+    //点击执行动画
+    $("#exec").click(function(){
+        $("#aaron").animate({
+            height: 300
+        }, 5000)
+        $("#aaron").animate({
+            width: 300
+        }, 5000)
+        $("#aaron").animate({
+            opacity: 0.6
+        }, 2000)
+    })
+
+
+    $("#stop").click(function() {
+        var v = $("#animation").val();
+        var $aaron = $("#aaron");
+        if (v == "1") {
+            //当前当前动画
+            $aaron.stop()
+        } else if (v == "2") {
+            //停止所以队列
+            $aaron.stop(true)
+        } else if (v == "3") {
+            //停止动画，直接跳到当前动画的结束
+            $aaron.stop(true,true)
+        } 
+    });
+    </script>
+	</body>
+</html>

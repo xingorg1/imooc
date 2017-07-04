@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>全部包裹wrapAll()</title>
+		<script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+		<style>
+			.left,
+			.right {
+				width: 250px;
+				height: 120px;
+			}
+			
+			.left div,
+			.right div {
+				width: 100px;
+				/*height: 120px;*/
+				padding: 5px;
+				margin: 5px;
+				float: left;
+				border: 1px solid #ccc;
+				background: #bbffaa;
+			}
+			
+			.right div {
+				background: yellow;
+			}
+			
+			div p {
+				border: 1px solid red;
+			}
+			
+			div a {
+				border: 1px solid blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p>wrap是针对单个dom元素处理，如果要将集合中的元素用其他元素包裹起来，也就是给他们增加一个父元素，针对这样的处理，JQuery提供了一个wrapAll方法</p>
+		<p>.wrapAll( wrappingElement )：给集合中匹配的元素增加一个外面包裹HTML结构</p>
+		<p>简单的看一段代码：</p>
+		《p>p元素《/p><br/> 《p>p元素《/p>
+		<p>给所有p元素增加一个div包裹</p>
+		$('p').wrapAll('《div>《/div>')
+		<p>最后的结构，2个P元素都增加了一个父div的结构</p>
+		《div><br/> 《p>p元素《/p>
+		<br/> 《p>p元素《/p>
+		<br/> 《/div>
+		<br/>
+		<p>.wrapAll( function ) ：一个回调函数，返回用于包裹匹配元素的 HTML 内容或 jQuery 对象</p>
+		<p>通过回调的方式可以单独处理每一个元素</p>
+		<p>以上面案例为例，</p>
+		$('p').wrapAll(function() { return '《div>《div/>'; })<br/>
+		<p>以上的写法的结果如下，等同于warp的处理了</p>
+		《div><br/> 《p>p元素《/p>
+		<br/> 《/div>
+		<br/> 《div>
+		<br/> 《p>p元素《/p>
+		<br/> 《/div>
+		<br/>
+		<p>
+			<b>注意：</b> .wrapAll()函数可以接受任何字符串或对象，可以传递给$()工厂函数来指定一个DOM结构。这种结构可以嵌套多层，但是最内层只能有一个元素。所有匹配元素将会被当作是一个整体，在这个整体的外部用指定的 HTML 结构进行包裹。</p>
+		<pre>
+					//1
+					   $(".aaron1").on('click', function() {
+			        //给所有p元素，增加父容器div
+			        $('p').wrapAll('《div>《/div>');
+			   		 })
+				
+					//2
+			   		 $(".aaron2").on('click', function() {
+			        //wrapAll接受一个回调函数
+			        //每一次遍历this都指向了合集中每一个a元素
+			        $('a').wrapAll(function() {
+			            return '《div>《/div>'
+			        })
+			    })
+				</pre>
+
+		<h2>实验：DOM包裹wrapAll()方法</h2>
+		<div class="left">
+			<div class="aaron1">点击,通过wrapAll方法给所有P元素增加父容器div</div>
+			<div class="aaron2">点击,通过wrapAll的回调方法给每个a元素增加父容器div</div>
+		</div>
+		<div class="right">
+			<p>p元素</p>
+			<p>p元素</p>
+		</div>
+		<div class="left">
+			<a>a元素</a>
+			<a>a元素</a>
+		</div>
+		<script type="text/javascript">
+			$(".aaron1").on('click', function() {
+				//给所有p元素，增加父容器div
+				$('.right p').wrapAll('<div></div>');//这里原来是$('p'),但是不出效果，点击.aaron1,反而上边的解释文本哪里的p标签被加上了div外包裹。我猜测是选择器的问题，然后加了.right类选择器，这次精确选择，就没问题了。
+			})
+		</script>
+		<script type="text/javascript">
+			$(".aaron2").on('click', function() {
+				//wrapAll接受一个回调函数
+				//每一次遍历this都指向了合集中每一个a元素
+				$('a').wrapAll(function() {
+					return '<div></div>';
+				})
+			})
+		</script>
+	</body>
+
+</html>

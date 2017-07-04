@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>综合运用</title>
+		<style type="text/css">
+			body {
+				text-align: center;
+				font: 14px "微软雅黑";
+			}
+			
+			td {
+				padding: 8px 10px;
+			}
+			
+			table {
+				display: inline-block;
+				border: 5px solid #6495ED;
+			}
+			
+			caption {
+				background-color: #6495ED;
+				color: white;
+				padding: 10px 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>流程控制for循环+if判断+Math对象+Array对象+Date对象制作成绩表</h1> //monthArr[mydate.getMonth()] + '月'; 这里注意，直接导出getMonth的值，会比实际月份少1，这是因为，月份是从1-12，而getMonth返回的值则是从0-11，就和星期的返回方法是一样的。所以解决方法也一样，利用返回的值，当做数组的下标调用，对应出正确的月份。用alert(mydate.getMonth())才发现了这个问题，进而解决掉。所以说alert是调试bug的必备良药。
+		<!--	
+			求和公式
+			var sum = 0;
+			for(var i=0;i<myArr.length;i++){
+					sum += myArr[i][1];
+//					alert(myArr[i][1]);
+//			document.write(myArr[i][0]+'<br />');
+			}
+//			document.write(sum);
+			document.getElementById('sum').innerText = sum;
+			求平均数
+			var pjf = sum/myArr.length;
+			document.getElementById('b').innerHTML = Math.round(pjf);
+			其他不成熟也不成功的小实验
+//			document.getElementById('b').innerText = Math.round(Math.sqrt(sum));//四舍五入（算术平方根（sum和的值））//document.write(Math.pow(Math.sqrt(sum),2));-->
+
+		<h1>法2——for循环制作表格</h1>
+		<script type="text/javascript">
+		//成绩信息
+			var myArr = [
+				['小明', 87],
+				['小花', 81],
+				['小红', 97],
+				['小天', 76],
+				['小张', 54],
+				['小小', 94],
+				['小西', 90],
+				['小舞', 66],
+				['小迪', 64],
+				['小曼', 76]
+			];
+		//月份
+			var month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+		//星期
+			var day = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+			var mydate = new Date(); //var year = mydate.getFullYear();
+
+		//日期
+			var datearr = [mydate.getFullYear() + '年', month[mydate.getMonth()] + '月', mydate.getDate() + '日', day[mydate.getDay()]];
+
+		//总分
+			var sum = 0; //这里一定要定义为0，这样也算声明sum是一个数值的方式，不然直接var sum。会返回NaN，不是一个数值
+			for(var s = 0; s < myArr.length; s++) {
+				sum += parseInt(myArr[s][1]);
+				//			alert(myArr.length);
+				//			alert(myArr[s][1]);
+			}
+			//		alert(sum);
+		//平均分——等于总分除以班级人数
+			var pjf = sum / myArr.length;
+			
+//			document.write(sum);
+//			document.write(pjf);
+		//最后单独添加：
+			myArr.push(['总分', sum], ['平均分', pjf]);
+
+		//开始写表格
+			document.write('<table border="1">');
+			document.write('<caption>181班期末成绩表</caption>');
+			document.write('<tr>');
+			for(var a = 0; a < datearr.length; a++) {
+				document.write('<td>' + datearr[a] + '</td>');
+			}
+			document.write('</tr>');
+			for(var i = 0; i < myArr.length; i++) { //实现写10行
+				document.write('<tr>');
+				for(var j = 0; j < 1; j++) { //每行写一遍
+					document.write('<td>' + myArr[i][0] + '</td>'); //一遍中的第一个单元格
+					document.write('<td>' + myArr[i][1] + '</td>'); //一遍中的第二个单元格
+					if(i < myArr.length-2) {//抛去最后两个不进行判断，因为最后两个是单独添加的总分和平均分。所以只有在i小于长度减去最后两个后的情况下，才能进行判断。
+						if(myArr[i][1] >= 80) { //判断成绩后写备注
+							document.write('<td>优秀</td>');
+						} else if(myArr[i][1] < 80 && myArr[i][1] >= 60) {
+							document.write('<td>及格</td>');
+						} else {
+							document.write('<td>不及格</td>');
+						}
+					}
+
+					//					alert(myArr[j]);
+				}
+
+				document.write('</tr>');
+			}
+			document.write('</table>');
+			//			alert(myArr.length);
+			//			alert(myArr[i].length);
+		</script>
+	</body>
+
+</html>

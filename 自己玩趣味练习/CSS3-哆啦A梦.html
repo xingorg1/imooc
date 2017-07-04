@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>自制哆啦A梦</title>
+		<style>
+			/*整体*/
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.doraemon{
+				width: 600px;
+				margin: 20px auto;
+				text-align: center;
+				/*border: 1px solid #1E90FF;*/
+				position: relative;
+			}
+			.clearfix:after{
+				content: "";
+				clear: both;
+				display: block;
+			}
+			.clearfix{
+				*zoom: 1;
+			}
+			/*头*/
+			.head{
+				width: 320px;
+				height: 300px;/*由于是椭圆头,所以宽高不一致*/
+				-webkit-border-radius: 150px;
+				-moz-border-radius: 150px;
+				border-radius:150px;/*150px,是圆的半径，是宽高的一半*/
+				background-color: #07bbee;/*可以兼容所有浏览器的背景色，防止渐变的那种颜色识别不出来。*/
+				background: -webkit-radial-gradient(right top,#fff 10%,#07bbee 20%,#10a6ce 75%,#000);/*右上角的白色是高光，左下角的黑色是立体感内阴影*/
+				background: -moz-radial-gradient(right top,#fff 10%,#07bbee 20%,#10a6ce 75%,#000);
+				background: -moz-radial-gradient(right top,#fff 10%,#07bbee 20%,#10a6ce 75%,#000);
+				background: -ms-radial-gradient(right top,#fff 10%,#07bbee 20%,#10a6ce 75%,#000);
+				background: radial-gradient(right top,#fff 10%,#07bbee 20%,#10a6ce 75%,#000);
+				border: 2px solid #555;
+				position:relative;
+			}
+			/*脸*/
+			.face{
+				position: relative;/*让所有脸部元素可以自有定位*/
+				z-index: 2;
+			}
+			.white{
+				/*脸白*/
+				width: 265px;
+				height: 195px;
+				-webkit-border-radius: 150px;
+				-moz-border-radius: 150px;
+				border-radius: 150px;
+				position: absolute;
+				top: 75px;
+				left: 28px;
+				background: #fff;
+				/*下边开始做有立体感的脸部，那就是会有高光和阴影。运用放射性渐变*/
+				background: -webkit-radial-gradient(right top,#fff 75%,#eee 80%,#999 90%,#444);
+				background: -moz-radial-gradient(right top,#fff 75%,#eee 80%,#999 90%,#444);
+				background: -o-radial-gradient(right top,#fff 75%,#eee 80%,#999 90%,#444);
+				background: -ms-radial-gradient(right top,#fff 75%,#eee 80%,#999 90%,#444);
+				background: radial-gradient(right top,#fff 75%,#eee 80%,#999 90%,#444);
+			}
+			/*眼睛*/
+			.eyes{
+				position: relative;
+				z-index: 3;
+			}
+			.eye{
+				width: 72px;
+				height: 82px;
+				background: #FFF;
+				border: 2px solid #333;
+				-webkit-border-radius: 35px;
+				-moz-border-radius: 35px;
+				border-radius: 35px;
+				position: absolute;
+				top: 39px;
+			}
+			.eLeft{
+				left: 82px;
+			}
+			.eRight{
+				left: 157px;
+			}
+			.black{
+				width: 14px;
+				height: 14px;
+				background: #000;
+				-webkit-border-radius: 14px;
+				-moz-border-radius: 14px;
+				border-radius: 14px;
+				position: absolute;
+				top: 40px;
+			}
+			.bLeft{
+				left: 50px;
+			}
+			.bRight{
+				left: 7px;
+			}
+			/*鼻子*/
+			.nose{
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				top: 110px;
+				left: 140px;
+				z-index: 3;
+				border: 2px solid #000;
+				-webkit-border-radius: 30px;
+				-moz-border-radius: 30px;
+				border-radius: 30px;
+				background: #c93300;
+			}
+			.light{
+				/*鼻子上的高光*/
+				width: 10px;
+				height: 10px;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				border-radius: 5px;
+				-webkit-box-shadow: 19px 8px 5px #fff;
+				box-shadow: 19px 8px 5px #FFF;
+			}
+			.noseLine{
+				/*鼻子下的竖线*/
+				width: 3px;
+				height: 100px;
+				position: absolute;
+				top: 143px;
+				left: 155px;
+				z-index: 3;
+				background: #333;
+				/*box-shadow: 0px 0px 10px #000;*/
+			}
+			/*嘴巴*/
+			.mouth{
+				width: 220px;
+				height: 220px;
+				position: absolute;
+				top: 22px;
+				left: 45px;
+				border-bottom: 3px solid #333;
+				-webkit-border-radius: 120px;
+				-moz-border-radius: 120px;
+				border-radius: 120px;
+				clip: rect(175px auto auto auto);/*上边第175个像素开始剪切直至最上边，右、下、左边不剪切*/
+			}
+			/*胡须*/
+			.whiskers{
+				width: 220px;
+				height: 80px;
+				position: relative;
+				top: 120px;
+				left: 50px;
+				z-index: 2;
+				/*background: #1E90FF;*/
+			}			
+			.whisker{
+				/*所有胡须的公用样式*/
+				width: 60px;
+				height: 2px;
+				background: #333;
+				position: absolute;
+				z-index: 2;
+			}
+			.rTop{
+			/*右上角胡子*/
+			left: 165px;
+			top: 25px;
+			}
+			.rt{
+				left: 167px;
+				top: 45px;
+			}
+			.rBottom{
+				left: 165px;
+				top: 65px;
+			}
+			.lTop{
+				/*左上角胡子*/
+				left: 0;
+				top: 25px;
+			}
+			.lt{
+				left: -2px;
+				top: 45px;
+			}
+			.lBottom{
+				left: 0;
+				top: 65px;
+			}
+			.r160{
+				/*旋转角度*/
+				-webkit-transform: rotate(160deg);
+				-moz-transform: rotate(160deg);
+				-ms-transform: rotate(160deg);
+				transform: rotate(160deg);
+			}
+			.r20{
+				-webkit-transform: rotate(20deg);
+				-moz-transform: rotate(20deg);
+				-ms-transform: rotate(20deg);
+				transform: rotate(20deg);
+			}
+			/*脖子和铃铛*/
+			.choker{
+				width: 230px;
+				height: 20px;
+				position: relative;
+				top: -40px;
+				left: 45px;
+				z-index: 4;
+				background: #c40;
+				/*线性渐变围巾*/
+				background: -webkit-gradient(linear, left top bottom from(#c40),to(#800400));/*注意webkit版本的和别人的额写法不一样*/
+				background: -moz-linear-gradient(center top,#c40,#800400);
+				background: -ms-linear-gradient(center top,#c40,#800400);
+				/*background: linear-gradient(center top,#c40,#800400);*/
+				border: 2px solid #000;
+				-webkit-border-radius: 10px;
+				-moz-border-radius: 10px;
+				border-radius: 10px;
+			}
+			/*铃铛*/
+			.bell{
+				width: 40px;
+				height: 40px;
+				_overflow:hidden;/*IE6 hack*/
+				border: 2px solid #000;
+				-webkit-border-radius: 50px;
+				-moz-border-radius: 50px;
+				border-radius: 50px;
+				background: #f9f12a;
+				/*线性渐变铃铛*/
+				background: -webkit-gradient(linear,left top,left bottom,from(#f9f12a),color-stop(0.5, #e9e11a),to(#a9a100));
+				background: -moz-linear-gradient(top,#f9f12a,#e9e11a 75%,#a9a100);
+				background: -ms-linear-gradient(top,#f9f12a,#e9e11a 75%,#a9a100);
+				-webkit-box-shadow: -5px 5px 10px rgba(0,0,0,0.25);
+				box-shadow: -5px 5px 10px rgba(0,0,0,0.25);
+				position: relative;
+				top: 5px;
+				left: 90px;
+			}
+			.bellLine{
+				/*铃铛上的双横线*/
+				width: 33px;
+				height: 2px;
+				background: orange;
+				-webkit-border-radius: 3px 3px 0 0;
+				-moz-border-radius: 3px 3px 0 0;
+				border-radius: 3px 3px 0 0;
+				position: absolute;
+				top: 7px;
+				left: 4px;
+			}
+			.bellCircle{
+				width: 12px;
+				height: 10px;
+				position: relative;
+				top: 17px;
+				left: 14px;
+				background: #000;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				border-radius: 5px;
+			}
+			.bellUnder{
+				width: 3px;
+				height: 15px;
+				background: #000;
+				position: absolute;
+				top: 25px;
+				left: 19px;
+			}
+			.bellLight{
+				width: 12px;
+				height: 12px;
+				position: absolute;
+				top: -5px;
+				left: 4px;
+				-webkit-border-radius: 10px;
+				-moz-border-radius: 10px;
+				border-radius: 10px;
+				-webkit-box-shadow: 19px 8px 5px #fff;
+				box-shadow: 19px 8px 5px #fff;
+				opacity: 0.7;
+			}
+			/*身体*/
+			.allBody{
+				position: relative;
+				top: -310px;
+			}
+			.dlBody{
+				/*肚子*/
+				width: 220px;
+				height: 165px;
+				border: 2px solid #333;
+				position: absolute;
+				top: 256px;
+				left: 50px;
+				background: #07beea;/*不支持css3的径向渐变的会显示为色块*/
+				background: -webkit-gradient(linear,right top,left top,from(#07beea),color-stop(0.5,#0073b3),color-stop(0.75,#00b0e0),to(#0096be));
+				background: -moz-linear-gradient(right center,#07beea,#0073b3 50%,#00b0e0 75%,#0096be 100%);
+				background: -ms-linear-gradient(right center,#07beea,#0073b3 50%,#00b0e0 75%,#0096be 100%);
+			}
+			.wraps{
+				/*肚兜*/
+				width: 170px;
+				height: 170px;
+				background: #fff;
+				background: -webkit-gradient(linear,right top,left bottom,from(#fff),color-stop(0.75,#fff),color-stop(0.83,#eee),color-stop(0.90,#999),color-stop(0.95,#444),to(#000));
+				background: -moz-linear-gradient(right top,#fff,#fff 75%,#eee 80%,#999 90%,#444 95%,#000);
+				background: -ms-linear-gradient(right top,#fff,#fff 75%,#eee 80%,#999 90%,#444 95%,#000);
+				border: 2px solid #000;
+				-webkit-border-radius: 85px;
+				-moz-border-radius: 85px;
+				border-radius: 85px;
+				position: absolute;
+				top: 230px;
+				left: 72px;
+			}
+			.pocket{
+				/*口袋*/
+				width: 130px;
+				/*from--为了制作口袋的半圆形状，之前的做法是加一个div挡住，这里就不用了吧*/
+				height: 60px;
+				line-height: 50px;
+				font-size:12px;
+				font-weight: bold;
+				font-family: "微软雅黑";
+				color: orangered;
+				-webkit-border-radius: 65px;
+				-moz-border-radius: 65px;
+				border-radius: 0 0 65px 65px;
+				/*end*/
+				position: relative;
+				top: 320px;
+				left: 92px;
+				border: 2px solid #000;
+				background: #fff;
+				background: -webkit-gradient(linear,right top,left bottom,from(#fff),color-stop(0.70,#fff),color-stop(0.75,#f8f8f8),color-stop(0.80,#eee),color-stop(0.88,#ddd),to(#fff));
+				background: -moz-linear-gradient(right top,#fff,#fff 70%,#f8f8f8 75%,#eee 80%,#ddd 88%,#fff);
+				background: -ms-linear-gradient(right top,#fff,#fff 70%,#f8f8f8 75%,#eee 80%,#ddd 88%,#fff);
+			}
+			/*手*/
+			.hand{
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				top: 272px;
+			}
+			.handRigth{
+				left: 248px;
+			}
+			.handLeft{
+				left: -10px;
+			}
+			.arm{
+				/*手臂公用部分*/
+				width: 80px;
+				height: 50px;
+				background: #07BBEE;
+				background: -webkit-gradient(linear,left top,left bottom,from(#07beea),color-stop(0.85,#07beea),to(#555),);
+				background: -moz-linear-gradient(center top,#07beea,#07beea 85%,#555);
+				background: -ms-linear-gradient(center top,07beea,#07beea 85%,#555);
+				border: 1px solid #000;
+				-webkit-box-shadow: -10px 7px 10px rgba(0,0,0,0.35);
+				box-shadow: -10px 7px 10px rgba(0,0,0,0.35);
+				position: relative;
+				top: 17px;
+				z-index: -1;
+			}
+			.handRigth .arm{
+				/*右手手臂*/
+				-webkit-transform: rotate(35deg);
+				-moz-transform: rotate(35deg);
+				-ms-transform: rotate(35deg);
+				transform: rotate(35deg);
+			}
+			.handLeft .arm{
+				/**左手手臂*/
+				-webkit-transform: rotate(145deg);
+				-moz-transform: rotate(145deg);
+				-ms-transform: rotate(145deg);
+				transform: rotate(145deg);
+				background: #0096BE;
+				-webkit-box-shadow: 5px -7px 10px rgba(0,0,0,0.25);
+				box-shadow: 5px -7px 10px rgba(0,0,0,0.25);
+			}
+			.handCircle{
+				width: 60px;
+				height: 60px;
+				background: #fff;
+				background: -webkit-gradient(linear,right top,left bottom,from(#fff),color-stop(0.5,#fff),color-stop(0.70,#eee),color-stop(0.8,#ddd),to(#999));
+				background: -moz-linear-gradient(right top,#fff,#fff 50%,#eee 70%,#ddd 80%,#999);
+				background: -ms-linear-gradient(right top,#fff,#fff 50%,#eee 70%,#ddd 80%,#999);
+				border: 2px solid #000;
+				-webkit-border-radius: 30px;
+				-moz-border-radius: 30px;
+				border-radius: 30px;
+				position: absolute;
+				top: 32px;
+			}
+			.handRigth .handCircle{
+				left: 40px;
+			}
+			.handLeft .handCircle{
+				left: -20px;
+			}
+			.armRewrite{
+				width: 5px;
+				height: 55px;
+				background: #07BEEA;
+				position: relative;
+				top: -45px;
+			}
+			.handRigth .armRewrite{
+				left: 22px;
+			}
+			.handLeft .armRewrite{
+				left: 60px;
+				background: #0096be;
+			}
+			/*脚*/
+			.foot{
+				width: 280px;
+				height: 40px;
+				position: relative;
+				top: -16px;
+				left: 20px;
+				/*background: #f00;*/
+			}
+			.foot .fLeft,.foot .fRight{
+				width: 125px;
+				height: 30px;
+				background: #fff;
+				border: 2px solid #333;
+				position: relative;
+			}
+			.foot .fLeft{
+				left: 8px;
+				top: 65px;
+				background: -webkit-gradient(linear,right top,left bottom,from(#fff),color-stop(0.75,#fff),color-stop(0.85,#eee),to(#999));
+				background: -moz-linear-gradient(right top,#fff,#fff 75%,#eee 85%,#999);
+				background: -ms-linear-gradient(right top,#fff,#fff 75%,#eee 85%,#999);
+				-webkit-border-radius: 80px 60px 60px 40px;
+				-moz-border-radius: 80px 60px 60px 40px;
+				border-radius: 80px 60px 60px 40px;
+				-webkit-box-shadow: -6px 0 10px rgba(0,0,0,0.35);
+				box-shadow: -6px 0 10px rgba(0,0,0,0.35);
+			}
+			.foot .fRight{
+				top: 31px;
+				left: 141px;
+				background: -webkit-gradient(linear,left top,right bottom,from(#fff),color-stop(0.75,#fff),color-stop(0.85,#eee),to(#999));
+				background: -moz-linear-gradient(left top,#fff,#fff 75%,#eee 85%,#999);
+				background: -ms-linear-gradient(left top,#fff,#fff 75%,#eee 85%,#999);
+				-webkit-border-radius: 60px 80px  40px 60px;
+				-moz-border-radius: 60px 80px 40px 60px;
+				border-radius: 60px 80px 40px 60px;
+				-webkit-box-shadow: 6px 0 10px rgba(0,0,0,0.35);
+				box-shadow: 6px 0 10px rgba(0,0,0,0.35);
+			}
+			.footRewrite{
+				width: 20px;
+				height: 10px;
+				background: #fff;
+				background: -webkit-gradient(linear,right top,left bottom,from(#666),color-stop(0.83,#fff),to(#fff));
+				background: -moz-linear-gradient(right top,#666,#fff 83%,#fff);
+				background: -ms-linear-gradient(right top,#666,#fff 85%,#fff);
+				background: -ms-linear-gradient(right top,#666,#fff 85%,#fff);
+				border: 1px solid #000;
+				border-bottom: none;
+				-webkit-border-radius: 40px 40px 0 0;
+				-moz-border-radius: 40px 40px 0 0;
+				/*四个分别表示：左上角top-left,右上角top-right,右下角bottom-right,左下角bottom-left*/
+				border-radius: 40px 40px 0 0;
+				position: absolute;
+				top: 56px;
+				left: 128px;
+				_left: 127px;/*ie6 hack*/
+			}
+			/*让眼睛动起来*/
+			@-webkit-keyframes eyemove{
+				80%{margin: 0;}/*一个数值时，表示上右下左*/
+				85%{margin: -20px 0 0;}/*三个数值时，表示上、左右、下*/
+				90%{margin: 0;}
+				93%{margin: 0,0,0,7px;}/*四个:分别表示：上、右、下、左*/
+				96%{margin: 0;}
+			}
+			@-moz-keyframes eyemove{
+				80%{margin: 0;}/*一个数值时，表示上右下左*/
+				85%{margin: -20px 0 0;}/*三个数值时，表示上、左右、下*/
+				90%{margin: 0;}
+				93%{margin: 0,0,0,7px;}/*四个:分别表示：上、右、下、左*/
+				96%{margin: 0;}
+			}
+			@-o-keyframes eyemove{
+				80%{margin: 0;}/*一个数值时，表示上右下左*/
+				85%{margin: -20px 0 0;}/*三个数值时，表示上、左右、下*/
+				90%{margin: 0;}
+				93%{margin: 0,0,0,7px;}/*四个:分别表示：上、右、下、左*/
+				96%{margin: 0;}
+			}
+			@-ms-keyframes eyemove{
+				80%{margin: 0;}/*一个数值时，表示上右下左*/
+				85%{margin: -20px 0 0;}/*三个数值时，表示上、左右、下*/
+				90%{margin: 0;}
+				93%{margin: 0,0,0,7px;}/*四个:分别表示：上、右、下、左*/
+				96%{margin: 0;}
+			}
+			.eye .black{
+				-webkit-animation: eyemove 3s linear;
+				-moz-animation: eyemove 3s linear;
+				-ms-animation: eyemove 3s linear;
+				animation: eyemove 3s linear;
+				-webkit-animation-iteration-count: infinite;
+				-moz-animation-iteration-count: infinite;
+				-ms-animation-iteration-count: infinite;
+				animation-iteration-count: infinite;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+        	作者：702004176@qq.com
+        	时间：2016-10-07
+        	描述：用css3制作单纯善良的哆啦A梦
+        -->
+        <div>待解决：隐形的盒布局问题，比如doraemon的高度小于实际的高度，eyes的高度还是0等</div>
+        <div class="doraemon clearfix">
+        	<!--头和脸-->
+        	<div class="head">
+        		<div class="eyes clearfix">
+        			<div class="eye eLeft">
+        				<div class="black bLeft"></div>
+        			</div>
+        			<div class="eye eRight">
+        				<div class="black bRight"></div>
+        			</div>
+        		</div>
+        		<div class="face">
+        			<div class="white"></div>
+        			<div class="nose">
+        				<div class="light"></div>
+        			</div>
+        			<div class="noseLine"></div>
+        			<div class="mouth"></div>
+        			<div class="whiskers">
+        				<div class="whisker rTop r160"></div>
+        				<div class="whisker rt"></div>
+        				<div class="whisker rBottom r20"></div>
+        				<div class="whisker lTop r20"></div>
+        				<div class="whisker lt"></div>
+        				<div class="whisker lBottom r160"></div>
+        			</div>
+        		</div>
+        	</div><!--head end-->
+        	<!--脖子和铃铛-->
+        	<div class="choker">
+        		<div class="bell">
+        			<div class="bellLine"></div>
+        			<div class="bellCircle"></div>
+        			<div class="bellUnder"></div>
+        			<div class="bellLight"></div>
+        		</div>
+        	</div> 
+        	<!--身体和四肢-->
+        	<div class="allBody">
+        		<div class="dlBody"></div>
+        		<div class="wraps"></div>
+        		<div class="pocket">my name is 高颖</div>
+        		<!--<div class="pocketMask">为了挡住口袋的一半，因为最先做的是口袋一个整圆，后来我改进成直接用borderradius制作成半圆了，不用这个div了</div>-->
+        	</div>
+        	<!--hand-->
+        	<div class="hand handRigth">
+        		<div class="arm"></div>
+        		<div class="handCircle"></div>
+        		<div class="armRewrite"></div>
+        	</div>
+        	<div class="hand handLeft">
+        		<div class="arm"></div>
+        		<div class="handCircle"></div>
+        		<div class="armRewrite"></div>
+        	</div>
+        	<!--foot-->
+        	<div class="foot">
+        		<div class="fLeft"></div>
+        		<div class="fRight"></div>
+        		<div class="footRewrite"></div>
+        	</div>
+        </div>
+	</body>
+</html>

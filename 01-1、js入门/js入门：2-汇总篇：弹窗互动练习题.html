@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>弹窗互动</title>
+		<style type="text/css">
+			hgroup{
+				height: auto;
+				width: auto;
+			}
+		</style>
+	<script type="text/javascript">
+		var a = window.confirm('是否打开网站？');
+//		alert(a);
+		if(a == true){
+			var b = prompt('请输入要打开的网址','http://www.imooc.com/');
+//			alert(typeof b);
+			alert(b);
+			if(b !== null){
+//				document.write('1');
+				window.open('http://www.imooc.com/','_blank', 'width=300,height=200,menubar=no,toolbar=no,status=no,scrollbars=yes');
+			document.write('2');
+			}
+		}
+		function o(){
+			window.open(
+				'http://www.baidu.com/','_blank','width=300,height=200'
+			)
+		}
+	</script>
+	</head>
+	
+	<body>
+		<h1>基于window.open()这个方法，火狐是可以用的，谷歌却不行，其他的我也没测试，所以他的兼容性是有问题的。</h1>
+		<a href="js入门：2-汇总篇：互动练习题.html"></a>
+		<input type="button" value="click" onclick="o()" />
+	</body>
+</html>

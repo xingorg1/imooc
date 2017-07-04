@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Array对象练习</title>
+		<style type="text/css">
+			body {
+				font: 14px "微软雅黑";
+			}
+			
+			div {
+				border: 1px solid royalblue;
+				margin-top: 12px;
+			}
+			
+			table {
+				display: inline-block;
+				border: 3px solid #4169E1;
+				vertical-align: top;
+				margin-top: 3px;
+			}
+			
+			td {
+				border: 1px solid #4169E1;
+				padding: 5px 10px;
+				max-width: 500px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div style="border: 3px solid #f00;padding: 10px; border-radius:12px ;">
+			<h1>知识点</h1>
+			<hr />
+			<table>
+				<caption style="background-color:darkslateblue;color:white;padding: 10px;">Array数组方法</caption>
+				<thead style="background-color:cornflowerblue;padding: 10px;text-align: center;">
+					<tr>
+						<td>方法</td>
+						<td>描述</td>
+						<td>备注</td>
+					</tr>
+				</thead>
+				<tr>
+					<td>concat(要连接的内容)</td>
+					<td>连接两个或多个数组，并返回结果</td>
+					<td>返回的是一个新的数组，不会对之前原数组的有影响</td>
+				</tr>
+				<tr>
+					<td>join(分隔符，为空默认是逗号)</td>
+					<td>把数组的所有元素放进一个字符串，元素通过指定的字符串进行分割</td>
+					<td>同上</td>
+				</tr>
+				<tr>
+					<td>pop()</td>
+					<td>删除并返回数组的最后一个元素</td>
+					<td>同上</td>
+				</tr>
+				<tr>
+					<td>push()</td>
+					<td>向数组的末尾添加一个或多个元素，并返回长度</td>
+					<td>同上</td>
+				</tr>
+				<tr>
+					<td>shift()</td>
+					<td>删除并返回数组的第一个元素</td>
+					<td>同上</td>
+				</tr>
+				<tr>
+					<td>unshift()</td>
+					<td>向数组的开头添加一个或多个元素，并返回新的长度</td>
+					<td>同上</td>
+				</tr>
+				<tr>
+					<td>reverse()</td>
+					<td>颠倒数组中元素的顺序 </td>
+					<td>同上</td>
+				</tr>
+				<tr>
+					<td>sort(方法函数)</td>
+					<td>对数组的元素进行排序</td>
+					<td>同上</td>
+				</tr>
+				<tr>
+					<td>slice(start,end
+						<!不包括end>)</td>
+					<td>从某个已有的数组返回选定的元素</td>
+					<td>同上</td>
+				</tr>
+				<tr>
+					<td>splice()</td>
+					<td>删除元素，并向元素添加新的元素</td>
+					<td>具体是只删除不添加还是只添加不删除亦或是有删除又添加，只看括号中四位数字的填写。同样返回一个新的子数组</td>
+				</tr>
+				<tr>
+					<td>toSource()</td>
+					<td>返回该对象的源代码</td>
+					<td>（普遍方法）</td>
+				</tr>
+				<tr>
+					<td>toString()</td>
+					<td>把数组转换为字符串，并返回结果</td>
+					<td>（普遍方法）</td>
+				</tr>
+				<tr>
+					<td>toLocaleString()</td>
+					<td>把数组转换为本地数组，并返回结果</td>
+					<td>（普遍方法）</td>
+				</tr>
+				<tr>
+					<td>valueof()</td>
+					<td>返回数组对象的原始值</td>
+					<td>（普遍方法）</td>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<h1>实验</h1>
+			<h3>concat()</h3>
+			<script type="text/javascript">
+				var myArray = [1, 2, 3, 4, 5];
+				var arr = myArray.concat('上山打老虎');
+				document.write(arr);
+				document.write('<hr/>');
+				var arr2 = "老虎没打着";
+				var arr3 = "打着小松鼠";
+				document.write(arr.concat(arr2, arr3));
+				document.write('<h4>总结：可见，既可以在括号里直接添加要连接的内容，也可以把连接的内容定义为变量，然后再concat括号内加入变量名称</h4>')
+			</script>
+		</div>
+		<div>
+			<h1>实验</h1>
+			<h3>join(分隔符)</h3>
+			<script type="text/javascript">
+				var myArray2 = [1, 2, 3, 4, 5];
+				var join1 = myArray2.join('-');
+				document.write(join1);
+				document.write('<h4>总结：返回一个字符串，该字符串把数组内的各个元素串联起来，用(分隔符)置于元素之间，此方法不影响元素本身的内容，我们使用join（），将数组的所有元素放入一个字符串之中。</h4>')
+			</script>
+		</div>
+		var join2 = myArray3.slice(-2,5);
+		<div>
+			<h1>实验</h1>
+			<h3>slice(start,end)</h3>
+			<script type="text/javascript">
+				var myArray3 = ['a', 'b', 'c', 'd', 'e'];
+				var join1 = myArray3.slice(2, 4);
+				document.write(join1);
+				var join2 = myArray3.slice(-2, 5);
+				var join2_1 = myArray3.slice(-2, -5);
+				document.write('<br />' + join2 + join2_1 + '<br/>join2_1为空' + '<br/>start为负值时，end为正，向后截，end为负值向前截，但是end为正数值不能是start对应元素前边元素的下标，否则为空');
+				document.write('<h4>总结：1，可用负值从数组尾部选取元素.2,如果end为空，则slice（）方法选取从start到数组结尾的所有元素。3.此方法Array()与String()相似</h4>')
+			</script>
+		</div>
+		<div>
+			<h1>实验</h1>
+			<h3>sort(方法函数)</h3>
+			<script type="text/javascript">
+				var myArray4 = [1, 23, 45, 12, 345, 678, 96, 4, 123];
+				var join3 = myArray4.sort();
+				document.write(join3 + '<br/>可见：如果不指定函数，则按照unicode编码顺序，1-9，a-z，且按照元素第一位，不管后边多少位，尤其数字时明显<br />');
+				//排序函数
+			//升序
+				function sortNum1(a, b) {
+					return a - b; //升序
+					//return b - a;//降序
+				}
+				var join3_1 = myArray4.sort(sortNum1);
+				document.write('升序：' + join3_1 + '<br />');
+			//降序
+				function sortNum2(a, b) {
+					//return a - b;//升序
+					return b - a; //降序
+				}
+				var join3_2 = myArray4.sort(sortNum2);
+				document.write('降序：' + join3_2);
+
+				document.write('<h4>总结：该函数要比较两个值，然后返回一个用于说明这两个值的相对顺序的数字，比较函数应该具有两个参数a和b，其返回值入如下：<br/>1，若返回值<=-1，则表示A在排序后的序列中出现在B之前。<br/>2,若返回值>-1&&<1,则表示A和B具有相同的排序顺序。<br/>3，若返回值>=1，则表示A在排序后的顺序中出现在B之后。<br/>总之，(a - b) 为升序，(b - a) 为降序</h4>')
+			</script>
+		</div>
+	</body>
+
+</html>

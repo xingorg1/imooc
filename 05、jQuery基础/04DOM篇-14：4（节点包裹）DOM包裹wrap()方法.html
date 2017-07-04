@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>DOM包裹wrap()方法</title>
+		<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+		<style>
+			.left div,
+			.right div {
+				width: 100px;
+				padding: 5px;
+				margin: 5px;
+				float: left;
+				border: 1px solid #ccc;
+				background: #bbffaa;
+			}
+			
+			.right div {
+				background: yellow;
+			}
+			
+			div p {
+				border: 1px solid red;
+			}
+			
+			div a {
+				border: 1px solid blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p>如果要将元素用其他元素包裹起来，也就是给它增加一个父元素，针对这样的处理，JQuery提供了一个wrap方法</p>
+		<p>wrap( wrappingElement )：在集合中匹配的每个元素周围包裹一个HTML结构</p>
+		<p>简单的看一段代码：</p>
+		《p>p元素《/p>
+		<p>给p元素增加一个div包裹</p>
+		$('p').wrap('《div>《/div>')
+		<p>最后的结构，p元素增加了一个父div的结构</p>
+		《div><br/> 《p>p元素《/p>
+		<br/> 《/div>
+		<p>.wrap( function ) ：一个回调函数，返回用于包裹匹配元素的 HTML 内容或 jQuery 对象</p>
+		<p>使用后的效果与直接传递参数是一样，只不过可以把代码写带函数体内部，写法不同而已</p>
+		<p>以第一个案例为例：</p>
+		<pre>
+			 $('p').wrap(function() {
+			    return '《div>《div/>'; //与第一种类似，只是写法不一样
+			})
+		</pre>
+		<b>注意：</b>
+		<p>.wrap()函数可以接受任何字符串或对象，可以传递给$()工厂函数来指定一个DOM结构。这种结构可以嵌套了好几层深，但应该只包含一个核心的元素。每个匹配的元素都会被这种结构包裹。该方法返回原始的元素集，以便之后使用链式方法。</p>
+		<pre>
+			    $(".aaron1").on('click', function() {
+		        //给所有p元素，增加父容器div
+		        $('p').wrap('《div>《/div>')
+		    })
+		
+		
+		    $(".aaron2").on('click', function() {
+		        $('a').wrap(function() {
+		            return '《div class="' + $(this).text() + '" />';//‘$(this).text()’在此处的值为“a元素”，也就相当于return  '《div class='a元素'>《/div>'
+		        })
+		    })
+		</pre>
+		<h3>
+	1.$('p').wrap('《div>')。。  
+	<br/>2.$('p').wrap('《div/>')。。 
+	<br/>3.$('p').wrap('《div>《/div>')。。
+	<br/>以上三种写法都可以。
+	<br/>但若写成$('p').wrap('div')，它就会将你文档中的第一个div元素（也就是那个.left）作为包裹元素。。。。。
+		</h3>
+		<h2>实验：DOM包裹wrap()方法</h2>
+		<div class="left">
+			<button class="aaron1">点击,通过wrap方法给p元素增加父容器div</button>
+			<button class="aaron2">点击,通过wrap的回调方法给a元素增加父容器div</div>
+    </div>
+    <div class="right">
+        <p>p元素</p>
+        <p>p元素</p>
+    </div>
+    <div class="left">
+        <a>a元素</a>
+        <a>a元素</a>
+    </div>
+    <script type="text/javascript">
+    $(".aaron1").on('click', function() {
+        //给所有p元素，增加父容器div
+        $('p').wrap('<div></div>')
+    })
+    </script>
+    <script type="text/javascript">
+    $(".aaron2").on('click', function() {
+        $('a').wrap(function() {
+            return '<div class="' + $(this).text() + '" />';
+        })
+    })
+    </script>
+	</body>
+</html>

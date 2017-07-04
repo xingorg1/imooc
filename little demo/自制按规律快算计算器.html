@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>开发页面时需要按比例计算宽高值得快速计算器</title>
+	</head>
+	<body>
+		<p id="jieguo"></p>
+		<script type="text/javascript">
+			window.onload = function(){
+				var x = window.prompt('请输入预计的长度是多少px');
+				document.getElementById('jieguo').innerHTML = Math.round(192 * x / 273) + "px";
+				//公式：宽高比例值是：192/273 所以，设定另一组比例值中的宽时，得出高的值 
+			}
+		</script>
+	</body>
+</html>
