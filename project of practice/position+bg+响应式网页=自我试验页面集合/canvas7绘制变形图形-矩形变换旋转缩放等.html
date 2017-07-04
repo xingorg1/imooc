@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas绘制变形图形</title>
+</head>
+<body onLoad="draw('canvas')">
+一个使用坐标变换的方法绘制变形图形的简单示例，实例中首先绘制了一个正方形，然后在一个循环中，反腐使用平移坐标轴，图形缩小，图像旋转这个技巧，最后绘制出来一个漂亮的变形图形
+<canvas id="canvas" width="1300" height="1200" />
+<script type="text/javascript">
+function draw(id){
+	var canvas = document.getElementById(id);
+	if (canvas == null)
+	return false;
+	var context = canvas.getContext('2d');
+	context.fillStyle = "black";
+	context.fillRect(0, 0, 1300, 1200);<!--定义黑色背景的范围-->
+	//图形绘制
+	context.translate(200, 50);<!--定义起始坐标，这样，坐标原点就平移，然后变成了（200,50）。起始大家都是开始从（0,0）的，而（0,0）就是画布的左上角的那个点。所以这里是从0，0平移到了200，50-->
+	context.fillStyle = 'rgba(255, 225, 0, 0.75)';<!--定义填充的颜色-->
+	for (var i = 0; i < 150; i++){<!--设置i<x，x表示会有几个图形画出来-->
+		context.translate(25, 25);<!--从原点开始，每次平移多少个数值/像素。第一个表示x轴水平平移多少。第二个数值表示y轴垂直平移多少-->
+		context.scale(0.95, 0.95);<!--表示缩放值。第一个表示x水平放大的倍数值，第二个表示垂直放大的倍数值。若想要设置缩放变小的时候，只要将数值设置在0-1之间的小数就可以了，譬如0.5是将图形缩小一半-->
+		context.rotate(Math.PI / 10);     
+		//<!--表示旋转的度数，旋转的中心点就是坐标原点。【在此案例中，因为在开始图形变换之前，已经用平移translate将坐标原点平移到了（200,50），所以，现在就是（200,50）为图像变换的原点】。参数angle：（π/10）就是180/10就是18°。默认是顺时针方向，将数值设为负值，就是逆时针-->
+		context.fillRect(0, 0, 100, 50);<!--每一个矩形填充100宽50长的面积，这样一次循环叠加，会有i个这样的矩形叠加变换出来-->
+		}
+ 	}
+
+</script>
+</body>
+</html>

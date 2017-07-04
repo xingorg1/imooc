@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ui状态伪类选择器</title>
+<style>
+    body{
+        font-size: 40px;
+    }
+    form input{
+        width: 300px;
+        height: 50px;
+        padding:0px 10px;
+        border-radius: 20px;
+    }
+    input[type='text']:hover,input[type='password']:hover,{
+        border:4px dotted #FF7916;
+    }
+    input[type='text']:focus,input[type='password']:focus{
+        border:4px solid #00d6e5;
+    }
+    input[type='text']:active,input[type='password']:active{
+        border:4px dashed #ff4797;
+    }
+    input:disabled{
+        color: #f00;
+        font-size: 22px;
+        background-color: #6d6d6d;
+        cursor: pointer;
+    }
+    input:read-only{
+        color: #ff04bb;
+        font-size: 22px;
+        background-color: #36dc62;
+        cursor:crosshair;
+    }
+    input[type='checkbox']{
+        width: 30px;
+        height:30px;
+        padding:3px;
+        border-radius: 2px;
+        background-color: #FF7916;
+    }
+    input[type='checkbox']:focus{
+        border: 3px solid #36dc62;
+    }
+    input[type='checkbox']:checked{
+        background-color: #ff8922;
+        border:2px solid green;
+        color: #ff4797;
+    }
+    input[type='radio']:checked{
+        border:2px solid green;
+        background-color: #ff8922;
+        color: #ff4797;
+    }
+    input[type='hidden']:hover{
+        border:4px dotted #FF7916;
+        cursor: pointer;
+    }
+    .span{
+        background: url("images/tj.png") no-repeat left bottom;
+        width: 99px;
+        height: 99px;
+        display: inline-block;
+        margin: 10px 140px;
+    }
+    .span:hover{
+        background: url("images/tj.png") no-repeat left top;
+        width: 99px;
+        height: 99px;
+    }
+</style>
+</head>
+<body>
+<form>
+    <p>
+        学  校：<input type="text" placeholder="浙江师范大学" disabled="disabled" /><!--定义不可输入的文本框的状态-->
+    </p>
+    <p>
+        学  院：<input type="text" placeholder="美术学院" readonly="readonly" /><!--定义只读的文本框的状态-->
+    </p>
+    <p>
+        用户名：<input type="text" placeholder="请输入用户名" autocomplete="on" />
+    </p>
+    <p>
+        密  码：<input type="password" maxlength="12" placeholder="请输入密码"/>
+    </p>
+    <p>
+        提  交：<input type="image" src="images/98661458148506.jpg" alt="点赞" width="100%" height="50%"/>
+    </p>
+    <p>
+        上传文件：<input type="file" accept="image/png,image/jpg"/>
+    </p>
+    <p>
+        复选框：<br />
+        <input type="checkbox" value="we" name="f" checked="checked"/>1
+        <input type="checkbox" value="er" name="f" />2
+        <input type="checkbox" value="rq" name="f" />3
+        <input type="checkbox" value="qw" name="f" />4
+    </p>
+    <p>
+        单选框：<br />
+        <input type="radio" value="q" name="f" checked="checked"/>1
+        <input type="radio" value="w" name="f" />2<br />
+        <input type="radio" value="e" name="f" />3
+        <input type="radio" value="r" name="f" />4
+    </p><!--单选框有了相同的name值和不同的value值时才可以进行单选,也不用，只要设置相同的name就行了-->
+    <p>
+        重  置：<input type="reset" />
+    </p>
+    <p>
+        提  交：<input type="submit" />
+    </p>
+    <p>
+        按  钮：<input type="button" />
+    </p>
+    <p>
+        你看不见我你看不见我：<input type="hidden"/>
+    </p>
+</form>
+<div>
+    <a href="article.html" >
+        <span class="span"></span>
+    </a>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>伪元素target练习</title>
+<style>
+    :root{
+        background: green;
+        color: #ffffff;
+    }
+    a{
+        font-size: 40px;
+    }
+    :target{
+        background: #ffffff;
+        color: green;
+    }
+</style>
+</head>
+<body>
+<a href="#a">A</a>
+<a href="#b">B</a>
+<a href="#c">C</a>
+<a href="#d">D</a>
+<a>点击这里的大写ABCD就会高亮显示对应的文字,相当于命名锚点的作用啊</a>
+<div id="a">
+    <h1>文章标题</h1>
+    <p>文章内容</p>
+</div>
+<div >
+    <h1>文章标题</h1>
+    <p>文章内容</p>
+</div>
+<div id="b">
+    <h1>文章标题</h1>
+    <p>文章内容</p>
+</div>
+<div >
+    <h1>文章标题</h1>
+    <p>文章内容</p>
+</div>
+<div >
+    <h1>文章标题</h1>
+    <p>文章内容</p>
+</div>
+<div id="c">
+    <h1>文章标题</h1>
+    <p>文章内容</p>
+</div>
+<div >
+    <h1>文章标题</h1>
+    <p>文章内容</p>
+</div>
+<div id="d">
+    <h1>文章标题</h1>
+    <p>文章内容</p>
+</div>
+<div >
+    <h1>文章标题</h1>
+    <p>文章内容</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+@charset "utf-8";
+/* CSS Document */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+li {
+	list-style: none;
+}
+a {
+	display: block;
+	text-decoration: none;
+	font-size: 20px;
+	color: rgba(0,0,0,1.00);
+	font-weight: bold;
+}
+/*a:hover {
+	cursor: pointer;
+	color: #ffff00;
+	background-color: #3582EA;
+}*/
+html {
+	font: "微软雅黑"，"Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+div {
+	margin: 0 auto;
+	width: 30%;
+	/*	border: #2FA7FF 1px solid;*/
+	margin-top: 10px;
+}
+.clearfix:after {
+	content: "";
+	clear: both;
+	display: block;
+}
+.clearfix {
+	zoom: 1;
+}
+/* ---------------*/
+div.tab {
+	background-color: #CEEFFF;
+}
+div.tab div {
+	display: none;
+}
+ul.tabMemu {
+	background: #2FA7FF;
+	text-align: center;
+	border-bottom: #ffffff 4px solid;
+	border-top: #2FA7FF 1px solid;
+}
+.tabMemu li {
+	float: left;
+	margin-left: 10px;
+	padding: 0 10px;
+}
+.tabMemu li a {
+	font-weight: bloder;
+	line-height: 34px;
+	padding: 5px 10px;
+}
+.current {
+	cursor: pointer;
+	color: #2F0000;
+	background-color: #ffffff;
+}
+.con {
+	width: 100%;
+	margin: 15px;
+	overflow: hidden;
+}
+.con li {
+	text-align: left;
+	background: url(flag_blue.png) no-repeat left center;
+	padding-left: 25px;
+	margin-left: 20px;
+}
+.con:nth-child(3) li {
+	background: url(flag_orange.png) no-repeat left center;
+}
+.con:last-child li {
+	background: url(flag_green.png) no-repeat left center;
+}
+.con li a {
+	width: 95%;
+	line-height: 30px;
+	/*---下边对付超出字体。---*/
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.con li a:hover {
+	border-bottom: 1px dotted #170078;
+}

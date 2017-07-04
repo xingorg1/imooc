@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>text-shadow,word-break,word-wrap</title>
+<style>
+    body{
+        color: #FF00F5;
+        font-size: 30px;
+        font-family: "微软雅黑";
+    }
+	div{
+		text-shadow: 13px 13px 5px #002d60;
+	}
+	/*text-shadow:x,y,radius,color;使用时，必须有x和y的值，不然你想想，有阴影但是阴影不位移，会让阴影和文字重合，看上去就是没有阴影的效果；radius是阴影向外模糊的半径，半径越大，阴影越模糊；color也可以放在最开始，去掉颜色值，默认继承该元素（这里如div）的颜色，该元素没有设置颜色就是黑色*/
+
+    /*指定多个阴影颜色——用逗号隔开*/
+    p{
+        text-shadow: 10px 10px 2px #00ff96,20px 20px 3px #0088ff,30px 30px 4px #8100ff;
+    }
+    /*自动换行*/
+    li{
+        font-size:16px;
+        word-break: break-all;
+        /*就是加了这个以后，英文单词就会断开换行*/
+    }
+    ul li:last-child{
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+    /*长单词或url地址中自动换行*/
+    }
+</style>
+
+
+</head>
+<body>
+<div>我是一个字</div>
+<P>设置多重阴影</P>
+<ul>
+    <li>属性用来标明是否允许浏览器在单词内进行断句,这是为了防止当一个字符串太长而找不到它的自然断句点时产生溢出现象.css的 word-break 属性用来标明怎么样进行单词..13.网上有些文章说,word-wrap:break-word 对长串英文不起作用,其实这是非常错误的,word-wrap:break-word照样能把一个长串英文或数字拆成多行。事实上,word</li>
+    <li>good good study,day day upgood good study,day day upgood good study,day day upgood good study,day day upgood good study,day day upgood good study,day day upgood good study,day day upgood good study,day day upgood good study,day day upgood good study,day day upgood good study,day day upgood good study,day day up</li>
+    <li>Happiness is not about being immortal nor having food or rights in one's hand.—《Up》</li>
+    <li>Property is used to indicate whether or not to allow the browser to punctuate the words. This is to prevent the when a string is too long and can't find it natural punctuation generate overflow phenomenon. CSS word-break attribute is used to indicate how words..13. online some of the said, word-wrap:break-word of long strings of English, in fact this is very wrong. Word-wrap:break-word can still put a long string of letters and numbers is split into multiple lines</li>
+    <li>http://localhost:63342/prodect%20of%20practice/6-1%E3%80%812%E3%80%813%E3%80%81.html?_ijt=7vb07t79bgtmmspcium4tp17mk</li>
+</ul>
+</body>
+</html>

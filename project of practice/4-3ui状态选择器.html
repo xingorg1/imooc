@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>17个ui状态伪类选择器</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+	input{
+		border-radius: 10px;
+		padding: 3px;
+		margin-top: 10px;
+	}
+	input[type="text"]{
+	border: 5px solid #aaa;
+	}
+	input[type="text"]:hover{
+		border-color: blue;
+	}
+	input[type="text"]:active{
+	border-color: red;
+	}
+/*	input[type="text"]:focus{
+	border-color: yellow;
+	}*/
+	input[type="password"]{
+	border: 5px solid #ccc;
+	}
+	input[type="password"]:hover{
+		border-color: yellow;
+	}
+/*	input[type="password"]:active{
+	border-color: red;
+	}
+*/	input[type="password"]:focus{
+	border-color: green;
+	}
+	input[type="email"]:read-only{
+		background-color: #ccc;
+	}
+	input[type="email"]:read-write{
+		background-color: pink;
+	}
+	input[type="checkbox"]:checked{
+		outline: 2px solid green;
+	}/*用outline来画外边的框，而不是border偶*/
+	input[type="checkbox"]:default{
+		outline: 2px solid red;
+	}	
+	/*default表示默认的样式，因为checked就是默认！默认！默认！选中的，如果即使把勾去掉，也是还有绿色边框的，但是只支持火狐浏览器*/
+	input[type="radio"]:indeterminate{
+		outline: 2px solid red;
+	}
+	/*indeterminate是指当页面刚刚打开时，一组单选框！单选框！单选框！没有被选中时，组的状态和样式；同样只有某几个某几个某几个浏览器支持*/
+	::selection{
+		/*这种双冒号的写法，是css3新增的为了区分伪元素与伪类选择器的*/
+		/*一般情况下，有的是一个冒号也支持，但selection不支持单冒号，但最好先写一个冒号，因为双冒号还是有的浏览器不支持，也最好单双冒号都写上*/
+		background-color: green;
+		color: yellow;
+	}
+	input[type="text"]::selection{
+		background-color: blue;
+		color: orange;
+	}
+	input[type="email"]:invalid{
+		color: red;
+	}
+	/*判断，当输入格式不正确时显示红色字体*/
+	input[type="email"]:valid{
+		color: green;
+	}
+	/*当输入时email默认格式时，显示正确为绿色字体*/
+	input[type="text"]:required{
+		background: red;
+		color: yellow;
+	}
+	/*必须输入的文本框的样式*/
+	input[type="text"]:optional{
+		background-color: #000;
+		color: red;
+	}
+	/*可输入的文本框的样式*/
+	input[type="number"]:in-range{
+	background: green;
+	color: #fff;
+	font-size: 22px;
+	}
+	/*当输入的数字在规定的最小值（10）到最大值（50）这一段范围内的时候:即in-range，颜色是绿*/
+	input[type="number"]:out-of-range{
+		background: red;
+		color: green;
+		font-size: 32px;
+	}
+	/*超出范围out-of-range，颜色是红*/
+
+
+	</style>
+</head>
+<body>
+<input type="button" value="重点看鼠标效果"><br/>
+<input type="text" placeholder="用户名"/><br/>
+<input type="password" placeholder="密码" />
+<p>只读文本框</p>
+<input type="email" readonly="readonly" name="" placeholder="这些文字只读.com" />
+<input type="email" placeholder="这些文字可以编写.com" name="" readwrite="readwrite">
+<form>
+<input type="checkbox">1
+<input type="checkbox" checked>2<br/>
+<p></p>
+性别：
+<input type="radio">男
+<input type="radio">女
+<input type="radio">人妖
+</form>
+<h1>selection伪元素选择器</h1>
+<p>
+<h1>hi，选中我，看看会有什么效果。</h1><br>
+<input type="text" name="" value="输入文字再选中我，看看会有什么效果。">
+<br>
+
+不如搜索一下你想要的，或者刷新网页试试吧。</p>
+这段文本包含 <sub>下标</sub>
+<h1>required与optional</h1>
+<input type="text" name="" placeholder="姓名-必填项" required>
+<input type="text" name="" placeholder="qq-选填项">
+<input type="number" name="" max="50" min="10" value="30">
+</body>
+</html>

@@ -1,0 +1,97 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0;
+	padding: 0;
+}
+img {
+	border: 0px;
+}
+li {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+	font-size: 12px;
+	color: #000000;
+}
+.clearfix:after {
+	content: "";
+	clear: both;
+	display: block;
+}
+.clearfix {
+	zoom: 1;
+}
+/*------大框架---------*/
+#scrollImg {
+	width: 1000px;
+	height: 300px;
+	overflow: hidden;
+	border: #FF00F5 2px solid;
+	border-right: none;
+	border-left: none;
+	margin: 20px auto;
+	position: relative;
+}
+/*左右箭头*/
+#scrollImg span {
+	width: 30px;
+	height: 300px;
+	display: block;
+	position: absolute;
+	top: 0px;
+	line-height: 300px;
+	text-align: center;
+	background: #FF00F5;
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+	cursor: pointer;
+}
+#prev {
+	left: 0px;
+}
+#next {
+	right: 0px;
+}
+/*----图片序列----*/
+#box {
+	width: 920px;
+	height: 280px;
+	margin: 10px auto;
+}
+#box ul {
+	overflow: hidden;
+	width: 920px;
+	height: 280px;
+	text-align:center;
+}
+#box li {
+	width: 176px;
+	height: 280px;
+	float: left;
+	overflow: hidden;
+	margin-right: 10px;
+	/*border: 1px solid #FF00F5;*/
+	display: inline-block;
+	text-align: center;
+	background: #f9f9f9;
+}
+/*#box li:nth-child(5n+5) {
+	margin-right: 0px;
+}*/
+#box li img {
+	width: 174px;
+	height: 240px;
+	margin-bottom: 10px;
+}
+#box li a {
+	width: 174px;
+	height: 278px;
+	background: #f9f9f9;
+	display: block;
+	padidng-bottom: 5px;
+}
+#box li a:hover {
+	text-decoration: underline;
+}

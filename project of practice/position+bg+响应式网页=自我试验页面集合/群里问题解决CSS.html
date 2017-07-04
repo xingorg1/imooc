@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style type="text/css">
+.bird{
+	width: 50px;
+	height: 50px;
+	background: #f00;
+	/*以上这三个必须设置，不然你看不到div，怎么看他的动画呢*/
+	position: absolute;
+	animation: myfirst 1s linear;
+	-webkit-animation:myfirst 1s linear;
+	animation-fill-mode:forwards; 
+	-webkit-animation-fill-mode:forwards;
+	/*animation-iteration-count: infinite;
+	-webkit-animation-iteration-count:infinite;
+*/}
+@-webkit-keyframes myfirst{
+	0%{
+		/*width: 20px;*/
+		right: 200px;
+		top: 100px;
+	}
+	/*10%{
+		right: 250px;top: 100px;
+	}
+	20%{
+		right: 300px;top: 100px;
+	}
+	30%{
+		right: 350px;top: 100px;
+	}
+	40%{
+		right: 400px;top: 100px;
+	}*/
+	/*50%{
+		right: 1000px;top: 500px;
+	}*/
+	/*60%{
+		right: 500px;top: 100px;
+	}
+	70%{
+		right: 550px;top: 100px;
+	}
+	80%{
+		right: 600px;top: 100px;
+	}
+	90%{
+		right: 650px;top: 100px;
+	}*/
+	25%{
+		right: 250px;top: 400px;
+	}
+	50%{
+		right: 1000px;top: 450px;
+	}
+	75%{
+		right: 1050px;top: 100px;
+	}
+	100%{
+		/*width: 1020px;*/
+		right: 200px;top: 100px;
+	}
+}
+</style>
+</head>
+
+<body>
+<script type="text/javascript">
+function fn(){
+	console.log("'first'");
+	setTimeout(function(){
+		console.log("'second'");
+	},0);
+}
+		for (var i = 0; i<5; i++){
+			fn();
+		}
+</script>
+<div class="bird"></div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>html新增元素-header练习</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            background-color:#dedede;
+            font-family:微软雅黑;
+            font-size:12px;
+            text-align: center;
+        }
+        li{list-style:none;}
+        header h1{
+            font-size: 42px;
+            margin-bottom:10px;
+        }
+        header hgroup a{
+            text-decoration: none;
+            color:orangered;
+            font-size: 10px;
+        }
+        header a:hover,header a{text-decoration:none}
+        nav{
+            width: 100%;
+            display: inline-block;
+            background-color: orange;
+            margin-top:10px;
+        }
+        nav li{
+            float: left;
+            display: inline-block;
+            padding: 5px;
+            background-color: black;
+            /* color: white; */
+            font-size: 14px;
+            margin: 5px 10px;
+            border-radius: 6px;
+        }
+        nav li a{color:#FF7916;}
+        nav li a:hover{color:white;}
+    </style>
+</head>
+
+<body>
+    <header>
+        <hgroup>
+            <h1>HTML5视频教程</h1>
+            <a href="/">[手机版]</a>
+            <a href="/">[HTML5论坛]</a>
+        </hgroup>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">首页</a>
+                </li><li>
+                    <a href="/">手机版</a>
+                </li><li>
+                    <a href="/">论坛</a>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+
+</body>
+</html>

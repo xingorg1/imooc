@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animation制作复杂帧动画</title>
+    <style>
+        body{
+            background-color: rgba(163, 207, 255, 0.69);
+        }
+        a:link{
+            color: #ff5ee6;
+        }
+        h4,dt,div{
+            font: bold 16px "微软雅黑";
+        }
+        dt{
+            display: inline;
+            float: left;
+        }
+        div{
+            width:130px;
+            height: 130px;
+            text-align: center;
+            line-height: 130px;
+            color: #fff;
+            cursor: pointer;
+            /*指定div的通用样式属性，*/
+            background: rgba(108, 112, 255, 0.85);
+            /*同时也有变换前的效果*/
+            -webkit-border-radius:24px;
+            -moz-border-radius:24px;
+            border-radius:24px;
+        }
+        @-webkit-keyframes bjcolor {
+            /*webkit内核兼容模式下的帧集合 自定义名称*/
+            0%{background-color: rgba(108, 112, 255, 0.85);}/*开始帧*/
+            25%{background-color: rgba(161, 255, 108, 0.85);}/*在整个动画运行到40%处时*/
+            50%{background-color: rgba(255, 193, 98, 0.85);}
+            75%{background-color: rgba(255, 133, 198, 0.85);}
+            100%{background-color: rgba(108, 112, 255, 0.85);}/*结束帧（开始和结束帧是必须有的）(结束帧和开始侦的数值可以一样，也可以不一样)*/
+        }
+        @-moz-keyframes bjcolor {
+            /*moz内核兼容模式下的帧集合 自定义名称*/
+            0%{background-color: rgba(108, 112, 255, 0.85);}/*开始帧*/
+            25%{background-color: rgba(161, 255, 108, 0.85);}/*在整个动画运行到40%处时*/
+            50%{background-color: rgba(255, 193, 98, 0.85);}
+            75%{background-color: rgba(255, 133, 198, 0.85);}
+            100%{background-color: rgba(108, 112, 255, 0.85);}/*结束帧（开始和结束帧是必须有的）(结束帧和开始侦的数值可以一样，也可以不一样)*/
+        }
+        @-ms-keyframes bjcolor {
+            /*msIE内核兼容模式下的帧集合 自定义名称*/
+            0%{background-color: rgba(108, 112, 255, 0.85);}/*开始帧*/
+            25%{background-color: rgba(161, 255, 108, 0.85);}/*在整个动画运行到25%处时*/
+            50%{background-color: rgba(255, 193, 98, 0.85);}
+            75%{background-color: rgba(255, 133, 198, 0.85);}
+            100%{background-color: rgba(108, 112, 255, 0.85);}/*结束帧（开始和结束帧是必须有的）(结束帧和开始侦的数值可以一样，也可以不一样)*/
+        }
+        @-o-keyframes bjcolor {
+            /*opera内核兼容模式下的帧集合 自定义名称*/
+            0%{background-color: rgba(108, 112, 255, 0.85);}/*开始帧*/
+            25%{background-color: rgba(161, 255, 108, 0.85);}/*在整个动画运行到40%处时*/
+            50%{background-color: rgba(255, 193, 98, 0.85);}/*这个花括号后面不用加分号等符号*/
+            75%{background-color: rgba(255, 133, 198, 0.85);}
+            100%{background-color: rgba(108, 112, 255, 0.85);}/*结束帧（开始和结束帧是必须有的）(结束帧和开始侦的数值可以一样，也可以不一样)*/
+        }
+        .first:hover{
+            -webkit-animation-name: bjcolor;
+            -webkit-animation-duration: 4s;
+            -webkit-animation-timing-function: linear;-moz-animation-name: bjcolor;
+            -moz-animation-duration: 4s;
+            -moz-animation-timing-function: linear;
+            -ms-animation-name: bjcolor;
+            -ms-animation-duration: 4s;
+            -ms-animation-timing-function: linear;
+            -o-animation-name: bjcolor;
+            -o-animation-duration: 4s;
+            -o-animation-timing-function: linear;
+            animation-name: bjcolor;
+            animation-duration: 4s;
+            animation-timing-function: linear;
+
+            /*animation:;看来也可以简写*/
+        }
+        /*------------------------第二个----------------------*/
+        @-webkit-keyframes tsform {
+            /*webkit内核兼容模式下的帧集合 自定义名称*/
+            0%{
+                background-color: rgba(108, 112, 255, 0.85);
+                -webkit-transfrom: rotate(0deg) scale(1);
+                color: #ffffff;
+            }
+            25%{
+                background-color: rgba(161, 255, 108, 0.85);
+                -webkit-transform: rotate(45deg) scale(1.1);
+            }
+            50%{
+                background-color: rgba(255, 193, 98, 0.85);
+                -webkit-transform: rotate(0deg) scale(1);
+            }
+            75% {
+                background-color: rgba(255, 81, 87, 0.85);
+                -webkit-transform: rotate(-45deg) scale(1.1);
+                color: #b7ffd4;
+            }
+            100%{
+                background-color: rgba(108, 112, 255, 0.85);
+                -webkit-transform: rotate(0deg) scale(1);
+                color: #faff96;
+            }
+        }
+        @-moz-keyframes tsform {
+            /*moz内核兼容模式下的帧集合 自定义名称*/
+            0%{
+                background-color: rgba(108, 112, 255, 0.85);
+                -moz-transfrom: rotate(0deg) scale(1);
+                color: #ffffff;
+            }
+            25%{
+                background-color: rgba(161, 255, 108, 0.85);
+                -moz-transform: rotate(45deg) scale(1.1);
+            }
+            50%{
+                background-color: rgba(255, 193, 98, 0.85);
+                -moz-transform: rotate(0deg) scale(1);
+            }
+            75% {
+                background-color: rgba(255, 81, 87, 0.85);
+                -moz-transform: rotate(-45deg) scale(1.1);
+                color: #b7ffd4;
+            }
+            100%{
+                background-color: rgba(108, 112, 255, 0.85);
+                -moz-transform: rotate(0deg) scale(1);
+                color: #faff96;
+            }
+        }
+        @-ms-keyframes tsform {
+            /*ms内核兼容模式下的帧集合 自定义名称*/
+            0%{
+                background-color: rgba(108, 112, 255, 0.85);
+                -ms-transfrom: rotate(0deg) scale(1);
+                color: #ffffff;
+            }
+            25%{
+                background-color: rgba(161, 255, 108, 0.85);
+                -ms-transform: rotate(45deg) scale(1.1);
+            }
+            50%{
+                background-color: rgba(255, 193, 98, 0.85);
+                -ms-transform: rotate(0deg) scale(1);
+            }
+            75% {
+                background-color: rgba(255, 81, 87, 0.85);
+                -ms-transform: rotate(-45deg) scale(1.1);
+                color: #b7ffd4;
+            }
+            100%{
+                background-color: rgba(108, 112, 255, 0.85);
+                -ms-transform: rotate(0deg) scale(1);
+                color: #faff96;
+            }
+        }
+        @-o-keyframes tsform {
+            /*opera内核兼容模式下的帧集合 自定义名称*/
+            0%{
+                background-color: rgba(108, 112, 255, 0.85);
+                -o-transfrom: rotate(0deg) scale(1);
+                color: #ffffff;
+            }
+            25%{
+                background-color: rgba(161, 255, 108, 0.85);
+                -o-transform: rotate(45deg) scale(1.1);
+            }
+            50%{
+                background-color: rgba(255, 193, 98, 0.85);
+                -o-transform: rotate(0deg) scale(1);
+            }
+            75% {
+                background-color: rgba(255, 81, 87, 0.85);
+                -o-transform: rotate(-45deg) scale(1.1);
+                color: #b7ffd4;
+            }
+            100%{
+                background-color: rgba(108, 112, 255, 0.85);
+                -o-transform: rotate(0deg) scale(1);
+                color: #faff96;
+            }
+        }
+        .second{
+            margin-left: 50px;
+            /*如果这里不设置：hover的话，会在一开始刷新的时候自动播放*/
+            -webkit-animation-name: tsform;
+            -webkit-animation-duration: 1s;
+            -webkit-animation-timing-funtion: ease-in-out;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-name: tsform;
+            -moz-animation-duration: 1s;
+            -moz-animation-timing-funtion: ease-in-out;
+            -moz-animation-iteration-count: infinite;
+            -ms-animation-name: tsform;
+            -ms-animation-duration: 1s;
+            -ms-animation-timing-funtion: ease-in-out;
+            -ms-animation-iteration-count: infinite;
+            -o-animation-name: tsform;
+            -o-animation-duration: 1s;
+            -o-animation-timing-funtion: ease-in-out;
+            -o-animation-iteration-count: infinite;
+            animation-name: tsform;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+         }
+        @-webkit-keyframes fadein{
+            0%{
+                opacity: 1;
+                background-color: #9937ff;
+            }
+            50%{
+                opacity: 0.1;
+                background-color: #FF33FF;
+            }
+            100%{
+                opacity: 1;
+                background-color: #FF33FF;
+            }
+        }
+        div.third:hover{ /*简写样式
+        animation:animation-name,animation-duration,animation-timing-function,animation-delay,animation-iteration-count*/
+            -webkit-animation:fadein 1s ease-in-out;
+            -o-animation:fadein 1s ease-in-out;
+            animation:fadein 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+<h1>animation案例一</h1>
+<h4>animation实现一个属性值得动画——背景变换</h4>
+<div class="first">鼠标经过</div>
+<p>总结：而他的帧集合也需要写内核前缀，就会有四个不同的：-webkit-keyfranmes；-moz-keyfranmes；-ms-keyfranmes；-o-keyfranmes.然后，hover模式中每一个带着animation的属性前也要加内核前缀</p>
+<hr/>
+<h1>animation案例二</h1>
+<h4>animation实现多个属性值得动画——transform变换+过渡速度变化+循环样式</h4>
+<div class="second">不要鼠标，我也自动循环</div>
+<p>transform在对应的内核帧集合中也需要写对应的内核前缀，
+    <br/>-webkit-animation-iteration-count: infinite;设定动画循环次数
+    <br/>infinite表示无限循环；也可以填数值来设置具体的循环次数，</p>
+<hr/>
+<h1>animation案例三</h1>
+<h4>animation实现网页渐入效果</h4>
+<div class="third">鼠标经过</div>
+<p></p>
+<hr/>
+</body>
+</html>

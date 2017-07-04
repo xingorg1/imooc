@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>HTML5系统学习</title>
+</head>
+
+<body onLoad="draw('canvas')">
+<details style="cursor: pointer; width: 300px;">
+  <summary>这里是detail的标题，没有的话就显示“详细信息”四个字</summary>
+  <ol>
+    <li>无</li>
+    <li>标</li>
+    <li>题</li>
+    <li>文</li>
+    <li>档</li>
+  </ol>
+</details>
+<input id="myCar" autocomplete="on" list="cars" />
+<datalist id="cars" style="display: none;"><!--datalist元素表示可选数据的列表，与input元素配合使用，可以制作出输入值的下拉列表，相当于select？据说只有部分浏览器支持，所以设为none,的display。另外此功能还可以出现自动提示剩余输入信息的功能，学名：后补输入-->
+  <option value="BMW" contenteditable="true">1</option>
+  <option value="Ford">2</option>
+  <option value="Volvo">3</option>
+</datalist>
+<keygen>生成秘钥</keygen>
+<menu label="选择" type="toolbar" contenteditable="true"><!--想要深入了解，请移步W3C或者自学手册-->
+  <li>
+    <input type="checkbox" />
+    1</li>
+  <li>
+    <input type="checkbox" />
+    2</li>
+</menu>
+新增的input元素的类型
+<p>
+  <label for="email"> email</label>
+  <input type="email" name="email"/>
+</p>
+<p>
+  <label for="url"> url</label>
+  <input type="url" name="url" value="www.baidu.com"/>
+  <input type="checkbox"/>
+  <input type="number" min="10" max="70" step="5"/>
+  step是指定一次增加或减少几个数值或步幅,最大值100最小值10，同range
+  <input type="range" min="10" max="70" step="12"/>
+  <input type="datatime" />
+</p>
+<input type="textarea" spellcheck="true"  width="300" height="200" />
+<input type="search" />
+<input type="text" />
+<input type="color" />
+<!--颜色选择器-->
+<input type="file" multiple />
+<!--multiple同时选择多个文件-->
+<input type="submit" />
+<p> 自动显示日历
+<p>
+  <input type="date" value="2011-12-23" name="datel" />
+  <input type="week" />
+  <input type="month" />
+  <input type="time" />
+  <input type="datetime-local" />
+</p>
+</p>
+<p>以下做一个用户注册页面，用到input新增部分属性,带自动判断和检查（加了required的不能为空）</p>
+<form name="form1" onSubmit="return check();">
+  <label for="username">姓名</label>
+  <input type="text" name="username" id="username" required pattern="[1-9][A-Z]{3}"  placeholder="至少一个数字三个大写字母"/>
+  <br />
+  <!--正则表达式pattern="[1-9][A-Z]{3}"-->
+  <label for="password">密码</label>
+  <input type="password" name="password" />
+  <br />
+  <label for="age">年龄</label>
+  <input type="number" name="age" id="age" min="18" max="120"/>
+  <br />
+  <label for="birthday">出生日期</label>
+  <input type="date" name="birthday" id="birthday" />
+  <br/>
+  <label for="email">邮箱</label>
+  <input type="email" name="email" id="email" />
+  <br/>
+  <label for="url">个人主页</label>
+  <input type="url" name="url" id="url" />
+  <br/>
+  <label for="memo">个人简介</label>
+  <input type="textarea" name="memo" id="memo" required />
+  <br/>
+  <input  type="submit" id="sub"/>
+</form>
+<p>output输出表单-计算结果或脚本的输出
+<form >
+  <input type="range" name="range1" id="range"  min="10" max="100" step="3"/>
+  <output onFormInput="value=range1.value"> 50</output>
+</form>
+</p>
+<script language="javascript">
+function check(){
+	var email = document.getElementById("email");
+	if(email.value=="")
+	{alert("请输入emaiL地址")
+	return false;
+		}
+		else if(!email.checkValidity())
+		alert("请输入正确的email地址");
+		else 
+		alert("您输入的email地址有效");
+	}
+</script>
+<script>
+var progressBar = document.getElementById('p');
+function button_onclick(){
+	var progressBar = document.getElementById('p');
+	progressBar.getElementByTagName('span')[0].textContent = "0";
+	for(var i=0;i<=100;i++)
+	updateProgress(i);
+	}
+function updateProgress(newValue){
+	var progressBar = document.getElementById('p');
+	progressBar.value = newValue;
+	progressBar.getElementByTagName('span')[0].textContent = newValue
+	}
+</script>
+<section>
+	<h2>progress的使用示例</h2>
+    <p>完成百分比：<progress id="p" max="100">
+    <span>0</span>%</progress></p>
+    <input type="button" onClick="button_onclick()" value="请点击" />
+</section>
+接下来是canvas的练习操作
+先要在body中添加一个onload="draw('canvas');"
+<h1>canvas元素示例</h1>
+<canvas id="canvas" width="500" height="700" /><!--绘制一个canvas-->
+<script type="text/javascript">
+function draw(id){
+var canvas = document.getElementById(id);<!--获取canvas元素-->
+if (canvas == null)
+return flase;
+var context = canvas.getContext("2d");<!--取得上下文。图形上下文是一个封装了很多绘图功能的对象，需要使用canvas对象的getContext方法获得图像上下文。在draw函数中，将参数设置为2d，只能是2d，没有3、4d-->
+<!--fill stroke 两种绘制方法。一个是填充，一个是边框-->
+context.fillStyle = "#0061a4";<!--fillStyle为样式，主要是颜色值，stroke道理一样-->
+context.fillRect(0, 0, 300, 200);<!--Rect表示矩形，fillRect表示填充矩形。stroke道理一应-->
+context.fillStyle = "pink";<!--颜色值可以是red等英文，也可以是16进制#000等模式，也可以是rgb（虹绿蓝）或者rgba（红绿蓝透明度）等形式-->
+context.strokeStyle = "yellow"
+context.lineWidth =1;<!--lineWidth指定线宽-->
+context.fillRect(20, 20, 300, 200);<!--fillRect括号中（x轴起点绘制坐标，y轴起点坐标，矩形宽度，矩形高度）stroke道理一样-->
+context.strokeRect(30, 30, 200, 100);
+context.clearRect(230, 130, 50, 50);<!--clear，清除矩形，其实矩形还在，就是将其颜色值变成了透明状-->
+}
+</script>
+</body>
+</html>

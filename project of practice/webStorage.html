@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>webStorage本地存储</title>
+    <script src="js/webstorage.js" type="text/javascript" rel="stylesheet"></script>
+</head>
+<body>
+<p id="msg"></p>
+<input id="input" type="text">
+<input type="button" value="保存" onclick="saveStorage('input');"><!--点击时，执行命令以保存input里面的数据-->
+<input type="button" value="读取" onclick="loadStorage('msg');">
+<!--点击时，执行命令以加载保存的数据并放置到p标签中-->
+</body>
+<script type="text/javascript">
+//    function saveStorage(id){//执行saveStorage的命令
+//        var target = document.getElementById(id);//定义一个id
+//        var str = target.value;//定义str等于上一个id的value值。用来保存html中传递过来的数据
+//        sessionStorage.setItem("message",str);
+//    }
+//    function loadStorage(id){
+//        var target = document.getElementById(id);
+//        var msg = sessionStorage.getItem("message");
+//        target.innerHTML = msg;
+//永久保存
+function saveStorage(id){
+    var target = document.getElementById(id);
+    var str = target.value;
+    localStorage.setItem("mess",str);//保存数据（键名，键值）
+}
+function loadStorage(id){
+    var target = document.getElementById(id);
+    var msg = localStorage.getItem("mess");//读取数据（键名）
+    target.innerHTML = msg;//获取数据
+}
+</script>
+</html>

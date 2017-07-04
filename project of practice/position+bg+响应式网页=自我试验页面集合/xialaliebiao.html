@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>下拉列表制作</title>
+<link href="xialaliebiao.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="lb">
+	<h4>下拉列表隐藏，鼠标经过时展示出下拉列表练习</h4>
+	<ul class="clearfix">
+		<li><a herf="#">我是充数的</a></li>
+		<li><a herf="#">我也是充数的</a></li>
+		<li id="zt"> <span><a href="javascript:void(0)">鼠标经过我会打开下拉菜单</a></span>
+			<ul >
+				<li><a href="#">第一列</a></li>
+				<li><a href="#">第二列</a></li>
+				<li><a href="#">第三列</a></li>
+				<li><a href="#">第四列</a></li>
+			</ul>
+		</li>
+	</ul>
+	<div>
+		<h6>这里为了展示是否会被隐藏的ul展开后顶下去，若不想被顶下去，ul.hide 必须设置position：absolute；而.hide ul上边的li必须设置position：relative；让ul。hide以li为父元素定位上下文</h6>
+	</div>
+</div>
+<div id="cs" class="layer"> 
+	<span><a href="javascript:void(0)">下拉菜单</a></span>
+		<ul >
+			<li><a href="#">全部</a></li>
+			<li><a href="#">进行中</a></li>
+			<li><a href="#">即将开始</a></li>
+			<li><a href="#">已结束</a></li>
+			<li><a href="#">全部</a></li>
+			<li><a href="#">进行中</a></li>
+			<li><a href="#">即将开始</a></li>
+			<li><a href="#">已结束</a></li>
+			<li><a href="#">全部</a></li>
+			<li><a href="#">进行中</a></li>
+			<li><a href="#">即将开始</a></li>
+			<li><a href="#">已结束</a></li>
+		</ul>
+</div>
+<!--下拉列表js如下两条script-->
+<script type="text/javascript" src="jquery-1.7.2.min.js"> </script> 
+<script type="text/javascript">
+$(document).ready(function() {
+	var objStr = "#zt";
+	$(objStr).mouseover(function(){$("#zt ul").show();});
+	$(objStr).mouseout(function(){$("#zt ul").hide();});	
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var objStr = "#cs";
+	$(objStr).mouseover(function(){$("#cs ul").show();});
+	$(objStr).mouseout(function(){$("#cs ul").hide();});	
+});
+</script>
+</body>
+</html>

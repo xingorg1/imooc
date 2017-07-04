@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <title>border-image=CSS参考手册_web前端开发参考手册系列</title>
+    <meta name="author" content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com" />
+    <style>
+        .test{
+            padding:10px;
+            /*-o-border-image:url(images/news.png) 27/27px stretch;*/
+            /*border-image:url(images/news.png) 27/27px;*/
+            background-color: #11ceff;
+            -webkit-border-image: url(images/news.png) 20/50px 67px 30px 10px repeat stretch;
+            -moz-border-image: url(images/news.png);
+            -o-border-image: url(images/news.png);
+            border-image: url(images/news.png);
+            /*border-image: url(图片地址链接) slice/width outset repeat;*/
+        }
+        /*slice：边距数值：如果四个一样，就设置一个即可；如果四个不一样，就得设置四个，分别对应上右下左*/
+        /*width：必须与slice之间有一个/号，然后同slice一样，设置一个值也可，四个也可但要分别对应*/
+        /*outset（有两个值跟在width之后，可以都设置为repeat repeat一样，【这样的话就是也可以只设置一个值】也可以上下repeat左右stretch不一样。）{*/
+            /*topbottom（上下）{repeat(上下平铺);stretch(上下拉伸),round()}*/
+            /*leftright（左右）{repeat(左右平铺);stretch(左右拉伸),round()}*/
+                    /*stretch:默认值*/
+                    /*round:将图像平铺显示，但是如果最后一幅图不能装下，会空出位置出来把能装下的背景图进行拉伸已达到铺满背景的效果 是repeat和stretch的结合.
+        }*/
+        div.radius{
+            width:600px;
+            height: 750px;
+            padding: 30px;
+            background-color: #ff04bb;
+            color: #fff;
+            font: 20px "微软雅黑";
+            -moz-border-radius-topleft: 12px;
+            -moz-border-radius-topright: 23px;
+            -moz-border-radius-bottomright: 34px;
+            -moz-border-radius-bottomleft: 45px;
+            -o-border-radius-topleft:12px;
+            -o-border-radius-topright:23px;
+            -o-border-radius-bottomright:34px;
+            -o-border-radius-bottomleft:45px;
+            -webkit-border-top-left-radius: 12px;
+            -webkit-border-top-right-radius: 23px;
+            -webkit-border-bottom-right-radius: 34px;
+            -webkit-border-bottom-left-radius: 45px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 23px;
+            border-bottom-right-radius: 34px;
+            border-bottom-left-radius: 45px;
+
+        }
+    </style>
+</head>
+<body>
+<div class="test">用图片来做边框<br />border-image:url(skin/border.png) 27/27px stretch;</div>
+<h1>绘制四个不同的圆角边框的写法以及不同的兼容性的写法大集合</h1>
+<div class="radius">
+    <ul>
+        <li>顺序就是逆时针转圈</li>
+        <li></li>
+        <li>border-radius-topleft:12px;</li>
+        <li>border-radius-topright:23px;</li>
+        <li>border-radius-bottomright:34px;</li>
+        <li>border-radius-bottomleft:45px;</li>
+        <li></li>
+        <li>或者这个写法是错了，因为软件不这么提示。正确如下</li>
+        <li></li>
+        <li>border-top-left-radiu:12px;</li>
+        <li>border-top-right-radius:23px;</li>
+        <li>border-bottom-right-radius:34px;</li>
+        <li>border-bottom-left-radius:45px;</li>
+        <li></li>
+        <li>-moz-border-radius-topleft:12px;</li>
+        <li>-moz-border-radius-topright:23px;</li>
+        <li>-moz-border-radius-bottomright:34px;</li>
+        <li>-moz-border-radius-bottomleft:45px;</li>
+        <li></li>
+        <li>-o-border-radius-topleft:12px;</li>
+        <li>-o-border-radius-topright:23px;</li>
+        <li>-o-border-radius-bottomright:34px;</li>
+        <li>-o-border-radius-bottomleft:45px;</li>
+        <li></li>
+        <li>-webkit-border-top-left-radius:12px;</li>
+        <li>-webkit-border-top-right-radius:23px;</li>
+        <li>-webkit-border-bottom-right-radius:45px;</li>
+        <li>-webkit-border-bottom-left-radius:34px;</li>
+    </ul>
+
+
+</div>
+</body>
+</html>

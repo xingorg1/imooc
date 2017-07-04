@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>tab选项卡制作练习</title>
+<link href="tabcss.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+<div class="tab">
+  <ul class="tabMemu clearfix">
+    <li class="current"><a href="#">热门新闻</a></li>
+    <li><a href="#">站点公告</a></li>
+    <li><a href="#">精彩博文</a></li>
+  </ul>
+  <div class="con" style="display:inline;">
+    <ul>
+      <li><a href="#">热门新闻热门新闻热门新闻热门新闻热门新闻</a></li>
+      <li><a href="#">热门新闻2</a></li>
+      <li><a href="#">热门新闻3</a></li>
+      <li><a href="#">热门新闻4</a></li>
+      <li><a href="#">热门新闻5</a></li>
+      <li><a href="#">热门新闻6</a></li>
+    </ul>
+  </div>
+  <div class="con">
+    <ul>
+      <li><a href="#">站点公告站点公告站点公告站点公告站点公告</a></li>
+      <li><a href="#">站点公告2</a></li>
+      <li><a href="#">站点公告3</a></li>
+      <li><a href="#">站点公告4</a></li>
+      <li><a href="#">站点公告5</a></li>
+      <li><a href="#">站点公告6</a></li>
+    </ul>
+  </div>
+  <div class="con">
+    <ul>
+      <li><a href="#">精彩博文精彩博文精彩博文精彩博文精彩博文</a></li>
+      <li><a href="#">精彩博文2</a></li>
+      <li><a href="#">精彩博文3</a></li>
+      <li><a href="#">精彩博文4</a></li>
+      <li><a href="#">精彩博文5</a></li>
+      <li><a href="#">精彩博文6</a></li>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript" src="jquery-1.7.2.min.js"> </script> 
+<script type="text/javascript">
+$(function(){
+	$('.tabMemu li').mouseover(function(){    //为.tabMemu li 绑定mouseover事件
+		$('.tabMemu li').attr('class','');          //清除所有.tabMemu li 下的所有的class名，设置为空。
+		$('.con').css('display','none');      //通过'display','none'来将所有.con区块隐藏
+		$(this).attr('class','current');                 //然后给当前的li添加class名为curren
+		$('.con').eq($(this).index()).css('display','inline');   //将对应当前的.com转区块，使其可见
+		})
+	})
+</script>
+</body>
+</html>

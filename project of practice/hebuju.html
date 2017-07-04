@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css盒布局练习</title>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    .clearfix:after{
+        content: '';
+        clear: both;
+        display: block;
+    }
+    .clearfix{ * zoom: 1;}
+  body{
+        background-color: #ffffff;
+      color: #ffffff;
+      font:900 45px '微软雅黑';
+      text-align: center;
+      vertical-align:middle;
+    }
+  #wrapper{
+      border:5px solid #32a3ff;
+      width:1000px;
+  }
+    header{
+        background-color: #FF7916;
+        height:200px;
+        margin-bottom:10px;
+    }
+    article{
+        background-color: #FF7916;
+        width: 750px;
+        height:500px;
+        float: left;
+    }
+    aside{
+        background-color: #FF7916;
+        width:240px;
+        height:500px;
+        float: right;
+    }
+    footer{
+        background-color: #FF7916;
+        height:80px;
+        margin-top: 10px;
+    }
+
+</style>
+</head>
+<body>
+<div id="wrapper">
+<header>header</header>
+<div class="clearfix">
+    <article>article</article>
+    <aside>sidebar</aside>
+</div>
+<footer>footer</footer>
+</div>
+</body>
+</html>

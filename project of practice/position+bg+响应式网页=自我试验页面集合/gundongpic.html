@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>滚动图片练习</title>
+<link href="gundongpic.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+<div id="scrollImg"> <span id="prev"><img src="images/resultset_previous.png" alt="上一张"/></span> <span id="next"><img src="images/resultset_next.png" alt="下一张" /></span>
+  <div id="box">
+    <ul class="clearfix">
+      <li><a href="#"><img src="images/Img351940048.jpg" alt="明星同乐会"/>明星同乐会1</a></li>
+      <li> <a href="#"><img src="images/QeCk.jpg" alt="明星同乐会"/>明星同乐会2</a></li>
+      <li> <a href="#"><img src="images/t014dc48add46ab94ed.jpg" alt="明星同乐会"/>明星同乐会3</a></li>
+      <li> <a href="#"><img src="images/t0151129c2257207b78.jpg" alt="明星同乐会"/>明星同乐会4</a></li>
+      <li><a href="#"><img src="images/Img351940048.jpg" alt="明星同乐会"/>明星同乐会1</a></li>
+      <li><a href="#"><img src="images/QeCk.jpg" alt="明星同乐会"/>明星同乐会2</a></li>
+      <li><a href="#"><img src="images/t014dc48add46ab94ed.jpg" alt="明星同乐会"/>明星同乐会3</a></li>
+      <li><a href="#"><img src="images/t0151129c2257207b78.jpg" alt="明星同乐会"/>明星同乐会4</a></li>
+      <li><a href="#"><img src="images/Img351940048.jpg" alt="明星同乐会"/>明星同乐会1</a></li>
+      <li><a href="#"><img src="images/QeCk.jpg" alt="明星同乐会"/>明星同乐会2</a></li>
+      <li><a href="#"><img src="images/t014dc48add46ab94ed.jpg" alt="明星同乐会"/>明星同乐会3</a></li>
+      <li><a href="#"><img src="images/t0151129c2257207b78.jpg" alt="明星同乐会"/>明星同乐会4</a></li>
+    </ul>
+  </div>
+</div>
+<script src="jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="jcarousellite.min.js" type="text/javascript"></script><!--这是一个封装好的jquery滚动图插件，直接链接进来就可以了，源代码复制于网页，也可以去下载-->
+<script type="text/javascript">
+$(function(){
+	$("#box").jCarouselLite({ //jCarouselLite是从"jcarousellite.min.js"代码中复制过来的，不知道对不对，试了一下效果可以动起来说明是对的，原来是scrollImg。老纸真聪明
+		bthPrev:"#prev",//选定向左的按钮
+		btnNext:"#next",//选定向右的按钮
+		auto:4000,				//图片停留时间
+		scroll:3,					//每次滚动覆盖的个数
+		speed:1000,			//设置速度，0是不动，其次就是数字越大，移动越慢。
+		vertical:false,		//横向true 竖向false
+		visible:5,      			//显示的数量
+		circular:true    		//是否循环
+		});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹性盒布局</title>
+    <style>
+        div {
+            height: auto;
+            padding: 20px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        div.wrapper {
+            width: auto;
+            display: -webkit-box;
+            display: -moz-box;
+            /*box-flex生效需定义其父元素display为box或inline-box*/
+            background-color: rgba(153, 130, 255, 0.49);
+        }
+
+        div.left {
+            /*width: 200px;*/
+            -webkit-box-flex: 2;
+            -moz-box-flex: 2;
+            background: #52ffaf;
+            /*改变元素的显示顺序*/
+            -webkit-box-ordinal-group: 3;
+            -moz-box-ordinal-group: 3;
+        }
+
+        div.center {
+            /*width:; 设置box-flex时不能设置宽度*/
+            -webkit-box-flex: 1;/*表示分配父元素剩余空白空间的份数，越大越好？*/
+            -moz-box-flex: 1;
+            background-color: #ff7efa;
+            /*改变元素的显示顺序*/
+            -webkit-box-ordinal-group: 1;
+            -moz-box-ordinal-group: 1;
+        }
+
+        div.right {
+            width: 250px;
+            background-color: #8879e0;
+            /*改变元素的显示顺序*/
+            -webkit-box-ordinal-group: 2;
+            -moz-box-ordinal-group: 2;
+        }
+        .packalign{
+            width: 300px;
+            height:300px;
+            display: -webkit-box;
+            display: -moz-box;
+            -webkit-box-pack: center;
+            -moz-box-pack: center;
+            -webkit-box-align: center;
+            -moz-box-align: center;
+            background: #34466e;
+            -webkit-border-radius: 300px;
+            -moz-border-radius: 300px;
+            border-radius: 300px;
+            font: bold 24px "微软雅黑";
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="packalign">
+    中
+</div>
+<h1>学习列表</h1>
+<ul>
+    <li>display:-webkit-box | -moz-box;盒布局</li>
+    <li>-webkit-box-flex | -moz-box-flex;弹性盒布局</li>
+    <li>-webkit-box-ordinal-group | -moz-box-ordinal-group;改变元素排列顺序</li>
+    <li>-webkit-box-orient | -moz-box-orient;改变元素排列方向：垂直|水平</li>
+    <li>-webkit-box-pack | -moz-box-pack;垂直方向上，元素排列位置</li>
+    <li>-webkit-box-align | -moz-box-align;水平方向上，元素排列位置</li>
+    <li>align和pack结合使用，可以让元素中的内容在元素正中央显示</li>
+</ul>
+<div class="wrapper">
+    <div class="left">
+        1html中我在最左边<br/><p></p>
+        1每一个下拉菜单，都需要额外操作才能显示其中的选项。如果某个选择对用户来说必不可少，那么最好不用下拉菜单，直接把选项列出来让用户选择。下拉菜单可以用在那些可预测、不需要学习成本的地方（比如日期、省份等），偶尔还能用在一些需要反复操作的地方（比如操作菜单）每一个下拉菜单，都需要额外操作才能显示其中的选项。如果某个选择对用户来说必不可少，那么最好不用下拉菜单，直接把选项列出来让用户选择。下拉菜单可以用在那些可预测、不需要学习成本的地方（比如日期、省份等），偶尔还能用在一些需要反复操作的地方（比如操作菜单）
+    </div>
+    <div class="center">
+        2html中我在中间<br/>
+        <p></p>
+        2每一个下拉菜单，都需要额外操作才能显示其中的选项。如果某个选择对用户来说必不可少，那么最好不用下拉菜单，直接把选项列出来让用户选择。下拉菜单可以用在那些可预测、不需要学习成本的地方（比如日期、省份等），偶尔还能用在一些需要反复操作的地方（比如操作菜单）每一个下拉菜单，都需要额外操作才能显示其中的选项。如果某个选择对用户来说必不可少，那么最好不用下拉菜单，直接把选项列出来让用户选择。下拉菜单可以用在那些可预测、不需要学习成本的地方（比如日期、省份等），偶尔还能用在一些需要反复操作的地方（比如操作菜单）每一个下拉菜单，都需要额外操作才能显示其中的选项。如果某个选择对用户来说必不可少，那么最好不用下拉菜单，直接把选项列出来让用户选择。下拉菜单可以用在那些可预测、不需要学习成本的地方（比如日期、省份等），偶尔还能用在一些需要反复操作的地方（比如操作菜单）每一个下拉菜单，都需要额外操作才能显示其中的选项。如果某个选择对用户来说必不可少，那么最好不用下拉菜单，直接把选项列出来让用户选择。下拉菜单可以用在那些可预测、不需要学习成本的地方（比如日期、省份等），偶尔还能用在一些需要反复操作的地方（比如操作菜单）
+    </div>
+    <div class="right">
+        3html中我在最右边<br/><p></p>
+        3每一个下拉菜单，都需要额外操作才能显示其中的选项。如果某个选择对用户来说必不可少，那么最好不用下拉菜单，直接把选项列出来让用户选择。下拉菜单可以用在那些可预测、不需要学习成本的地方（比如日期、省份等），偶尔还能用在一些需要反复操作的地方（比如操作菜单）
+    </div>
+</div>
+
+</body>
+</html>

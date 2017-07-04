@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<title>兄弟选择符 (E~F)_CSS参考手册_web前端开发参考手册系列</title>
+<meta name="author" content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com" />
+<style>
+p~p{color:#f00;}
+body div:last-child{
+	background: #f0f0f0;
+}
+body div:last-child span:first-child~span{
+	color: red;
+}
+/*body中最后一个div的第一个soan的相邻兄弟元素设置为红色*/
+</style>
+</head>
+<body>
+<div class="test">
+	<h3>这是一个标题</h3>
+	<p>这是一个文字段落</p>
+	<p>这是一个文字段落</p>
+	<h3>这是一个标题</h3>
+	<p>这是一个文字段落</p>
+	<h3>这是一个标题</h3>
+	<p>这是一个文字段落</p>
+	<p>这是一个文字段落</p>
+</div>
+<div>
+	<span>1</span>
+	<span>2</span>
+	<p>p</p>
+	<span>3</span>
+	<span>4</span>
+	<span>5</span>
+
+</div>
+</body>
+</html>
+			

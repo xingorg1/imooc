@@ -1,0 +1,70 @@
+*{
+    margin:0;
+    padding:0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body{
+    background-color:#dedede;
+    font-family:微软雅黑;
+    font-size:12px;
+    /*text-align: center;*/
+}
+article.article_wrapper{
+    width: 1000px;
+    background-color: azure;
+    margin:50px auto;
+    padding:20px 30px;
+    border-radius:35px;
+    border:2px dashed darkslateblue;
+    opacity: 0.95; /*Chrome、Safari、Firefox、Opera */
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=95); /* IE6/IE7/8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=95)"; /*  IE8 */
+/*第一行是在其他浏览器中使用 Opacity 属性；第二行是 IE6/7/8 中使用滤镜属性设置透明度；第三行是新的 IE 滤镜属性，它只在 IE8 中起作用在其他浏览器中会被忽略，如果不是针对 IE8 设置，使用第二行代码就可以了。参数的设置与 CSS 中 Opacity 属性也基本相同，在 IE 滤镜中使用 0-100 表示透明度，因此 opacity=40 相当于 Opacity 属性为 0.4，亦即透明度为 40%。使用该滤镜属性有两个缺点：由于使用了 Microsoft 特有的属性，会使得你的 CSS 非验证的；另外，IE 的滤镜属性会使得所有的 HTML 子节点都继承这个属性。*/
+}
+article.article_wrapper header{
+
+    padding-bottom:10px;
+}
+article.article_wrapper header h1{
+    font-size:24px;
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+article.article_wrapper header p{
+    font-size:8px;
+    color: darkgray;
+    text-align: center;
+}
+article.article_wrapper header p time{
+    margin-right: 10px;
+}
+article header a {
+    margin-right: 10px;
+    color:darkgray;
+    text-decoration:none;
+}
+article header a:hover{
+    text-decoration:underline;
+    color:#FF7916;
+}
+article header span {
+    color: darkred;
+}
+
+article section{
+    font-size: 14px;
+    -webkit-margin-before: 1em;
+    -moz-margin-before: 1em;
+    -ms-margin-before: 1em;
+    -o-margin-before: 1em;
+    -webkit-margin-after:1em;
+    -moz-margin-after:1em;
+    font-family:"微软雅黑";
+    padding-top: 35px;
+    border-top:1px solid darkgrey;
+}

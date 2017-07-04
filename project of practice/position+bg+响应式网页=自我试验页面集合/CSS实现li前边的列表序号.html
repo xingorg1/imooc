@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+li:before {
+	content: counter(listxh);
+	padding: 2px 7px;
+	margin-right: 5px;
+	background: #0061a4;
+	border: 1px solid #000;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	color: #fff;
+}
+li {
+	counter-increment: listxh;
+	/*display: inline-block;*/
+	vertical-align: bottom;
+	list-style: none;
+	margin-top: 12px;
+}
+li:first-child:before, li:nth-child(2):before, li:nth-child(3):before {
+	background: #0c3561;
+}
+</style>
+</head>
+
+<body>
+<ul>
+  <li>q</li>
+  <li>w</li>
+  <li>e</li>
+  <li>r</li>
+  <li>t</li>
+  <li>y</li>
+</ul>
+</body>
+</html>

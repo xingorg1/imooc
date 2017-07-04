@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css变形功能</title>
+    <style>
+        body{
+            background-color: #b9eef0;
+        }
+        h3,p{
+            margin:100px 0px;
+            padding-bottom: 10px;
+            border-bottom:1px dotted rgb(74, 5, 91);
+            font:bold 20px "微软雅黑";
+        }
+        h3:first-child,p{
+            margin-top:20px;
+        }
+        h1{
+            font:bold 30px "微软雅黑";
+            margin-top:120px;
+        }
+        span{
+            font:bold 20px "微软雅黑";
+        }
+        div{
+            width: 200px;
+            height: 50px;
+            display: inline-block;
+            padding: 15px;
+            box-sizing: border-box;
+            background-color: rgba(113, 0, 208, 0.57);
+            text-align: center;
+            line-height: 50px;
+            font:500 14px "微软雅黑";
+            color: #fff;
+        }
+        .rotate{
+            -webkit-transform: rotate(-25deg);
+            -moz-transform: rotate(-25deg);
+            -ms-transform: rotate(-25deg);
+            -o-transform: rotate(-25deg);
+            transform: rotate(-25deg);
+        }
+        .scale{
+            -webkit-transform: scale(0.875,-3);
+            -moz-transform: scale(0.875,-3);
+            -ms-transform: scale(0.875,-3);
+            -o-transform: scale(0.875,-3);
+            transform: scale(0.875,-3);
+            /*transform: scaleX(0.63);*/
+            /*transform:scaleY(0.64);*/
+            /*可以這兩個這樣單獨的設置，就可以单独设置是x轴缩放还是y轴缩放了，或者设置两个值得时候，其中一个设为0也可以这种效果*/
+        }
+        .translate{
+            -webkit-transform: translate(30px,40px);
+            -moz-transform: translate(30px 40px);
+            -o-transform: translate(30px 40px);
+            -ms-transform: translate(30px 40px);
+            transform: translate(30px 40px);
+        }
+        .skew{
+            -webkit-transform: skew(-5deg,45deg);
+            -moz-transform: skew(-5deg,45deg);
+            -ms-transform: skew(-5deg,45deg);
+            -o-transform: skew(-5deg,45deg);
+            transform: skew(-5deg,45deg);
+        }
+        .jihe1{
+            -webkit-transform: translate(20px,34px) scale(2,0.76) rotate(75deg);
+            -moz-transform: translate(20px,34px) scale(2,0.76) rotate(75deg);
+            -ms-transform: translate(20px,34px) scale(2,0.76) rotate(75deg);
+            -o-transform: translate(20px,34px) scale(2,0.76) rotate(75deg);
+            transform: translate(20px,34px) scale(2,0.76) rotate(75deg);
+        }
+        .jihe2{
+            -webkit-transform: rotate(75deg) scale(2,0.76) translate(20px,34px);
+            -moz-transform: rotate(75deg) scale(2,0.76) translate(20px,34px);
+            -ms-transform: rotate(75deg) scale(2,0.76) translate(20px,34px);
+            -o-transform: rotate(75deg) scale(2,0.76) translate(20px,34px);
+            transform: rotate(75deg) scale(2,0.76) translate(20px,34px);
+        }
+        .jihe3{
+            -webkit-transform: translate(20px,34px) rotate(75deg) scale(2,0.76);
+            -moz-transform: translate(20px,34px) rotate(75deg) scale(2,0.76);
+            -ms-transform: translate(20px,34px) rotate(75deg) scale(2,0.76);
+            -o-transform: translate(20px,34px) rotate(75deg) scale(2,0.76);
+            transform: translate(20px,34px) rotate(75deg) scale(2,0.76);
+        }
+        .origin{
+            width:130px;
+            height:130px;
+            background: rgba(0, 65, 212, 0.57);
+            margin: 0px 100px;
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        .origin1{}
+        .origin2{
+            -webkit-transform-origin:right bottom;
+            -moz-transform-origin:right bottom;
+            -ms-transform-origin:right bottom;
+            -o-transform-origin:right bottom;
+            transform-origin:right bottom;
+            margin-top:50px;
+        }
+        .hover{
+            width: 240px;
+            height: 250px;
+            display: inline-block;
+            padding: 15px;
+            cursor: pointer;
+            -webkit-transform-origin:right bottom;
+            -moz-transform-origin:right bottom;
+            -ms-transform-origin:right bottom;
+            -o-transform-origin:right bottom;
+            transform-origin:right bottom;
+        }
+        .hover:hover{
+            -webkit-transform: translate(30px,45px) rotate(25deg) scale(0.92,0.45);
+            -moz-transform: translate(30px,45px) rotate(25deg) scale(0.92,0.45);
+            -ms-transform: translate(30px,45px) rotate(25deg) scale(0.92,0.45);
+            -o-transform: translate(30px,45px) rotate(25deg) scale(0.92,0.45);
+            transform: translate(30px,45px) rotate(25deg) scale(0.92,0.45);
+        }
+    </style>
+</head>
+<body>
+<h1 style="margin: 20px auto;">transform详解</h1>
+<h3 style="margin: 20px auto;">1,旋转——rotate(读数deg)-正值为顺时针方向，负值的话会是逆时针方向</h3>
+<br /><div>单个测试 原图</div>
+<div class="rotate">单个测试 rotate</div>
+<h3>2,缩放——scale(水平方向,垂直方向)可以是一个，表示整体；int整数值表示放大，float浮点值小数表示缩小倍率。负值的话会倒着翻过来.不用单位</h3>
+<br /><div>单个测试 原图</div>
+<div class="scale">单个测试 scale</div>
+<li style="margin-top:50px">总结：scaleX();scaleY();可以這兩個這樣單獨的設置，就可以单独设置是x轴缩放还是y轴缩放了，或者设置两个值得时候，其中一个设为0也可以这种效果*/</li>
+<h3>3,移动——translate(x方向px,y方向px)可以是一个，表示x方向</h3>
+<br /><div>单个测试 原图</div>
+<div class="translate">单个测试 translate</div>
+<li style="margin-top:50px">总结：如果你全部写完了，但是效果还是出不来，发现代码也都正确，那请你检查一下translate属性的括号中是否有逗号，自己写的习惯是总是用空格代替这个逗号，总是把这个逗号丢掉，没有逗号，不报错也不显示效果,这真可怕！！translate(Xpx,Ypx);</li>
+<h3>4,倾斜——skew(水平方向deg，垂直方向deg)可以是一个，表示水平方向,可以为负值</h3>
+<br /><div>单个测试 原图</div>
+<div class="skew">单个测试 skew</div>
+<li style="margin-top:100px">总结：skewX();skewY();可以這兩個這樣單獨的設置，就可以单独设置是x轴倾斜还是y轴倾斜了，或者设置两个值得时候，其中一个设为0也可以这种效果*/</li>
+<h1>5.接下来对一个元素综合使用多个变形方法制作一个案例。</h1>
+<p>注意：这几个变形使用的顺序不一样，效果也不一样.对比如下，很明显啊</p>
+<div>综合使用效果 原图</div>
+<div class="jihe1">综合使用效果-顺序1</div>
+<div class="jihe2">综合使用效果-顺序2</div>
+<div class="jihe3">综合使用效果-顺序3</div>
+<div style="height:100px;color: #000;background-color: #6f40f7; color: #fff">总结：2和3的效果一样，看来，只要平移和旋转的前后顺序有调整就会有变化，不关缩放的事情</div>
+<p style="margin-top:170px;margin-bottom:20px;">这是因为</p>
+<p style="margin-bottom:20px;">1.元素的中心点总是在最中间的，而水平平移的方向也是左右，垂直平移的方向是上下。如果先平移，元素的水平和垂直的准线还是和二维坐标的xy轴平行的。自然最后旋转是从中心点旋转不会有影响。<br/>2.但是若先旋转，那么元素的水平线和垂直线都发生了转动，再进行平移的话，就是在旋转后的方向基础上向前移动。具体见下图</p>
+<img src="images/transform1.jpg"/>
+<span>先平移后旋转</span>
+<img src="images/transform.jpg"/>
+<span>先旋转后平移</span>
+<p></p>
+<h1 style="margin-top: 10px;">6.transform-origin改变动画变形的基准点</h1>
+<div class="origin origin1" style="margin-top: 30px;">
+    我是没有设置origin的
+</div>
+<div class="origin origin2">
+    我是设置了origin的
+</div>
+<p>總結：共有兩個屬性需要填寫《水平，垂直》：水平有三個點：left，center，right；垂直的有三個點：top，center，bottom</p>
+<h1>7.最后综合，来个鼠标移动上去变换效果</h1>
+<div class="hover">最后综合，来个鼠标移动上去变换效果</div>
+<p><a style="display: block; text-align: center;color: #06304d;font-weight: 100">2016.08.10 00:06;by xing.orgl^</a></p>
+</body>
+</html>

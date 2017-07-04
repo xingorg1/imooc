@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>moveTo与lineTo</title>
+</head>
+
+<body onLoad="draw('canvas')">
+<p style=" width: 300px; float: left; margin-left: 30px;line-height: 24px;">特写说明：在创建路径的时候，需要使用moveTo方法将光标移动到直线终点，然后使用lineto的方法在直线起点与直线终点之间创建路径，然后将光标移动到直线终点，在下一次使用lineto方法的时候，会以当前光标所在坐标点为直线起点，并在下一个用lineto方法指定的直线终点之间创建路径，它会不断重复说这个过程，来完成复杂图形的路径绘制。
+  以上实例中，复杂图形的绘制，使用三角函数计算顶点，循环调用lineto语句来绘制图形，第一个lineto语句中指定的坐标点即为直线起点，然后不断将直线绘制到下一个lineto语句指定的直线终点，循环结束后关闭路径，最后一个坐标点与第一个坐标点自动闭合，使用fill语句填充图形</p>
+<canvas id="canvas" width="900" height="600" style="background-color: #f0f0f0; float: right;"/>
+<script type="text/javascript">
+function draw(id){
+	var canvas = document.getElementById(id);
+	if (canvas == null)
+	return false;
+	var context = canvas.getContext('2d');
+	context.fillStyle = 'rgba(2, 0, 255, 0.5)';
+	context.fillRect(50, 50, 800, 500);
+	/*var n = 0;*/
+	var dx = 450;
+	var dy = 200;
+	var s = 100;
+	context.beginPath();
+	context.fillStyle = 'rgba(255, 0, 0, 0.3)';
+	context.strokeStyle = 'rgba(100, 255, 0, 0.7)';
+	var x = Math.sin(0);
+	var y = Math.cos(0);
+	var dig = Math.PI / 15 * 11;
+	/*context.moveTo(dx, dy);*/
+	for(var i = 0; i < 30; i++)
+	{
+		var x = Math.sin(i * dig);
+		var y = Math.cos(i * dig);
+		context.lineTo( dx + x * s, dy + y * s);<!--lineTo的作用是将直线从moveTo（设置直线的起始位置，有x，y两个坐标值）处绘制一条直线到lineTo（终点，同moveTo有xy，使用lineto绘制完成直线后，光标自动移动到lineto方法的参数所指定的直线终点。）所指定的终点位置-->	
+	
+		}
+	context.closePath();
+	context.fill();
+	context.stroke();
+	}
+</script>
+</body>
+</html>

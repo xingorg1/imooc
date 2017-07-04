@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jquery焦点图练习</title>
+<link href="jiaodiantucss.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+<div class="roll">
+  <ul class="rImg">
+    <li><a href="#"> <img src="images/Img351940048.jpg" alt="明星同乐会" /></a></li>
+    <li><a href="#"> <img src="images/QeCk.jpg" alt="明星同乐会" /></a></li>
+    <li><a href="#"> <img src="images/t014dc48add46ab94ed.jpg" alt="明星同乐会" /></a></li>
+    <li><a href="#"> <img src="images/t0151129c2257207b78.jpg" alt="明星同乐会" /></a></li>
+  </ul>
+  <ul class="rTit">
+    <li><a href="#">明星同乐会</a></li>
+    <li><a href="#"> 明星同乐会</a></li>
+    <li><a href="#"> 明星同乐会</a></li>
+    <li><a href="#"> 明星同乐会</a></li>
+  </ul>
+  <ul class="rNum">
+    <li class="current"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+  </ul>
+</div>
+</body>
+<script src="jquery-1.7.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	var imgList = $(".rImg li");	//获取.rimg li元素并赋值给变量imglist
+	var biaoti = $(".rTit li");		//获取.rtit li 元素并赋值给变量biaoti
+	var num = $(".rNum li");	//获取.rnum li元素并赋值给变量num
+	var roll = $(".roll");			//获取.roll元素并赋值给变量roll
+	var count = imgList.length;//获取imglist下的元素的个数
+	var interval = 2000;			//设置interval为两秒，隔两秒变换图片。表示周期
+	var t;								//定时器标识
+	var index=0;						//设置index当前下标为0
+	var hideAll = function(){	//声明一个因此所有函数hidealll
+		imgList.hide();				//设置imglist隐藏，下面一样
+		biaoti.hide();
+		num.removeClass("current");//清楚所有num的class名。
+		}
+		var showItem = function(){//设置显示当前函数showitem
+			hideAll();							//首先因此全部
+			$(imgList[index]).fadeIn();	//imglist下的当前显示
+			$(biaoti[index]).fadeIn();//biaoti下的当前显示
+			$(num[index]).addClass("current");//数字下的当前给其添加class名为current
+		};
+		var next = function(){			//声明下一个函数next
+			index=index+1;					//下一个为当前index+1
+			if(index==count)				//如果当前等于个数
+			{
+				index=0;						//那么当前就让其等于0
+			}
+				showItem();					//显示当前。
+		};
+		t=setInterval(next,interval);	//调用定时器，（next表示下一个，interval表示周期）
+		roll.bind("mouseover",function(){//为整体区块roll绑定事件，当鼠标悬停之上
+				clearInterval(t);						//清除定时器
+			});
+		roll.bind("mouseout",function(){	//当鼠标离开时
+				t=setInterval(next,interval);	//开启定时器
+			});
+		num.each(function(i, n) {				//遍历数字
+				$(n).bind("click",function(){//为数字n绑定点击事件
+				index = i;								//当前等于i时
+				showItem();							//显示本组
+			});                 
+        });
+	})
+</script>
+</html>

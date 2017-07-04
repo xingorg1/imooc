@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas-图形变换-五角星-坐标变化与路径的结合使用</title>
+</head>
+<body onLoad = "draw('canvas')">
+如果要对矩形进行变形，使用坐标变换就足够了，但是对使用路径绘制出来的图形进行变换的时候，要考虑的事情就比较多了，因为使用了坐标变换之后，已经创建好的路径就不能用了，必须要重新传建路径，重新创建的路径之后，坐标变换方法有失效了。
+必须先另外写一个创建路径的函数，然后在坐标变换的同时调用该函数，这样才能解决问题。
+实例中，我们给出一个将坐标变换与路径结合使用的实例，执行该实例中的代码，可以绘制一个将五角星一边旋转一边缩小的图形。
+在实例中，首先单独书写了一个create5Star的函数，在该函数中创建了一个五角星的路径，然后在draw函数中的for循环中，首先依次执行translate，scale，rotate方法，然后执行create5Star函数创建路径，最后执行fill填充。
+在create5Star函数中，只创建了一个五角星，因坐标轴变换，在canvas画布中，此五角星会一边缩小一边旋转，之后产生一个新的五角星，新的五角星又采用同样的方法进行绘制，最终绘制出来的一连串具有变形效果的五角星的图形。
+<canvas id="canvas" width="1300" height="700" />
+<script type="text/javascript">
+function draw(id){
+	var canvas = document.getElementById(id);
+	if (canvas == null)
+	return false;
+	var context = canvas.getContext('2d');
+	context.fillStyle = "black";
+	context.fillRect (0,0,1300,1200);
+	//图形绘制，先设置好平移缩放旋转五大动画属性，然后调用创建的星星路径图形上下文，最后填充
+	context.translate(200, 50);
+	for(var i = 0; i < 150; i++){
+		context.translate(25, 25);
+		context.scale(0.95, 0.95);
+		context.rotate(Math.PI / 10);
+		create5Star(context);<!---->
+		context.fill();
+		}
+	}
+	<!--以下开始单独创建一个五角星。和画圆的路径或者和画线的函数差不多，道理一样。lineTo-->
+	function create5Star(context){
+		var dx = 100;
+		var dy = 0;
+		var s = 50;
+		//创建路径
+		context.beginPath();
+		context.fillStyle = 'rgba(255, 225, 0, 0.5)';
+		var x = Math.sin(0);
+		var y = Math.cos(0);
+		var dig = Math.PI / 5 * 4;<!--14.4°-->
+		for(var i = 0; i < 5; i++){<!--创建五个角的图形=五角星，所以小于5。可以把dig和i的两个5都改一样的数值试下效果就明白了-->
+			var x = Math.sin(i * dig);
+			var y = Math.cos(i * dig);
+			context.lineTo(dx + x * s, dy + y * s);
+			}
+			context.closePath();
+		}
+</script>
+</body>
+</html>

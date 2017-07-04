@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>nth-child(An+B)循环使用样式练习-制作不同色调行交叉的表格</title>
+<style>
+    :root{
+        background: #32a3ff;
+        color: #000;
+        font:600 24px '新宋体';
+        text-align: center;
+        margin: 0 auto;
+    }
+    body *:not(li){
+        background: green;
+    }
+    /*body{
+
+        color: #000;
+        font:600 24px '新宋体';
+        text-align: center;
+        margin: 0 auto;
+        width: 100%;
+        height: 100px;
+        display: block;
+    }*/
+    ul{
+        border:2px dashed #ffffff;
+        width: 245px;
+        text-align: center;
+        display: inline-block;
+    }
+    li{list-style:none;
+        padding:2px;
+        width:200px;
+        display:block;
+        text-align: center;}
+    a{
+        padding:5px 20px;
+        cursor: pointer;
+    }
+    li:nth-child(2n+1){
+        background: rgb(255, 235, 232);
+        margin-bottom: 2px;
+    }
+    li:nth-child(2n+1):hover,li:nth-child(2n+2):hover{
+        background: green;
+        margin-bottom: 5px;
+        color: #fff;
+    }
+    li:nth-child(2n+2){
+        background: #58ffe6;
+        margin-bottom: 2px;
+    }
+</style>
+</head>
+<body>
+<ul>
+    <li><a>第一行</a></li>
+    <li><a>第二行</a></li>
+    <li><a>第三行</a></li>
+    <li><a>第四行</a></li>
+    <li><a>第五行</a></li>
+    <li><a>第六行</a></li>
+    <li><a>第七行</a></li>
+    <li><a>第八行</a></li>
+    <li><a>第九行</a></li>
+    <li><a>第十行</a></li>
+    <li><a>第十一行</a></li>
+</ul>
+</body>
+</html>

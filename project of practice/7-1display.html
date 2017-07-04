@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>各种盒模型</title>
+    <style>
+        .div{
+            width: 300px;
+
+        }
+        .div div{
+            margin: 10px;
+            display: list-item;
+            background-color: #0c3561;
+            color: #FFf;
+            text-align: center;
+            list-style-type: circle;
+            /*奇怪，没有列表样式( ⊙ o ⊙ )！*/
+        }
+        .table{
+            display: table;
+            width: 300px;
+        }
+        .caption{
+            display: table-caption;
+        }
+        .thead{
+            display: table-header-group;
+            background-color: #58ffe6;
+        }
+        .thead .td{
+            padding: 3px;
+        }
+        .tr{
+            display: table-row;
+        }
+        .td{
+            display: table-cell;
+            width: 60px;
+            padding:20px;
+            border: 1px solid #143ade;
+            text-align: center;
+        }
+        .diva, .button{
+            width: 300px;
+            height: 300px;
+            background-color: green;
+            font-size: 30px;
+            color: #fff;
+            text-align: center;
+        }
+        .divb, .text{
+            display: none;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            background-color: peru;
+            font-size: 20px;
+        }
+        .diva:hover .divb{
+            display: block;
+        }
+        /*我以前怎么就没有想到这么好玩的用法呢！*/
+        .button:hover .text{
+            display: none;
+        }
+        .button{
+            margin-top:20px;
+        }
+        .text{
+            display: block;
+        }
+        .textoverflow{
+            overflow: hidden;
+            white-space: nowrap;
+            -webkit-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            -ms-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            text-shadow: 0px 0px 10px #0c3561;
+        }
+        h1:first-child:first-letter{
+
+            /*-shadow: 1px 1px 3px #f00;*/
+            -moz-box-shadow: 13px 13px 3px #f00;
+            -ms-box-shadow: 13px 13px 3px #f00;
+            box-shadow: 13px 13px 3px #f00;
+        }
+        table{
+            border-spacing: 10px;
+            /*这样就可以调整单元格的距离额*/
+            box-shadow: 4px 4px 5px #004493;
+        }
+        td{
+            padding: 8px;
+            text-align: center;
+            line-height: 15px;
+            border:1px solid #58ffe6;
+            background-color: #FF9900;
+            box-shadow: 4px 4px 5px #a04f0f;
+            border-radius: 10px;
+            border-top-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+            /*为了斜对角实现radius，其实还有更简单的方法*/
+            /*border-radius: 30px 0px;*/
+            /*前边的值表示左上和右下对角的效果，后边的值表示左下和右上的圆角值*/
+            color: #fff;
+        }
+        .radius{
+            width: 300px;
+            height:300px;
+            margin-top:30px;
+            padding:30px;
+            border: 5px dotted #FF9900;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-border-radius:123px 0px;
+            -moz-border-radius:123px 0px; /*radius两个值得写法*/
+            border-radius:123px 0px;
+            background-color: #f00;
+            color: #FFFFAD;
+            text-align: center;
+            line-height: 100px;
+
+        }
+        /*相当于margin和padding设置两个，表对应的上下与左右的两个不同值 ，上与下是对应的，左上和右下也是对应的，所以写到一起了*/
+    </style>
+</head>
+<body>
+<h1>我以前怎么就没有想到这么好玩的用法呢!!!*
+    .button:hover .text{
+    display: none;
+    }</h1>
+<h2>利用hover模式，鼠标放上父元素去，实现内部某个子元素的隐藏或显示</h2>
+<div class="div">
+<div>我是第一条</div>
+<div>我是第二条</div>
+<div>我是第三条</div>
+<div>我是第四条</div>
+<div>我是第五条</div>
+<div>我是第六条</div>
+</div>
+<!--用div制作表格-我看人也是闲的没事干，能直接用table他不用，非要拐外转圈-->
+<div class="table">
+    <div class="caption">字母表</div>
+    <div class="thead">
+        <div class="tr">
+            <div class="td">1</div>
+            <div class="td">2</div>
+            <div class="td">3</div>
+            <div class="td">4</div>
+            <div class="td">5</div>
+        </div>
+    </div>
+        <div class="tr">
+            <div class="td">A</div>
+            <div class="td">B</div>
+            <div class="td">C</div>
+            <div class="td">D</div>
+            <div class="td">E</div>
+        </div>
+        <div class="tr">
+            <div class="td">F</div>
+            <div class="td">G</div>
+            <div class="td">H</div>
+            <div class="td">I</div>
+            <div class="td">J</div>
+        </div>
+</div>
+<h1>利用hover模式，鼠标放上父元素去，实现内部某个子元素的隐藏或显示</h1>
+<div class="diva">
+    鼠标放到绿色区域，会有惊喜奥！！！
+    <div class="divb">
+        鼠标移开 我就消失了！
+    </div>
+</div>
+<div class="button"><div  class="text"></div></div>
+<h1>text-overflow也要写兼容前缀呀</h1>
+<p class="textoverflow">text-overflow也要写兼容前缀呀text-overflow也要写兼容前缀呀text-overflow也要写兼容前缀呀text-overflow也要写兼容前缀呀text-overflow也要写兼容前缀呀text-overflow也要写兼容前缀呀text-overflow也要写兼容前缀呀</p>
+<h1>box-shadow制作数字面板</h1>
+<table>
+    <caption>box-shadow</caption>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+    </tr>
+</table>
+<div class="radius">测试radius的两个值设置，分别对应左上右下和右上左下的效果</div>
+</body>
+
+</html>

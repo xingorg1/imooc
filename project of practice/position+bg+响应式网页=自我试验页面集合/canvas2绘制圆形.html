@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas绘制圆形</title>
+</head>
+
+<body onLoad="draw('canvas')">
+<p style="line-height: 12px;"> 注释：
+<pre />
+@1处：以下开始绘制圆形
+<pre />
+@2处：也没用到n，var他有什么用？
+<pre />
+@3处：括号内的值：(x轴坐标，y轴坐标，圆的半径，起点，终点弧度，是否顺时针，true为是=anticlockwise)
+<pre />
+-math.PI圆周率常量,意思是返回圆周率的一半这个值,这个方法应该是用来调用圆周率的一般的值。PI是圆周率π 所以Math.PI * 2=360°
+<pre />
+@4处：/*因为上边已经画出了一个path路径是关于元的，所以这里就不用像矩形那样再写一个rect了，直接fill（）
+<pre />
+@ 5处：去掉关闭路径后会出现不一样的效果，有时候也可以利用这一点做别的效果
+<pre />
+@ 6处：此处填fill也有用
+</p>
+<canvas id="canvas" width="1000" height="500" style="background: #f0f0f0;float:left;"/>
+<script type="text/ecmascript">
+function draw(id){
+	var canvas = document.getElementById(id);
+	if (canvas == null)
+	return false;
+	var context = canvas.getContext("2d");
+	context.fillStyle = "#0061a4";
+	context.fillRect(0, 0, 200, 200);
+	context.strokeStyle = "#000";
+	context.strokeRect(10, 10, 200, 200);
+	context.lineWidth  = 1;
+	//1
+	/*var n = 0;*///2
+	for(var i = 0; i < 10; i++)
+	{
+		context.beginPath();
+		context.arc(i * 25, i * 25, i * 10, 0, Math.PI * 2, true);//3
+		context.closePath();
+		context.fillStyle = ' rgba(255, 225, 0, 0.5) ';
+		context.fill();//4
+		}
+		/*以下为单独画一个圆*/
+	context.beginPath();//5
+	context.arc(500, 200, 30, 0, Math.PI * 1.5, false);
+	context.closePath();//5
+	context.strokeStyle = "red";//6
+	context.stroke();
+	}
+</script>
+</body>
+</html>

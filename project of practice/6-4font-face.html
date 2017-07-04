@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@font-face</title>
+    <style type="text/css">
+        @font-face {
+            font-family: aaa;
+            src:url('kk.eot');
+        }
+        @font-face {
+            font-family: aaa;
+            src: local('ddd.eot');
+            /*local（）表示客户端字体，我觉得，如果使用客户端就有的字体，设置fontface是多余的，直接font-family=字体就行了*/
+            font-style: italic;
+        }
+        p{
+            font-family: aaa;
+        }
+        p{
+            font-family: aaa;
+            font-style: italic;
+            /*如果这里也设置了style 则会引用@font-face中设置了style的那个字体*/
+        }
+    </style>
+</head>
+<body>
+<p>yingwen</p>
+</body>
+</html>

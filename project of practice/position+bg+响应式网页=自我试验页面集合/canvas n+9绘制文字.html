@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas绘制文字</title>
+</head>
+
+<body onLoad="draw('canvas')">
+<canvas id="canvas" width="500px" height="500px"> </canvas>
+<script type="text/javascript">
+function draw(id){
+	var canvas = document.getElementById(id);
+	if (canvas == null)
+	return false;
+	var context = canvas.getContext('2d');
+	context.fillStyle = "#0061c4";
+	context.fillRect(0,0,500,500);
+	context.font = "bold 45px san-serif";
+	context.textAlign = "start";
+	context.textBaseline = "top";
+	context.strokeStyle = "red";//定义边框描边的文字颜色
+	context.fillStyle = "#fff";//定义填充的文字颜色.注意二者的不一样
+	context.fillText('郭菊锋', 0, 0);
+	context.font = "bloder 34px '微软雅黑' ";
+	context.strokeText('浙江师范', 0, 100); 
+	
+	}
+
+</script>
+
+</body>
+</html>

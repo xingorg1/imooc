@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>背景和边框的样式</title>
+<style type="text/css">
+    div{
+        width: 400px;
+        height: 300px;
+        display: inline-block;
+        margin: 10px;
+        padding: 20px;
+        border: 20px dashed #f782e6;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        background: url("images/98661458148506.jpg");
+        font: bold 30px/2 "微软雅黑",Simsun,arial,sans-serif;
+        color: #60e1a0;
+    }
+    .border{
+        -webkit-background-clip: border-box;
+        -moz-background-clip: border;/*对于FF老版本的写法*//*新语法要放在老语法的后面，越往下的优先级越高，所以为什么加内核前缀的要放上边了，只要支持不带前缀的就不用往下找了*/
+        background-clip: border-box;/*border是默认的样式，这么写支持css3和各浏览器的新版本*/
+    }
+    .padding{
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding;
+        background-clip: padding-box;
+    }
+    .content{
+        -webkit-background-clip: content-box;
+        /*z这个有-moz-background-clip的话会报错，就删掉了*/
+        background-clip: content-box;
+    }
+    hr{
+           height: 10px;
+           background-color: #ccc;}
+    h1{
+        border-bottom: dotted 2px #0c3561;
+    }
+    .oborder,.ocontent,.opadding{
+        border: 20px dashed #1cf749;
+        color: #ff04bb;
+        background-repeat: no-repeat;
+    }
+    .oborder{
+        -webkit-background-origin: border-box;
+        background-origin: border-box;/*神经病ie8以下浏览器的默认值*/
+    }
+    .opadding{
+        -webkit-background-origin: padding-box;
+        background-origin: padding-box;/*正常浏览器的默认值*/
+
+    }
+    .ocontent{
+
+        -moz-background-origin: content;
+        -webkit-background-origin: content;
+        background-origin: content;
+        /*据说上边三个是需要支持老式浏览器-但我写了总是报错，写法是错误的*/
+
+        -webkit-background-origin: content-box;
+        -moz-background-origin: content-box;
+        -o-background-origin: content-box;
+        background-origin: content-box;
+        /*据说上边三个是xin式浏览器-但我写了也是有报错，写法是错误的和重复的*/
+    }
+    .length,.percentage,.auto,.cover,.contain{
+        border: 20px dashed #00bbf7;
+        color: #dbff4e;
+        background-repeat: no-repeat;
+        background-origin: content-box;
+    }
+    .length{
+        -webkit-background-size: 300px;
+        background-size: 300px;/*设置一个值表示宽，高自动*/
+        /*-webkit-background-size: 200px 300px;设置两个值表示宽和高*/
+        /*background-size: 200px 300px;*/
+    }
+    .percentage{
+        /*-webkit-background-size: 45%;*/
+        /*background-size: 45%;*/
+        /*写两个的道理同length，表示宽，高*/
+        /*写一个表示图片缩放值*/
+        -webkit-background-size: 75% 80%;
+        background-size: 75% 80%;
+    }
+    .auto{
+        -webkit-background-size: auto;
+        background-size:auto;
+        /*默认值*/
+    }
+    .cover{
+        -webkit-background-size: cover;
+        background-size: cover;
+        /*宽度覆盖容器需要填充的部分，高度按比例自动，可能会溢出*/
+    }
+    .contain{
+        -webkit-background-size: contain;
+        background-size: contain;
+        /*缩放至宽高有其中一项铺满容器即可，不会溢出*/
+    }
+    .image{
+        width: 800px;
+        height: 300px;
+        border: 20px solid #00bbf7;
+        background-image: url('images/news.png'),url('images/tj.png'),url('images/98661458148506.jpg'),url('images/s.jpg');
+        /*设置多个背景图像，第一个设置的在最上边，最后一个设置的在最下边。在本软件中按住shift并把鼠标放在图片链接上，会出现图像预览*/
+        -webkit-background-origin: content-box;
+        background-origin: content-box;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+    }
+</style>
+</head>
+<body>
+<h1>1.指定对象的背景图像向外裁剪的区域。 </h1>
+<div class="border">background-clip:<br />border-box;</div>
+<div class="padding">background-clip:<br />padding-box;</div>
+<div class="content">background-clip:<br />content-box;</div>
+<hr/>
+<h1>2.指定背景图像开始平铺的地点区域。 </h1>
+<div class="oborder">background-origin:<br />border-box;</div>
+<div class="opadding">background-origin:<br />padding-box;</div>
+<div class="ocontent">background-origin:<br />content-box;</div>
+<hr />
+<h1>3.指定背景图像的大小尺寸。 </h1>
+<div class="length">background-size:<br />length;长度值</div>
+<div class="percentage">background-size:<br />percentage;百分比</div>
+<div class="auto">background-size:<br />auto;</div>
+<div class="cover">background-size:<br />cover;等比缩放到覆盖容器，可能超出</div>
+<div class="contain">background-size:<br />contain;等比缩放到</div>
+<hr />
+<h1>3.background-break[指定内联元素对象背景图片进行平铺时的循环方式]</h1>
+<hr />
+<h1>4.background-image设置多个图像</h1>
+<p>一般情况下，设置多个图片叠加，会让第一个设置的图像在空间的最上边，最后一个设置的在最下边</p>
+<p class="image"></p>
+</body>
+</html>

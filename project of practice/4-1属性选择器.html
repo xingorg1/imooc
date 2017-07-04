@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性选择器</title>
+    <style type="text/css">
+        div[id*=section] {
+            background-color: #00CCFF;
+        }
+
+        /*属性值是id的、div元素中，包含指定的用section字符的{背景色为#00CCFF;}*/
+        div[id^=section2] {
+            color: #fff;
+        }
+
+        /*属性值是id的、div元素中，指定的用section2字符为开头的{字体颜色为#fff;}*/
+        div[id$=\-2] {
+            border: 1px solid #f00;
+        }
+
+        /*属性值是id的、div元素中，指定的以2字符结尾的{border:1px solid #f00;}*/
+        /*这里需要特别注意的是，如果结尾字符前边有‘-’连字符，需要用“\-”这个符号加结尾字符的方式来表示，不然不成功，不过结尾字符前边有其他字符比如‘_’下划线等，是没有问题不用加反斜杠的！如下*/
+        div[id$=_3] {
+            font-size: 30px;
+        }
+
+        /*小示例样式表*/
+        a[href$=html], a[href$=jpg] {
+            color: #000;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        a[href$=html]:after {
+            content: '网页文件';
+            color: #12a900;
+        }
+
+        a[href$=jpg]:after {
+            content: '图片文件';
+            color: #a23fff;
+        }
+
+        hr {
+            height: 10px;
+            background-color: #cccccc;
+        }
+
+        h2 {
+            width: 300px;
+            margin-left: 300px;
+        }
+    </style>
+</head>
+<body>
+<div id="section1">section1</div>
+<div id="section1-1">section1-1</div>
+<div id="section1-1-1">section1-1-1</div>
+<div id="section1-1-2">section1-1-2</div>
+<div id="section1-2">section1-2</div>
+<div id="section2">section2</div>
+<div id="section2-1">section2-1</div>
+<div id="section2-2">section2-2</div>
+<div id="section2_3">section2-3</div>
+<p></p>
+<hr/>
+<h1>属性选择器小示例</h1>
+<a href="4-1属性选择器.html">网站首页</a>
+<a href="images/s.jpg">网站图片</a>
+<h2>这里说明一下，如果超链接给了一个图片的路径地址，则会在网页中打开空白网页以用AAAAAAAAAAAAAAAAAAAAAAASSSSSSSSSSSSSSSSSSSSSSSAAAAA来显示一个图片</h2>
+</body>
+</html>

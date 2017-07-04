@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>鼠标事件js测试</title>
+<style type="text/css">
+div{
+	width: 300px;
+	height: 50px;
+	background-color: #f0f0f0;
+	margin-bottom: 12px;
+	line-height: 50px;
+	text-align: center;
+}
+#div1{
+	margin-top: 10px;
+}
+#kzcd{
+	background-color: red;
+}
+</style>
+<script type="text/javascript">
+window.onload = function (){
+	var oButn1 = document.getElementById('butn1');
+	var oDiv1 = document.getElementById('div1');
+	var oFloats = document.getElementById('floats');
+	var oKzcd = document.getElementById('kzcd');
+	var oRed = document.getElementById('red');
+	var oYellow = document.getElementById('yellow');
+	var oBlue = document.getElementById('blue');
+	oButn1.onclick = function(){
+		oFloats.style.display = 'inline';
+		oKzcd.style.width = "50px";
+	}
+	oBlue.onclick = function(){
+		oFloats.style.display = 'none';
+		oKzcd.style.width = "300px";
+	}
+
+}
+</script>
+</head>
+<body>
+<input type="button" id="butn1" value="点击">
+<input type="button" id="blue" value="再次点击">
+<div id="div1">
+这是一个div
+</div>
+<div id="floats">
+这是一个floats
+</div>
+<div id="kzcd">
+这是一个kzcd
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas绘制径向渐变</title>
+</head>
+
+<body onLoad="draw('canvas')">
+<canvas id="canvas" width="900" height="900"/>
+<script type="text/javascript">
+function draw(id){
+	var canvas = document.getElementById(id);
+	if (canvas == null)
+	return false;
+	var context = canvas.getContext('2d');
+	context.fillStyle = "#eee";
+	context.fillRect(0, 0, 900, 500);
+	var gl = context.createRadialGradient(400, 0, 0, 400, 0, 400);/*和直线渐变：createLinearGradient相比，径向渐变：createRadialGradient是需要六个参数（xStart, yStart, radiusStart, xEnd, yEnd, radiusEnd）(渐变开始圆的圆心横坐标, 渐变开始圆的圆心纵坐标, 开始圆的半径, 渐变结束圆的圆心横坐标, 渐变结束圆的圆心纵坐标, 结束圆的半径);*/
+	<!--在这个函数中，分别指定了两个圆的大小与位置，从第一个圆的圆心处向外扩散渐变。一直扩散到第二个圆的外轮廓处。所以应该把xStart, yStart,和xEnd, yEnd,两个坐标值设置的一样，这样让两个圆的圆心重叠。然后，第二个圆的radiusend多大，最终挂出来的圆就会有多大。-->
+	gl.addColorStop(0, 'rgb(225, 255, 0)');/*'rgb(214, 32, 132)'rgb(225, 70, 190)'*/
+	gl.addColorStop(0.5, 'rgb(255, 0, 255)');/*'rgb(20, 225, 160)'*/
+	gl.addColorStop(1, 'rgb(0, 255, 225)');/*rgb(230, 10, 63)'rgb(90, 160, 225)'*/
+	/*在设定颜色处，同线性渐变一样。同样也需要设定从0-1的浮点数的变化，来作为渐变转折点的偏移量*/
+	context.fillStyle = gl;
+	context.fillRect(0, 0, 400, 300);
+	var g2 = context.createRadialGradient(590, 300, 0, 590, 300, 290);
+	g2.addColorStop(0.1, 'rgba(225, 225, 0, 0.4)');
+	g2.addColorStop(0.7, 'rgba(225, 225, 0, 0.8)');
+	g2.addColorStop(1, 'rgba(90, 160, 220, 0.75)');
+	for (var i = 0; i < 30; i++){
+		context.beginPath();context.fillStyle = g2;
+		context.arc(i * 50, i * 50, i * 5, 0, Math.PI * 2, true)
+		context.closePath();
+		context.fill();
+	}
+}
+</script>
+</body>
+</html>

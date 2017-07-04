@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>使用选择器在页面中插入内容</title>
+	<style type="text/css">
+	body{
+		font-size: 20px;
+		font-weight: 900px;
+		font-family: "微软雅黑";
+	}
+	h1:before{
+		content: '这是插入的内容，还可以设置样式——';
+		/*插入一些需要插入的内容*/
+		color: orange;
+	}
+	h2:after{
+		content: "——这是插入的内容";/*插入一些需要插入的内容*/
+		color: orange;
+	}
+	h2:nth-child(4):after{
+		content: none;	/*给添加过内容的元素，把内容再清除掉*/
+		color: orange;
+	}
+	h2:before{
+		content: url(images/news.png);
+		color: orange;
+	}
+	/*前面插入一个小图标，就相当于列表样式了，可以代替那种插入background的不足，但是缺点是不能做图片精灵了*/
+	h3:before{
+		content: counter(jishu)"、";
+		color: orange;
+	}
+	h3{
+		counter-increment: jishu;
+	}
+	/*注意这两个的写法*/
+	
+	h4:before{
+		content: "第"counter(bianhao)"章、";/*编号的样式*/
+		color: orange;
+	}
+	h4{
+		counter-increment: bianhao;/*编号的顺序和每次叠加的数值*/
+	}
+/*给带文字的编号，改变编号的样式，不再使用阿拉伯数字*/
+	h5:before{
+		content: counter(jiehao,upper-roman)"节、 ";
+		color: orange;
+		/*核心在，counter是设置样式的，counter的（）内，逗号前添加自定义序号的名称，逗号后边添加list-style-type，具体有哪些样式可以查看手册*/
+	}
+	h5{
+		counter-increment: jiehao;/*注意这边写法——不用括号*/
+	}
+
+	div:after{
+		content:attr(title);
+		color: orange;
+		font-size: 24px;
+	}
+	/*把写在标签内部的元素的属性值以内容的形式显现出来掺入标签中*/
+	p.attrceshi img:after{
+	content: attr(alt);
+	content: "cc";
+	background: #f00;
+	}
+/*	其实不设置，人家也会是显示alt的信息的*/
+	/*counter嵌套*/
+	li{
+		list-style: none;
+	}
+	ul li{
+		counter-increment: list;
+	}
+	ul li:before{
+		content: counter(list)".";
+		color: orange;
+	}
+	ul li li{
+		counter-increment: list2;
+	}
+	ul li li:before{
+		content:counter(list)"."counter(list2)".";
+	}
+	ul li li li{
+		counter-increment: list3;
+	}
+	ul li li li:before{
+		content: counter(list)"."counter(list2)"."counter(list3)".";
+	}
+	ul li li li li{
+		counter-increment: list4;
+	}
+	ul li li li li:before{
+		content: counter(list)"."counter(list2)"."counter(list3)"."counter(list4)".";
+	}
+	span{
+		counter-reset: reset2;
+		/*在父元素中追加一个counter-reset然后给需要重新定义的子元素的自定义名称就行了。道理是这样的，但是我这里追加了以后，就让顺序序号继承了，不加反而会重新开始呢！*/
+	}
+	span div{
+		counter-increment: reset;
+		
+	}
+	span div:before{
+		content: counter(reset)".  ";
+		color: orange;
+	}
+	span div div{
+		counter-increment: reset2;
+		margin-left: 10px;
+	}
+	span div div:before{
+		content: counter(reset2)".";
+	}
+	h6:before{
+		content: "(";
+	}
+	h6:after{
+		content: ")";
+	}
+	/*这样防止内部填充的东西需要替换时，后台把左右的装饰符号也给删了，代替了那种写法：<span>(</span>我的两边没有东西<span>)</span>*/
+	/*第三种高端写法————quote*/
+	h6:last-child:before{
+		content: open-quote;
+	}
+	h6:last-child:after{
+		content: close-quote;
+	}
+	h6:last-child{
+		quotes: "【""】";
+	}
+	</style>
+</head>
+<body>
+<h1>这是本来就有的内容</h1>
+<hr />
+<h2>content插入图片</h2>
+<h2>删除content插入的东西</h2>
+<h2>content插入图片</h2>
+<hr />
+<p>在content属性中使用counter属性来正对对个项目追加连续的编号。</p>
+<h3>content在多个连续标题前插入连续编号</h3>
+<h3>content多个连续标题前插入连续编号</h3>
+<h3>content多个连续标题前插入连续编号</h3>
+<h3>content多个连续标题前插入连续编号</h3>
+<p></p>
+<hr />
+<h4>给编号追加文字-content插入带文字的编号</h4>
+<h4>给编号给编号追加文字-content插入带文字的编号</h4>
+<h4>给编号追加文字-content插入带文字的编号</h4>
+<hr />
+<h5>编号的样式更改</h5>
+<h5>编号的样式更改</h5>
+<h5>编号的样式更改</h5>
+<h5>编号的样式更改</h5>
+<hr />
+<div title="在支持content属性的浏览器中能看到我被显示了">我是一个div</div>
+<p class="attrceshi"><img src="images/98661458148506.jpg" alt="官员一寸照"></p>
+<hr />
+<p>以下是一个编号嵌套</p>
+<ul>
+	<li>a</li>
+	<li>b</li>
+	<li>c</li>
+	<li>d
+		<ul>
+			<li>d-1</li>
+			<li>d-2</li>
+			<li>d-3</li>
+			<li>d-3
+				<ul>
+					<li>d-3-1</li>
+					<li>d-3-2
+						<ul>
+							<li>d-3-2-1</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>e
+		<ul>
+			<li>e-1</li>
+			<li>e-2</li>
+		</ul>
+	</li>
+	<li>f</li>
+	<li>g</li>
+	<li>h</li>
+</ul>
+<hr>
+<p>编号重置-即新开一段进行重新编号</p>
+<span>
+<div class="reset">a
+	<div>a-1</div>
+	<div>a-2</div>
+	<div>a-3</div>
+</div>
+<div class="reset">b
+	<div>b-1</div>
+	<div>b-2</div>
+	<div>b-3</div>
+</div>
+<div class="reset">c</div>
+<hr>
+<p>字符串两边添加嵌套文字符号</p>
+<h6>我的两边没有符号</h6>
+<span>(</span>我的两边没有东西<span>)</span>
+<h6>css3高级写法给两边添加东西</h6>
+</span>
+<ul id="ceshi">
+<li><a href="#">adkh</a></li>
+<li><a href="#">adkh</a></li>
+<li><a href="#">adkh</a></li>
+<li><a href="#">adkh</a></li>
+<li><a href="#">adkh</a></li>
+</ul>
+</body>
+</html> 

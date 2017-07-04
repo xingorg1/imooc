@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas绘制渐变-高级函数</title>
+<style>
+body {
+ background:
+}
+header {
+ background:
+}
+h1 {
+	margin: 30px 100px;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 45px;
+	font-weight: 900;
+    color: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+</style>
+</head>
+<body onLoad="draw('canvas')"><h1>zhangshuo</h1>
+<canvas id="canvas" width="1300" height="500" />
+
+<script type="text/javascript">
+function draw(id){
+	var canvas = document.getElementById(id);
+	if (canvas == null)
+	return false;
+	var context = canvas.getContext('2d');
+	context.fillStyle = "#f0f0f0";
+	context.fillRect(0, 0, 1300, 500);/*填充举行背景色*/
+	var gl = context.createLinearGradient(0, 0, 1300, 500);/*定义渐变的方向吧，0，0是渐变起点的坐标，300,300是重点的坐标，这样写是一个正方形的对角线渐变。如果是0，0，0，300，则是由上自下的一个垂直渐变*/
+	gl.addColorStop(0, 'rgb(155, 0, 255)' );/*指定渐变的颜色额，两个值（offset, color）其中，color值可以有fillstyle的四种一样额形式#十六进制、rgb、rgba、英文单词等都可以，而前边的offset值只可以在0-1之间，是指颜色离开渐变点的偏移量。。addColorStop可以不止两个，可以定义很多次，但是，最少有两个，用以定义开始颜色和结束颜色。而且，开始的偏移值必须为0，结束的偏移值必须为1 ，中间的必须在0-1之间*/
+	<!--另外，createLinearGradient和addColorStop一定是紧接着写的-->
+	gl.addColorStop(1, 'rgb(255, 0, 255)');
+	context.fillStyle = gl;/*fillStyle不止填充颜色一种形式，这里呢，填充渐变是另一种形式，后面还会学到填充图像和文字等。但是，这个填充渐变，不是直接写的是，而是用一个变量gl代替context.createLinearGradient的形式，然后style再等于变量gl就可以了*/
+	context.fillRect(0, 0, 1300, 500);/*画出要填充的范围*/
+	
+	<!--/*---------------------------------------以上为背景的渐变------------------------------------------------*/-->
+	var g2 = context.createLinearGradient(0, 0, 0, 400);/*这样是垂直的渐变*/
+	g2.addColorStop(0, 'rgba(154, 255, 0, 0.25)');
+	g2.addColorStop(0.5, 'rgba(100, 255, 60, 0.35)');
+	g2.addColorStop(1, 'rgba(60, 255, 173, 0.55)');
+	for (var i=0; i<10; i++){
+		context.beginPath();
+		context.arc(i * 25, i * 25, i * 25, 0, Math.PI * 2, true);
+		context.closePath();
+		context.fillStyle = g2;
+		context.fill();	
+	}<!--这个效果是先定义一个线性渐变样式，再设置渐变的颜色，这里设置了三个，然后用一个for循环，做出十个圆形，最后填充圆形的样式和颜色-->
+}
+</script>
+</body>
+</html>
